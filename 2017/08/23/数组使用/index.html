@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS 数组使用 | BoomHe</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="数组使用 数组合并  ES5的写法 12345let arr1=[0,1,2];let arr2=[3,4,5];Array.prototype.push.apply(arr1,arr2); ES6的写法 123456let arr3=[&amp;apos;a&amp;apos;,&amp;apos;b&amp;apos;,&amp;apos;c&amp;apos;];let arr4=[3,4,5];arr3.push(...arr4);">
+<meta name="keywords" content="数组使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 数组使用">
+<meta property="og:url" content="http://yoursite.com/2017/08/23/数组使用/index.html">
+<meta property="og:site_name" content="BoomHe">
+<meta property="og:description" content="数组使用 数组合并  ES5的写法 12345let arr1=[0,1,2];let arr2=[3,4,5];Array.prototype.push.apply(arr1,arr2); ES6的写法 123456let arr3=[&amp;apos;a&amp;apos;,&amp;apos;b&amp;apos;,&amp;apos;c&amp;apos;];let arr4=[3,4,5];arr3.push(...arr4);">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/Boom618/ExceptionReadme/blob/master/image/9B89CB56DB8EDB991A2A17D1243D140B.png">
+<meta property="og:updated_time" content="2017-08-23T05:23:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 数组使用">
+<meta name="twitter:description" content="数组使用 数组合并  ES5的写法 12345let arr1=[0,1,2];let arr2=[3,4,5];Array.prototype.push.apply(arr1,arr2); ES6的写法 123456let arr3=[&amp;apos;a&amp;apos;,&amp;apos;b&amp;apos;,&amp;apos;c&amp;apos;];let arr4=[3,4,5];arr3.push(...arr4);">
+<meta name="twitter:image" content="https://github.com/Boom618/ExceptionReadme/blob/master/image/9B89CB56DB8EDB991A2A17D1243D140B.png">
+  
+    <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://avatars2.githubusercontent.com/u/10544851">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://avatars2.githubusercontent.com/u/10544851" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">BoomHe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叫太阳起床的男人</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Boom618" title="github">github</a>
+					        
+								<a class="jianshu" target="_blank" href="http://www.jianshu.com/u/5c80c461ab08" title="jianshu">jianshu</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/2402691815" title="weibo">weibo</a>
+					        
+								<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100010098188015" title="facebook">facebook</a>
+					        
+								<a class="twitter" target="_blank" href="https://twitter.com/BoomHe8" title="twitter">twitter</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/库依赖/" style="font-size: 10px;">库依赖</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数组使用/" style="font-size: 10px;">数组使用</a> <a href="/tags/算法排序/" style="font-size: 10px;">算法排序</a> <a href="/tags/项目异常/" style="font-size: 10px;">项目异常</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/Boom618">github</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/hedong316">csdn</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">BoomHe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://avatars2.githubusercontent.com/u/10544851" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">BoomHe</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">叫太阳起床的男人</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Boom618" title="github">github</a>
+			        
+						<a class="jianshu" target="_blank" href="http://www.jianshu.com/u/5c80c461ab08" title="jianshu">jianshu</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/2402691815" title="weibo">weibo</a>
+			        
+						<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100010098188015" title="facebook">facebook</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/BoomHe8" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-数组使用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/23/数组使用/" class="article-date">
+  	<time datetime="2017-08-23T02:52:18.000Z" itemprop="datePublished">2017-08-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS 数组使用
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数组使用/">数组使用</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="数组使用"><a href="#数组使用" class="headerlink" title="数组使用"></a>数组使用</h2><blockquote>
+<p>数组合并</p>
+</blockquote>
+<p>ES5的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let arr1=[0,1,2];</div><div class="line"></div><div class="line">let arr2=[3,4,5];</div><div class="line"></div><div class="line">Array.prototype.push.apply(arr1,arr2);</div></pre></td></tr></table></figure>
+<p>ES6的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let arr3=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;];</div><div class="line"></div><div class="line">let arr4=[3,4,5];</div><div class="line"></div><div class="line">arr3.push(...arr4);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>几个属性的理解</p>
+</blockquote>
+<ul>
+<li>Object.keys(obj) :返回对象自身的所有可枚举的属性的键名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let arr1keys = Object.keys(arr1);  // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;] </div><div class="line"></div><div class="line">let arr3keys = Object.keys(arr3);   // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;]</div></pre></td></tr></table></figure>
+<ul>
+<li>Object.getOwnPropertyNames(obj):返回一个数组，包含对象自身的所有属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let temp1 = Object.getOwnPropertyNames(arr1);// [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;length&quot;]</div></pre></td></tr></table></figure>
+<ul>
+<li>Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有Symbol属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let temp2 = Object.getOwnPropertySymbols(arr2);// []</div></pre></td></tr></table></figure>
+<blockquote>
+<p>for…of  、for…in 和 forEach</p>
+</blockquote>
+<ul>
+<li>for of是遍历键值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">for( let i of arr3 )&#123;</div><div class="line"></div><div class="line">console.log(i);// a b c 3 4 5</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>for…in循环：只遍历对象自身的和继承的可枚举的属性、for in是遍历键名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">for( let i in arr3 )&#123;</div><div class="line"></div><div class="line">console.log(i);// 0 1 2 3 4 5</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>forEach循环</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">arr3.forEach(function(item,index)&#123;</div><div class="line"></div><div class="line">console.log(item);// a b c 3 4 5</div><div class="line"></div><div class="line">console.log(index);// 0 1 2 3 4 5</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>数组过滤</p>
+</blockquote>
+<ul>
+<li>扩展数组<code>prototype</code>属性过滤数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">let arrayAll = [&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;,</div><div class="line">            &#123;&apos;id&apos;:&apos;222&apos;,&apos;name&apos;:&apos;bbb&apos;&#125;,</div><div class="line">            &#123;&apos;id&apos;:&apos;333&apos;,&apos;name&apos;:&apos;ccc&apos;&#125;];</div><div class="line">            </div><div class="line">let arrayDel = [&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;];</div><div class="line">            </div><div class="line">Array.prototype.indexOf = function(val) &#123;</div><div class="line">    for (var i = 0; i &lt; this.length; i++) &#123;</div><div class="line">        if (val.id == this[i].id) return i;</div><div class="line">    &#125;</div><div class="line">    return -1;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Array.prototype.remove = function(val) &#123;</div><div class="line">    var index = this.indexOf(val);</div><div class="line">    if (index &gt; -1) &#123;</div><div class="line">        this.splice(index, 1);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">for (let i of arrayDel.length) &#123;</div><div class="line">    let obj = arrayDel[i];</div><div class="line">    array.remove(obj);</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.dir(array);</div></pre></td></tr></table></figure>
+<ul>
+<li>lodash 库 <code>differenceBy</code> 方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let newArray = differenceBy(array,[&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;],&apos;id&apos;);</div><div class="line">console.dir(newArray);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>ES 6 常用 <code>API</code></p>
+</blockquote>
+<p><img src="https://github.com/Boom618/ExceptionReadme/blob/master/image/9B89CB56DB8EDB991A2A17D1243D140B.png" alt="ES 6 常用方法"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/23/快捷键_插件_依赖库/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          常用快捷键 + 插件 + 库依赖
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/23/项目库/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">项目库依赖</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="数组使用" data-title="JS 数组使用" data-url="http://yoursite.com/2017/08/23/数组使用/"  data-images="https://avatars2.githubusercontent.com/u/10544851" data-content="JS 数组使用">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 BoomHe
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

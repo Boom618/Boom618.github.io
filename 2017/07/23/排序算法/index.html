@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>算法排序 | BoomHe</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="算法排序java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）// 冒泡排序: public void bubbleSort(int[] arr) {     for (int i = 0; i &amp;lt; arr.length - 1; i++)">
+<meta name="keywords" content="算法排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法排序">
+<meta property="og:url" content="http://yoursite.com/2017/07/23/排序算法/index.html">
+<meta property="og:site_name" content="BoomHe">
+<meta property="og:description" content="算法排序java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）// 冒泡排序: public void bubbleSort(int[] arr) {     for (int i = 0; i &amp;lt; arr.length - 1; i++)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-23T05:23:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法排序">
+<meta name="twitter:description" content="算法排序java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）// 冒泡排序: public void bubbleSort(int[] arr) {     for (int i = 0; i &amp;lt; arr.length - 1; i++)">
+  
+    <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://avatars2.githubusercontent.com/u/10544851">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://avatars2.githubusercontent.com/u/10544851" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">BoomHe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叫太阳起床的男人</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Boom618" title="github">github</a>
+					        
+								<a class="jianshu" target="_blank" href="http://www.jianshu.com/u/5c80c461ab08" title="jianshu">jianshu</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/2402691815" title="weibo">weibo</a>
+					        
+								<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100010098188015" title="facebook">facebook</a>
+					        
+								<a class="twitter" target="_blank" href="https://twitter.com/BoomHe8" title="twitter">twitter</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/库依赖/" style="font-size: 10px;">库依赖</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/数组使用/" style="font-size: 10px;">数组使用</a> <a href="/tags/算法排序/" style="font-size: 10px;">算法排序</a> <a href="/tags/项目异常/" style="font-size: 10px;">项目异常</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/Boom618">github</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/hedong316">csdn</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">BoomHe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://avatars2.githubusercontent.com/u/10544851" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">BoomHe</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">叫太阳起床的男人</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Boom618" title="github">github</a>
+			        
+						<a class="jianshu" target="_blank" href="http://www.jianshu.com/u/5c80c461ab08" title="jianshu">jianshu</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/2402691815" title="weibo">weibo</a>
+			        
+						<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100010098188015" title="facebook">facebook</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/BoomHe8" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-排序算法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/07/23/排序算法/" class="article-date">
+  	<time datetime="2017-07-23T02:52:18.000Z" itemprop="datePublished">2017-07-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      算法排序
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法排序/">算法排序</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="算法排序"><a href="#算法排序" class="headerlink" title="算法排序"></a>算法排序</h1><h2 id="java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"><a href="#java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试" class="headerlink" title="java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"></a>java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试</h2><h3 id="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）"><a href="#冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）" class="headerlink" title="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）"></a><code>冒泡排序</code>是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）</h3><pre><code>// 冒泡排序:
+public void bubbleSort(int[] arr) {
+    for (int i = 0; i &lt; arr.length - 1; i++) {
+        // 找出最小要 arr.length - 1 - i 次
+        for (int j = arr.length - 1; j &gt; i; j--) {
+            if (arr[j - 1] &gt; arr[j]) {
+                int temp = arr[j - 1];
+                arr[j - 1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+</code></pre><h3 id="选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"><a href="#选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。" class="headerlink" title="选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"></a><code>选择排序</code>的时间复杂度还有空间复杂度跟冒泡是一样的。</h3><pre><code> // 选择排序：
+public void chooseSort(int[] arr) {
+    for (int i = 0; i &lt; arr.length; i++) {
+        for (int j = i + 1; j &lt; arr.length; j++) {
+            if (arr[i] &gt; arr[j]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+</code></pre><h3 id="插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1"><a href="#插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1" class="headerlink" title="插入排序的时间复杂度也是O(n*n)，空间复杂度也是O(1)"></a><code>插入排序</code>的时间复杂度也是O(n*n)，空间复杂度也是O(1)</h3><pre><code> // 插入排序：
+public void insertSort(int[] arr) {
+    for (int j = 1; j &lt; arr.length; j++) {
+        for (int i = 0; i &lt; j; i++) {
+            if (arr[i] &gt; arr[j]) {
+                int tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+            }
+        }
+    }
+}
+</code></pre><h3 id="快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N"><a href="#快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N" class="headerlink" title="快速排序通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)"></a><code>快速排序</code>通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)</h3><pre><code> // 快速排序
+public void quickSort(int[] arr, int head, int tail) {
+    int i = head;
+    int j = tail;
+    if (i &gt; j) {
+        return;
+    }
+    int key = arr[i];
+    while (i &lt; j) {
+        while (i &lt; j &amp;&amp; key &lt;= arr[j]) {
+            j--;
+        }
+        if (i &lt; j) {
+            arr[i++] = arr[j];
+        }
+        while (i &lt; j &amp;&amp; key &gt;= arr[i]) {
+            i++;
+        }
+        if (i &lt; j) {
+            arr[j--] = arr[i];
+        }
+    }
+    arr[j] = key;
+    quickSort(arr, head, j - 1);
+    quickSort(arr, j + 1, tail);
+} 
+</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>@Test
+public void TestSort() {
+    int[] arr1 = new int[6000];
+    for (int i = 0; i &lt; arr1.length; i++) {
+        arr1[i] = new Random().nextInt(6000) + 1;
+    }
+    int[] arr2 = new int[6000];
+    for (int i = 0; i &lt; arr2.length; i++) {
+        arr2[i] = new Random().nextInt(6000) + 1;
+    }
+    int[] arr3 = new int[6000];
+    for (int i = 0; i &lt; arr3.length; i++) {
+        arr3[i] = new Random().nextInt(6000) + 1;
+    }
+    int[] arr4 = new int[6000];
+    for (int i = 0; i &lt; arr4.length; i++) {
+        arr4[i] = new Random().nextInt(6000) + 1;
+    }
+    long m = System.currentTimeMillis();
+    bubbleSort(arr1);
+    long n = System.currentTimeMillis();
+    System.out.println(&quot;冒泡排序耗时：&quot; + (n - m) + &quot;ms&quot;);
+
+    long p = System.currentTimeMillis();
+    int[] arr6 = {77,43,56,78};
+    chooseSort(arr2);
+    long q = System.currentTimeMillis();
+    System.out.println(&quot;选择排序耗时：&quot; + (q - p) + &quot;ms&quot;);
+
+    long e = System.currentTimeMillis();
+    insertSort(arr3);
+    long d = System.currentTimeMillis();
+    System.out.println(&quot;插入排序耗时：&quot; + (d - e) + &quot;ms&quot;);
+
+    long a = System.currentTimeMillis();
+    quickSort(arr4, 0, arr4.length - 1);
+    long b = System.currentTimeMillis();
+    System.out.println(&quot;快速排序耗时：&quot; + (b - a) + &quot;ms&quot;);
+}
+
+冒泡排序耗时：106ms
+选择排序耗时：107ms
+插入排序耗时：47ms
+快速排序耗时：2ms
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/28/项目异常/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          异常总结
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="排序算法" data-title="算法排序" data-url="http://yoursite.com/2017/07/23/排序算法/"  data-images="https://avatars2.githubusercontent.com/u/10544851" data-content="算法排序">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 BoomHe
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
