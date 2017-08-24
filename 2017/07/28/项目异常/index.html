@@ -183,6 +183,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ExceptionReadme"><span class="toc-number">1.</span> <span class="toc-text">ExceptionReadme</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#总结项目中出现的异常"><span class="toc-number">1.0.1.</span> <span class="toc-text">总结项目中出现的异常</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-util-ConcurrentModificationException"><span class="toc-number">1.1.</span> <span class="toc-text">java.util.ConcurrentModificationException</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-lang-ArrayIndexOutOfBoundsException"><span class="toc-number">1.2.</span> <span class="toc-text">java.lang.ArrayIndexOutOfBoundsException</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-lang-IllegalStateException"><span class="toc-number">1.3.</span> <span class="toc-text">java.lang.IllegalStateException</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-lang-NullPointerException"><span class="toc-number">1.4.</span> <span class="toc-text">java.lang.NullPointerException</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-lang-IllegalArgumentException"><span class="toc-number">1.5.</span> <span class="toc-text">java.lang.IllegalArgumentException</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#android-os-DeadObjectException"><span class="toc-number">1.6.</span> <span class="toc-text">android.os.DeadObjectException</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-util-concurrent-TimeoutException"><span class="toc-number">1.7.</span> <span class="toc-text">java.util.concurrent.TimeoutException</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-lang-ClassNotFoundException"><span class="toc-number">1.8.</span> <span class="toc-text">java.lang.ClassNotFoundException</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-lang-SecurityException"><span class="toc-number">1.9.</span> <span class="toc-text">java.lang.SecurityException</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-lang-OutOfMemoryError"><span class="toc-number">1.10.</span> <span class="toc-text">java.lang.OutOfMemoryError</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#android-os-FileUriExposedException"><span class="toc-number">1.11.</span> <span class="toc-text">android.os.FileUriExposedException</span></a></li></ol></li></ol>
+		</div>
+		
+		
         <h1 id="ExceptionReadme"><a href="#ExceptionReadme" class="headerlink" title="ExceptionReadme"></a>ExceptionReadme</h1><h3 id="总结项目中出现的异常"><a href="#总结项目中出现的异常" class="headerlink" title="总结项目中出现的异常"></a>总结项目中出现的异常</h3><h2 id="java-util-ConcurrentModificationException"><a href="#java-util-ConcurrentModificationException" class="headerlink" title="java.util.ConcurrentModificationException"></a>java.util.ConcurrentModificationException</h2><blockquote>
 <p><strong>异常描述</strong>：该异常表示并发修改异常.迭代器迭代过程中，迭代的对象发生了改变，如数据项增加或删除.</p>
 <p><strong>解决思路</strong>：由于迭代对象不是线程安全，在迭代的过程中，会检查 modCount 是否和初始 modCount 即 expectedModCount 一致，如果不一致，则认为数据有变化，迭代终止并抛出异常。常出现的场景是，两个线程同时对集合进行操作，线程 1 对集合进行遍历，而线程 2 对集合进行增加、删除操作，此时将会发生 ConcurrentModificationException 异常。</p>
@@ -548,11 +556,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">算法排序</a>
+                <a href="javascript:void(0)" class="js-tag color5">数组使用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数组使用</a>
+                <a href="javascript:void(0)" class="js-tag color5">算法排序</a>
               </li>
              
               <li class="article-tag-list-item">
