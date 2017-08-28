@@ -575,9 +575,7 @@
 		</div>
 		
 		
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=32807379&auto=1&height=66"></iframe>
-
-<h2 id="数组使用"><a href="#数组使用" class="headerlink" title="数组使用"></a>数组使用</h2><blockquote>
+        <h2 id="数组使用"><a href="#数组使用" class="headerlink" title="数组使用"></a>数组使用</h2><blockquote>
 <p>数组合并</p>
 </blockquote>
 <p>ES5的写法</p>
@@ -710,8 +708,7 @@
 		</div>
 		
 		
-        <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=28427748&auto=0&height=66"></iframe></p>
-<h1 id="项目库"><a href="#项目库" class="headerlink" title="项目库"></a>项目库</h1><h2 id="库依赖"><a href="#库依赖" class="headerlink" title="库依赖"></a>库依赖</h2><table>
+        <h1 id="项目库"><a href="#项目库" class="headerlink" title="项目库"></a>项目库</h1><h2 id="库依赖"><a href="#库依赖" class="headerlink" title="库依赖"></a>库依赖</h2><table>
 <thead>
 <tr>
 <th>功能</th>
@@ -937,9 +934,7 @@
 		</div>
 		
 		
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=32192436&auto=0&height=66"></iframe>
-
-<h1 id="ExceptionReadme"><a href="#ExceptionReadme" class="headerlink" title="ExceptionReadme"></a>ExceptionReadme</h1><h3 id="总结项目中出现的异常"><a href="#总结项目中出现的异常" class="headerlink" title="总结项目中出现的异常"></a>总结项目中出现的异常</h3><h2 id="java-util-ConcurrentModificationException"><a href="#java-util-ConcurrentModificationException" class="headerlink" title="java.util.ConcurrentModificationException"></a>java.util.ConcurrentModificationException</h2><blockquote>
+        <h1 id="ExceptionReadme"><a href="#ExceptionReadme" class="headerlink" title="ExceptionReadme"></a>ExceptionReadme</h1><h3 id="总结项目中出现的异常"><a href="#总结项目中出现的异常" class="headerlink" title="总结项目中出现的异常"></a>总结项目中出现的异常</h3><h2 id="java-util-ConcurrentModificationException"><a href="#java-util-ConcurrentModificationException" class="headerlink" title="java.util.ConcurrentModificationException"></a>java.util.ConcurrentModificationException</h2><blockquote>
 <p><strong>异常描述</strong>：该异常表示并发修改异常.迭代器迭代过程中，迭代的对象发生了改变，如数据项增加或删除.</p>
 <p><strong>解决思路</strong>：由于迭代对象不是线程安全，在迭代的过程中，会检查 modCount 是否和初始 modCount 即 expectedModCount 一致，如果不一致，则认为数据有变化，迭代终止并抛出异常。常出现的场景是，两个线程同时对集合进行操作，线程 1 对集合进行遍历，而线程 2 对集合进行增加、删除操作，此时将会发生 ConcurrentModificationException 异常。</p>
 <p><strong>解决方法</strong>：多线程访问时要增加同步锁，或者建议使用线程安全的集合：</p>
@@ -1129,9 +1124,7 @@
 		</div>
 		
 		
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=432506345&auto=0&height=66"></iframe>
-
-<h1 id="算法排序"><a href="#算法排序" class="headerlink" title="算法排序"></a>算法排序</h1><h2 id="java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"><a href="#java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试" class="headerlink" title="java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"></a>java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试</h2><h3 id="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）"><a href="#冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）" class="headerlink" title="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）"></a><code>冒泡排序</code>是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）</h3><pre><code>// 冒泡排序:
+        <h1 id="算法排序"><a href="#算法排序" class="headerlink" title="算法排序"></a>算法排序</h1><h2 id="java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"><a href="#java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试" class="headerlink" title="java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"></a>java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试</h2><h3 id="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）"><a href="#冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）" class="headerlink" title="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）"></a><code>冒泡排序</code>是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）</h3><pre><code>// 冒泡排序:
 public void bubbleSort(int[] arr) {
     for (int i = 0; i &lt; arr.length - 1; i++) {
         // 找出最小要 arr.length - 1 - i 次
