@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>异常总结 | BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="//其中的width=298 height=52 均改为0就看不到了，依然可以播放音乐 ExceptionReadme总结项目中出现的异常java.util.ConcurrentModificationException 异常描述：该异常表示并发修改异常.迭代器迭代过程中，迭代的对象发生了改变，如数据项增加或删除. 解决思路：由于迭代对象不是线程安全，在迭代的过程中，会检查 modCount 是否">
+  <meta name="description" content="ExceptionReadme总结项目中出现的异常java.util.ConcurrentModificationException 异常描述：该异常表示并发修改异常.迭代器迭代过程中，迭代的对象发生了改变，如数据项增加或删除. 解决思路：由于迭代对象不是线程安全，在迭代的过程中，会检查 modCount 是否和初始 modCount 即 expectedModCount 一致，如果不一致，则">
 <meta name="keywords" content="项目异常">
 <meta property="og:type" content="article">
 <meta property="og:title" content="异常总结">
 <meta property="og:url" content="http://yoursite.com/2017/07/28/项目异常/index.html">
 <meta property="og:site_name" content="BoomHe">
-<meta property="og:description" content="//其中的width=298 height=52 均改为0就看不到了，依然可以播放音乐 ExceptionReadme总结项目中出现的异常java.util.ConcurrentModificationException 异常描述：该异常表示并发修改异常.迭代器迭代过程中，迭代的对象发生了改变，如数据项增加或删除. 解决思路：由于迭代对象不是线程安全，在迭代的过程中，会检查 modCount 是否">
+<meta property="og:description" content="ExceptionReadme总结项目中出现的异常java.util.ConcurrentModificationException 异常描述：该异常表示并发修改异常.迭代器迭代过程中，迭代的对象发生了改变，如数据项增加或删除. 解决思路：由于迭代对象不是线程安全，在迭代的过程中，会检查 modCount 是否和初始 modCount 即 expectedModCount 一致，如果不一致，则">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-28T06:57:59.000Z">
+<meta property="og:updated_time" content="2017-08-28T07:50:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="异常总结">
-<meta name="twitter:description" content="//其中的width=298 height=52 均改为0就看不到了，依然可以播放音乐 ExceptionReadme总结项目中出现的异常java.util.ConcurrentModificationException 异常描述：该异常表示并发修改异常.迭代器迭代过程中，迭代的对象发生了改变，如数据项增加或删除. 解决思路：由于迭代对象不是线程安全，在迭代的过程中，会检查 modCount 是否">
+<meta name="twitter:description" content="ExceptionReadme总结项目中出现的异常java.util.ConcurrentModificationException 异常描述：该异常表示并发修改异常.迭代器迭代过程中，迭代的对象发生了改变，如数据项增加或删除. 解决思路：由于迭代对象不是线程安全，在迭代的过程中，会检查 modCount 是否和初始 modCount 即 expectedModCount 一致，如果不一致，则">
   
     <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
   
@@ -191,7 +191,8 @@
 		</div>
 		
 		
-        <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="298" height="52" src="http://music.163.com/outchain/player?type=2&id=32192436&auto=1&height=32"></iframe><br>//其中的width=298 height=52 均改为0就看不到了，依然可以播放音乐</p>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=32192436&auto=0&height=66"></iframe>
+
 <h1 id="ExceptionReadme"><a href="#ExceptionReadme" class="headerlink" title="ExceptionReadme"></a>ExceptionReadme</h1><h3 id="总结项目中出现的异常"><a href="#总结项目中出现的异常" class="headerlink" title="总结项目中出现的异常"></a>总结项目中出现的异常</h3><h2 id="java-util-ConcurrentModificationException"><a href="#java-util-ConcurrentModificationException" class="headerlink" title="java.util.ConcurrentModificationException"></a>java.util.ConcurrentModificationException</h2><blockquote>
 <p><strong>异常描述</strong>：该异常表示并发修改异常.迭代器迭代过程中，迭代的对象发生了改变，如数据项增加或删除.</p>
 <p><strong>解决思路</strong>：由于迭代对象不是线程安全，在迭代的过程中，会检查 modCount 是否和初始 modCount 即 expectedModCount 一致，如果不一致，则认为数据有变化，迭代终止并抛出异常。常出现的场景是，两个线程同时对集合进行操作，线程 1 对集合进行遍历，而线程 2 对集合进行增加、删除操作，此时将会发生 ConcurrentModificationException 异常。</p>
