@@ -163,286 +163,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-数组使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/数组使用/">JS 数组使用</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/数组使用/" class="archive-article-date">
-  	<time datetime="2017-08-23T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组使用"><span class="toc-number">1.</span> <span class="toc-text">数组使用</span></a></li></ol>
-		</div>
-		
-		
-        <h2 id="数组使用"><a href="#数组使用" class="headerlink" title="数组使用"></a>数组使用</h2><blockquote>
-<p>数组合并</p>
-</blockquote>
-<p>ES5的写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let arr1=[0,1,2];</div><div class="line"></div><div class="line">let arr2=[3,4,5];</div><div class="line"></div><div class="line">Array.prototype.push.apply(arr1,arr2);</div></pre></td></tr></table></figure>
-<p>ES6的写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let arr3=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;];</div><div class="line"></div><div class="line">let arr4=[3,4,5];</div><div class="line"></div><div class="line">arr3.push(...arr4);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>几个属性的理解</p>
-</blockquote>
-<ul>
-<li>Object.keys(obj) :返回对象自身的所有可枚举的属性的键名</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let arr1keys = Object.keys(arr1);  // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;] </div><div class="line"></div><div class="line">let arr3keys = Object.keys(arr3);   // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;]</div></pre></td></tr></table></figure>
-<ul>
-<li>Object.getOwnPropertyNames(obj):返回一个数组，包含对象自身的所有属性</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let temp1 = Object.getOwnPropertyNames(arr1);// [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;length&quot;]</div></pre></td></tr></table></figure>
-<ul>
-<li>Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有Symbol属性</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let temp2 = Object.getOwnPropertySymbols(arr2);// []</div></pre></td></tr></table></figure>
-<blockquote>
-<p>for…of  、for…in 和 forEach</p>
-</blockquote>
-<ul>
-<li>for of是遍历键值</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">for( let i of arr3 )&#123;</div><div class="line"></div><div class="line">console.log(i);// a b c 3 4 5</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>for…in循环：只遍历对象自身的和继承的可枚举的属性、for in是遍历键名</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">for( let i in arr3 )&#123;</div><div class="line"></div><div class="line">console.log(i);// 0 1 2 3 4 5</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>forEach循环</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">arr3.forEach(function(item,index)&#123;</div><div class="line"></div><div class="line">console.log(item);// a b c 3 4 5</div><div class="line"></div><div class="line">console.log(index);// 0 1 2 3 4 5</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>数组过滤</p>
-</blockquote>
-<ul>
-<li>扩展数组<code>prototype</code>属性过滤数组</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">let arrayAll = [&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;,</div><div class="line">            &#123;&apos;id&apos;:&apos;222&apos;,&apos;name&apos;:&apos;bbb&apos;&#125;,</div><div class="line">            &#123;&apos;id&apos;:&apos;333&apos;,&apos;name&apos;:&apos;ccc&apos;&#125;];</div><div class="line">            </div><div class="line">let arrayDel = [&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;];</div><div class="line">            </div><div class="line">Array.prototype.indexOf = function(val) &#123;</div><div class="line">    for (var i = 0; i &lt; this.length; i++) &#123;</div><div class="line">        if (val.id == this[i].id) return i;</div><div class="line">    &#125;</div><div class="line">    return -1;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Array.prototype.remove = function(val) &#123;</div><div class="line">    var index = this.indexOf(val);</div><div class="line">    if (index &gt; -1) &#123;</div><div class="line">        this.splice(index, 1);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">for (let i of arrayDel.length) &#123;</div><div class="line">    let obj = arrayDel[i];</div><div class="line">    array.remove(obj);</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.dir(array);</div></pre></td></tr></table></figure>
-<ul>
-<li>lodash 库 <code>differenceBy</code> 方法</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let newArray = differenceBy(array,[&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;],&apos;id&apos;);</div><div class="line">console.dir(newArray);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>ES 6 常用 <code>API</code></p>
-</blockquote>
-<p><img src="https://github.com/Boom618/ExceptionReadme/blob/master/image/9B89CB56DB8EDB991A2A17D1243D140B.png" alt="ES 6 常用方法"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数组使用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/23/数组使用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-项目库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/项目库/">项目库依赖</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/项目库/" class="archive-article-date">
-  	<time datetime="2017-08-23T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目库"><span class="toc-number">1.</span> <span class="toc-text">项目库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#库依赖"><span class="toc-number">1.1.</span> <span class="toc-text">库依赖</span></a></li></ol></li></ol>
-		</div>
-		
-		
-        <h1 id="项目库"><a href="#项目库" class="headerlink" title="项目库"></a>项目库</h1><h2 id="库依赖"><a href="#库依赖" class="headerlink" title="库依赖"></a>库依赖</h2><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>GitHub 地址</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>TakePhoto</code> 是一款用于 Android 设备获取照片（拍照或从相册、文件中选择）、裁剪图片、压缩图片的开源工具库</td>
-<td><a href="https://github.com/crazycodeboy/TakePhoto" target="_blank" rel="external">TakePhoto</a></td>
-</tr>
-<tr>
-<td><code>PhotoView</code>一个流畅的图片浏览缩放控件</td>
-<td><a href="https://github.com/bm-x/PhotoView" target="_blank" rel="external">PhotoView</a></td>
-</tr>
-<tr>
-<td><code>FileDownloader</code>Android 文件下载引擎，稳定、高效、灵活、简单易用</td>
-<td><a href="https://github.com/lingochamp/FileDownloader" target="_blank" rel="external">FileDownloader</a></td>
-</tr>
-<tr>
-<td><code>FlycoTabLayout</code>一个 Android TabLayout 库</td>
-<td><a href="https://github.com/H07000223/FlycoTabLayout" target="_blank" rel="external">FlycoTabLayout</a></td>
-</tr>
-<tr>
-<td><code>PagerBottomTabStrip</code>Android 的底部导航栏</td>
-<td><a href="https://github.com/tyzlmjj/PagerBottomTabStrip" target="_blank" rel="external">PagerBottomTabStrip</a></td>
-</tr>
-<tr>
-<td><code>PermissionGen</code>Android API 易于使用的 Android M 权限</td>
-<td><a href="https://github.com/lovedise/PermissionGen" target="_blank" rel="external">PermissionGen</a></td>
-</tr>
-<tr>
-<td><code>PermissionsDispatcher</code>简单的基于注释的 API 来处理运行时权限</td>
-<td><a href="https://github.com/hotchemi/PermissionsDispatcher" target="_blank" rel="external">PermissionsDispatcher</a></td>
-</tr>
-<tr>
-<td><code>MaterialDateTimePicker</code>选择日期或时间</td>
-<td><a href="https://github.com/wdullaer/MaterialDateTimePicker" target="_blank" rel="external">MaterialDateTimePicker</a></td>
-</tr>
-<tr>
-<td><code>zxingLibrary</code>快速集成二维码扫描功能</td>
-<td><a href="https://github.com/yipianfengye/android-zxingLibrary" target="_blank" rel="external">zxingLibrary</a></td>
-</tr>
-<tr>
-<td><code>Luban</code> 鲁班 Android 图片压缩工具，仿微信朋友圈压缩策略</td>
-<td><a href="https://github.com/Curzibn/Luban" target="_blank" rel="external">Luban</a></td>
-</tr>
-<tr>
-<td><code>materialish-progress</code>Material Style  进度轮与 2.3 兼容</td>
-<td><a href="https://github.com/pnikosis/materialish-progress" target="_blank" rel="external">materialish-progress</a></td>
-</tr>
-<tr>
-<td><code>Logger</code>简单，漂亮和强大的 Android 日志</td>
-<td><a href="https://github.com/orhanobut/logger" target="_blank" rel="external">Logger</a></td>
-</tr>
-<tr>
-<td><code>Picasso</code>功能强大的图像下载和缓存库</td>
-<td><a href="https://github.com/square/picasso" target="_blank" rel="external">Picasso</a></td>
-</tr>
-<tr>
-<td><code>Glide</code>图像加载和缓存库</td>
-<td><a href="https://github.com/bumptech/glide" target="_blank" rel="external">Glide</a></td>
-</tr>
-</tbody>
-</table>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">库依赖</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/23/项目库/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -522,7 +242,7 @@
 
 
   
-    <article id="post-排序算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-数组使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
@@ -531,123 +251,68 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tags-算法排序"><span class="toc-number">1.</span> <span class="toc-text">tags: 算法排序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#算法排序"><span class="toc-number"></span> <span class="toc-text">算法排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"><span class="toc-number">1.</span> <span class="toc-text">java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）"><span class="toc-number">1.1.</span> <span class="toc-text">冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"><span class="toc-number">1.2.</span> <span class="toc-text">选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1"><span class="toc-number">1.3.</span> <span class="toc-text">插入排序的时间复杂度也是O(n*n)，空间复杂度也是O(1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N"><span class="toc-number">1.4.</span> <span class="toc-text">快速排序通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">1.5.</span> <span class="toc-text">测试</span></a></li></ol></li></ol>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tags-数组使用"><span class="toc-number">1.</span> <span class="toc-text">tags: 数组使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组使用"><span class="toc-number">2.</span> <span class="toc-text">数组使用</span></a></li></ol>
 		</div>
 		
 		
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=432506345&auto=0&height=66"></iframe>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=32807379&auto=1&height=66"></iframe>
 
 
 <hr>
-<p>title: 算法排序<br>date: 2017-07-23 10:52:18</p>
-<h2 id="tags-算法排序"><a href="#tags-算法排序" class="headerlink" title="tags: 算法排序"></a>tags: 算法排序</h2><h1 id="算法排序"><a href="#算法排序" class="headerlink" title="算法排序"></a>算法排序</h1><h2 id="java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"><a href="#java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试" class="headerlink" title="java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"></a>java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试</h2><h3 id="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）"><a href="#冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）" class="headerlink" title="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）"></a><code>冒泡排序</code>是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）</h3><pre><code>// 冒泡排序:
-public void bubbleSort(int[] arr) {
-    for (int i = 0; i &lt; arr.length - 1; i++) {
-        // 找出最小要 arr.length - 1 - i 次
-        for (int j = arr.length - 1; j &gt; i; j--) {
-            if (arr[j - 1] &gt; arr[j]) {
-                int temp = arr[j - 1];
-                arr[j - 1] = arr[j];
-                arr[j] = temp;
-            }
-        }
-    }
-}
-</code></pre><h3 id="选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"><a href="#选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。" class="headerlink" title="选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"></a><code>选择排序</code>的时间复杂度还有空间复杂度跟冒泡是一样的。</h3><pre><code> // 选择排序：
-public void chooseSort(int[] arr) {
-    for (int i = 0; i &lt; arr.length; i++) {
-        for (int j = i + 1; j &lt; arr.length; j++) {
-            if (arr[i] &gt; arr[j]) {
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
-    }
-}
-</code></pre><h3 id="插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1"><a href="#插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1" class="headerlink" title="插入排序的时间复杂度也是O(n*n)，空间复杂度也是O(1)"></a><code>插入排序</code>的时间复杂度也是O(n*n)，空间复杂度也是O(1)</h3><pre><code> // 插入排序：
-public void insertSort(int[] arr) {
-    for (int j = 1; j &lt; arr.length; j++) {
-        for (int i = 0; i &lt; j; i++) {
-            if (arr[i] &gt; arr[j]) {
-                int tmp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = tmp;
-            }
-        }
-    }
-}
-</code></pre><h3 id="快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N"><a href="#快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N" class="headerlink" title="快速排序通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)"></a><code>快速排序</code>通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)</h3><pre><code> // 快速排序
-public void quickSort(int[] arr, int head, int tail) {
-    int i = head;
-    int j = tail;
-    if (i &gt; j) {
-        return;
-    }
-    int key = arr[i];
-    while (i &lt; j) {
-        while (i &lt; j &amp;&amp; key &lt;= arr[j]) {
-            j--;
-        }
-        if (i &lt; j) {
-            arr[i++] = arr[j];
-        }
-        while (i &lt; j &amp;&amp; key &gt;= arr[i]) {
-            i++;
-        }
-        if (i &lt; j) {
-            arr[j--] = arr[i];
-        }
-    }
-    arr[j] = key;
-    quickSort(arr, head, j - 1);
-    quickSort(arr, j + 1, tail);
-} 
-</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>@Test
-public void TestSort() {
-    int[] arr1 = new int[6000];
-    for (int i = 0; i &lt; arr1.length; i++) {
-        arr1[i] = new Random().nextInt(6000) + 1;
-    }
-    int[] arr2 = new int[6000];
-    for (int i = 0; i &lt; arr2.length; i++) {
-        arr2[i] = new Random().nextInt(6000) + 1;
-    }
-    int[] arr3 = new int[6000];
-    for (int i = 0; i &lt; arr3.length; i++) {
-        arr3[i] = new Random().nextInt(6000) + 1;
-    }
-    int[] arr4 = new int[6000];
-    for (int i = 0; i &lt; arr4.length; i++) {
-        arr4[i] = new Random().nextInt(6000) + 1;
-    }
-    long m = System.currentTimeMillis();
-    bubbleSort(arr1);
-    long n = System.currentTimeMillis();
-    System.out.println(&quot;冒泡排序耗时：&quot; + (n - m) + &quot;ms&quot;);
+<p>title: JS 数组使用<br>date: 2017-08-23 10:52:18</p>
+<h2 id="tags-数组使用"><a href="#tags-数组使用" class="headerlink" title="tags: 数组使用"></a>tags: 数组使用</h2><h2 id="数组使用"><a href="#数组使用" class="headerlink" title="数组使用"></a>数组使用</h2><blockquote>
+<p>数组合并</p>
+</blockquote>
+<p>ES5的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let arr1=[0,1,2];</div><div class="line"></div><div class="line">let arr2=[3,4,5];</div><div class="line"></div><div class="line">Array.prototype.push.apply(arr1,arr2);</div></pre></td></tr></table></figure>
+<p>ES6的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let arr3=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;];</div><div class="line"></div><div class="line">let arr4=[3,4,5];</div><div class="line"></div><div class="line">arr3.push(...arr4);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>几个属性的理解</p>
+</blockquote>
+<ul>
+<li>Object.keys(obj) :返回对象自身的所有可枚举的属性的键名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let arr1keys = Object.keys(arr1);  // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;] </div><div class="line"></div><div class="line">let arr3keys = Object.keys(arr3);   // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;]</div></pre></td></tr></table></figure>
+<ul>
+<li>Object.getOwnPropertyNames(obj):返回一个数组，包含对象自身的所有属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let temp1 = Object.getOwnPropertyNames(arr1);// [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;length&quot;]</div></pre></td></tr></table></figure>
+<ul>
+<li>Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有Symbol属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let temp2 = Object.getOwnPropertySymbols(arr2);// []</div></pre></td></tr></table></figure>
+<blockquote>
+<p>for…of  、for…in 和 forEach</p>
+</blockquote>
+<ul>
+<li>for of是遍历键值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">for( let i of arr3 )&#123;</div><div class="line"></div><div class="line">console.log(i);// a b c 3 4 5</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>for…in循环：只遍历对象自身的和继承的可枚举的属性、for in是遍历键名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">for( let i in arr3 )&#123;</div><div class="line"></div><div class="line">console.log(i);// 0 1 2 3 4 5</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>forEach循环</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">arr3.forEach(function(item,index)&#123;</div><div class="line"></div><div class="line">console.log(item);// a b c 3 4 5</div><div class="line"></div><div class="line">console.log(index);// 0 1 2 3 4 5</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>数组过滤</p>
+</blockquote>
+<ul>
+<li>扩展数组<code>prototype</code>属性过滤数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">let arrayAll = [&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;,</div><div class="line">            &#123;&apos;id&apos;:&apos;222&apos;,&apos;name&apos;:&apos;bbb&apos;&#125;,</div><div class="line">            &#123;&apos;id&apos;:&apos;333&apos;,&apos;name&apos;:&apos;ccc&apos;&#125;];</div><div class="line">            </div><div class="line">let arrayDel = [&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;];</div><div class="line">            </div><div class="line">Array.prototype.indexOf = function(val) &#123;</div><div class="line">    for (var i = 0; i &lt; this.length; i++) &#123;</div><div class="line">        if (val.id == this[i].id) return i;</div><div class="line">    &#125;</div><div class="line">    return -1;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Array.prototype.remove = function(val) &#123;</div><div class="line">    var index = this.indexOf(val);</div><div class="line">    if (index &gt; -1) &#123;</div><div class="line">        this.splice(index, 1);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">for (let i of arrayDel.length) &#123;</div><div class="line">    let obj = arrayDel[i];</div><div class="line">    array.remove(obj);</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.dir(array);</div></pre></td></tr></table></figure>
+<ul>
+<li>lodash 库 <code>differenceBy</code> 方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let newArray = differenceBy(array,[&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;],&apos;id&apos;);</div><div class="line">console.dir(newArray);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>ES 6 常用 <code>API</code></p>
+</blockquote>
+<p><img src="https://github.com/Boom618/ExceptionReadme/blob/master/image/9B89CB56DB8EDB991A2A17D1243D140B.png" alt="ES 6 常用方法"></p>
 
-    long p = System.currentTimeMillis();
-    int[] arr6 = {77,43,56,78};
-    chooseSort(arr2);
-    long q = System.currentTimeMillis();
-    System.out.println(&quot;选择排序耗时：&quot; + (q - p) + &quot;ms&quot;);
-
-    long e = System.currentTimeMillis();
-    insertSort(arr3);
-    long d = System.currentTimeMillis();
-    System.out.println(&quot;插入排序耗时：&quot; + (d - e) + &quot;ms&quot;);
-
-    long a = System.currentTimeMillis();
-    quickSort(arr4, 0, arr4.length - 1);
-    long b = System.currentTimeMillis();
-    System.out.println(&quot;快速排序耗时：&quot; + (b - a) + &quot;ms&quot;);
-}
-
-冒泡排序耗时：106ms
-选择排序耗时：107ms
-插入排序耗时：47ms
-快速排序耗时：2ms
-</code></pre>
       
 
       
@@ -659,7 +324,7 @@ public void TestSort() {
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/21/排序算法/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/08/21/数组使用/">展开全文 >></a>
         </p>
       
 
@@ -1046,6 +711,299 @@ public void TestSort() {
 
 
   
+    <article id="post-排序算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tags-算法排序"><span class="toc-number">1.</span> <span class="toc-text">tags: 算法排序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#算法排序"><span class="toc-number"></span> <span class="toc-text">算法排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"><span class="toc-number">1.</span> <span class="toc-text">java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）"><span class="toc-number">1.1.</span> <span class="toc-text">冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"><span class="toc-number">1.2.</span> <span class="toc-text">选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1"><span class="toc-number">1.3.</span> <span class="toc-text">插入排序的时间复杂度也是O(n*n)，空间复杂度也是O(1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N"><span class="toc-number">1.4.</span> <span class="toc-text">快速排序通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">1.5.</span> <span class="toc-text">测试</span></a></li></ol></li></ol>
+		</div>
+		
+		
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=432506345&auto=0&height=66"></iframe>
+
+
+<hr>
+<p>title: 算法排序<br>date: 2017-07-23 10:52:18</p>
+<h2 id="tags-算法排序"><a href="#tags-算法排序" class="headerlink" title="tags: 算法排序"></a>tags: 算法排序</h2><h1 id="算法排序"><a href="#算法排序" class="headerlink" title="算法排序"></a>算法排序</h1><h2 id="java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"><a href="#java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试" class="headerlink" title="java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"></a>java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试</h2><h3 id="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）"><a href="#冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）" class="headerlink" title="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）"></a><code>冒泡排序</code>是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）</h3><pre><code>// 冒泡排序:
+public void bubbleSort(int[] arr) {
+    for (int i = 0; i &lt; arr.length - 1; i++) {
+        // 找出最小要 arr.length - 1 - i 次
+        for (int j = arr.length - 1; j &gt; i; j--) {
+            if (arr[j - 1] &gt; arr[j]) {
+                int temp = arr[j - 1];
+                arr[j - 1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+</code></pre><h3 id="选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"><a href="#选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。" class="headerlink" title="选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"></a><code>选择排序</code>的时间复杂度还有空间复杂度跟冒泡是一样的。</h3><pre><code> // 选择排序：
+public void chooseSort(int[] arr) {
+    for (int i = 0; i &lt; arr.length; i++) {
+        for (int j = i + 1; j &lt; arr.length; j++) {
+            if (arr[i] &gt; arr[j]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+</code></pre><h3 id="插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1"><a href="#插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1" class="headerlink" title="插入排序的时间复杂度也是O(n*n)，空间复杂度也是O(1)"></a><code>插入排序</code>的时间复杂度也是O(n*n)，空间复杂度也是O(1)</h3><pre><code> // 插入排序：
+public void insertSort(int[] arr) {
+    for (int j = 1; j &lt; arr.length; j++) {
+        for (int i = 0; i &lt; j; i++) {
+            if (arr[i] &gt; arr[j]) {
+                int tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+            }
+        }
+    }
+}
+</code></pre><h3 id="快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N"><a href="#快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N" class="headerlink" title="快速排序通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)"></a><code>快速排序</code>通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)</h3><pre><code> // 快速排序
+public void quickSort(int[] arr, int head, int tail) {
+    int i = head;
+    int j = tail;
+    if (i &gt; j) {
+        return;
+    }
+    int key = arr[i];
+    while (i &lt; j) {
+        while (i &lt; j &amp;&amp; key &lt;= arr[j]) {
+            j--;
+        }
+        if (i &lt; j) {
+            arr[i++] = arr[j];
+        }
+        while (i &lt; j &amp;&amp; key &gt;= arr[i]) {
+            i++;
+        }
+        if (i &lt; j) {
+            arr[j--] = arr[i];
+        }
+    }
+    arr[j] = key;
+    quickSort(arr, head, j - 1);
+    quickSort(arr, j + 1, tail);
+} 
+</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>@Test
+public void TestSort() {
+    int[] arr1 = new int[6000];
+    for (int i = 0; i &lt; arr1.length; i++) {
+        arr1[i] = new Random().nextInt(6000) + 1;
+    }
+    int[] arr2 = new int[6000];
+    for (int i = 0; i &lt; arr2.length; i++) {
+        arr2[i] = new Random().nextInt(6000) + 1;
+    }
+    int[] arr3 = new int[6000];
+    for (int i = 0; i &lt; arr3.length; i++) {
+        arr3[i] = new Random().nextInt(6000) + 1;
+    }
+    int[] arr4 = new int[6000];
+    for (int i = 0; i &lt; arr4.length; i++) {
+        arr4[i] = new Random().nextInt(6000) + 1;
+    }
+    long m = System.currentTimeMillis();
+    bubbleSort(arr1);
+    long n = System.currentTimeMillis();
+    System.out.println(&quot;冒泡排序耗时：&quot; + (n - m) + &quot;ms&quot;);
+
+    long p = System.currentTimeMillis();
+    int[] arr6 = {77,43,56,78};
+    chooseSort(arr2);
+    long q = System.currentTimeMillis();
+    System.out.println(&quot;选择排序耗时：&quot; + (q - p) + &quot;ms&quot;);
+
+    long e = System.currentTimeMillis();
+    insertSort(arr3);
+    long d = System.currentTimeMillis();
+    System.out.println(&quot;插入排序耗时：&quot; + (d - e) + &quot;ms&quot;);
+
+    long a = System.currentTimeMillis();
+    quickSort(arr4, 0, arr4.length - 1);
+    long b = System.currentTimeMillis();
+    System.out.println(&quot;快速排序耗时：&quot; + (b - a) + &quot;ms&quot;);
+}
+
+冒泡排序耗时：106ms
+选择排序耗时：107ms
+插入排序耗时：47ms
+快速排序耗时：2ms
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/21/排序算法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-项目库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tags-库依赖"><span class="toc-number">1.</span> <span class="toc-text">tags: 库依赖</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#项目库"><span class="toc-number"></span> <span class="toc-text">项目库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#库依赖"><span class="toc-number">1.</span> <span class="toc-text">库依赖</span></a></li></ol>
+		</div>
+		
+		
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=28427748&auto=0&height=66"></iframe>
+
+
+<hr>
+<p>title: 项目库依赖<br>date: 2017-08-23 10:52:18</p>
+<h2 id="tags-库依赖"><a href="#tags-库依赖" class="headerlink" title="tags: 库依赖"></a>tags: 库依赖</h2><h1 id="项目库"><a href="#项目库" class="headerlink" title="项目库"></a>项目库</h1><h2 id="库依赖"><a href="#库依赖" class="headerlink" title="库依赖"></a>库依赖</h2><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>GitHub 地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TakePhoto</code> 是一款用于 Android 设备获取照片（拍照或从相册、文件中选择）、裁剪图片、压缩图片的开源工具库</td>
+<td><a href="https://github.com/crazycodeboy/TakePhoto" target="_blank" rel="external">TakePhoto</a></td>
+</tr>
+<tr>
+<td><code>PhotoView</code>一个流畅的图片浏览缩放控件</td>
+<td><a href="https://github.com/bm-x/PhotoView" target="_blank" rel="external">PhotoView</a></td>
+</tr>
+<tr>
+<td><code>FileDownloader</code>Android 文件下载引擎，稳定、高效、灵活、简单易用</td>
+<td><a href="https://github.com/lingochamp/FileDownloader" target="_blank" rel="external">FileDownloader</a></td>
+</tr>
+<tr>
+<td><code>FlycoTabLayout</code>一个 Android TabLayout 库</td>
+<td><a href="https://github.com/H07000223/FlycoTabLayout" target="_blank" rel="external">FlycoTabLayout</a></td>
+</tr>
+<tr>
+<td><code>PagerBottomTabStrip</code>Android 的底部导航栏</td>
+<td><a href="https://github.com/tyzlmjj/PagerBottomTabStrip" target="_blank" rel="external">PagerBottomTabStrip</a></td>
+</tr>
+<tr>
+<td><code>PermissionGen</code>Android API 易于使用的 Android M 权限</td>
+<td><a href="https://github.com/lovedise/PermissionGen" target="_blank" rel="external">PermissionGen</a></td>
+</tr>
+<tr>
+<td><code>PermissionsDispatcher</code>简单的基于注释的 API 来处理运行时权限</td>
+<td><a href="https://github.com/hotchemi/PermissionsDispatcher" target="_blank" rel="external">PermissionsDispatcher</a></td>
+</tr>
+<tr>
+<td><code>MaterialDateTimePicker</code>选择日期或时间</td>
+<td><a href="https://github.com/wdullaer/MaterialDateTimePicker" target="_blank" rel="external">MaterialDateTimePicker</a></td>
+</tr>
+<tr>
+<td><code>zxingLibrary</code>快速集成二维码扫描功能</td>
+<td><a href="https://github.com/yipianfengye/android-zxingLibrary" target="_blank" rel="external">zxingLibrary</a></td>
+</tr>
+<tr>
+<td><code>Luban</code> 鲁班 Android 图片压缩工具，仿微信朋友圈压缩策略</td>
+<td><a href="https://github.com/Curzibn/Luban" target="_blank" rel="external">Luban</a></td>
+</tr>
+<tr>
+<td><code>materialish-progress</code>Material Style  进度轮与 2.3 兼容</td>
+<td><a href="https://github.com/pnikosis/materialish-progress" target="_blank" rel="external">materialish-progress</a></td>
+</tr>
+<tr>
+<td><code>Logger</code>简单，漂亮和强大的 Android 日志</td>
+<td><a href="https://github.com/orhanobut/logger" target="_blank" rel="external">Logger</a></td>
+</tr>
+<tr>
+<td><code>Picasso</code>功能强大的图像下载和缓存库</td>
+<td><a href="https://github.com/square/picasso" target="_blank" rel="external">Picasso</a></td>
+</tr>
+<tr>
+<td><code>Glide</code>图像加载和缓存库</td>
+<td><a href="https://github.com/bumptech/glide" target="_blank" rel="external">Glide</a></td>
+</tr>
+</tbody>
+</table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/21/项目库/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-项目异常" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1059,7 +1017,7 @@ public void TestSort() {
 		</div>
 		
 		
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=32192436&auto=1&height=66"></iframe>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=32192436&auto=0&height=66"></iframe>
 
 
 <hr>
@@ -1308,23 +1266,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">算法排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数组使用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
               </li>
             
             <div class="clearfix"></div>
