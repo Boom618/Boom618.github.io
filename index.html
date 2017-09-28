@@ -163,6 +163,119 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-开发一个属于自己的插件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/28/开发一个属于自己的插件/">开发一个属于自己的插件</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/28/开发一个属于自己的插件/" class="archive-article-date">
+  	<time datetime="2017-09-28T05:19:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#开发插件原由"><span class="toc-number">1.</span> <span class="toc-text">开发插件原由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发插件的步骤"><span class="toc-number">2.</span> <span class="toc-text">开发插件的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、Step-新建插件项目"><span class="toc-number">2.1.</span> <span class="toc-text">1、Step 新建插件项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、Step"><span class="toc-number">2.2.</span> <span class="toc-text">2、Step</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、Step"><span class="toc-number">2.3.</span> <span class="toc-text">3、Step</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、Step"><span class="toc-number">2.4.</span> <span class="toc-text">4、Step</span></a></li></ol></li></ol>
+		</div>
+		
+		
+        <h3 id="开发插件原由"><a href="#开发插件原由" class="headerlink" title="开发插件原由"></a>开发插件原由</h3><blockquote>
+<p>近期项目组考虑到编写代码的时候有个繁琐的工作</p>
+<ul>
+<li>class -&gt; className</li>
+<li>for -&gt; htmlFor</li>
+<li>style </li>
+</ul>
+<p>就是遇到类似上面这些字符的时候得转换成相应的字符</p>
+</blockquote>
+<h3 id="开发插件的步骤"><a href="#开发插件的步骤" class="headerlink" title="开发插件的步骤"></a>开发插件的步骤</h3><h4 id="1、Step-新建插件项目"><a href="#1、Step-新建插件项目" class="headerlink" title="1、Step 新建插件项目"></a>1、Step 新建插件项目</h4><blockquote>
+<p>开发工具是 IDEA</p>
+</blockquote>
+<p> 选择 <code>File</code>-&gt;<code>New</code>-&gt;<code>Project</code> 选择 <code>IntelliJ Platform Plugin</code> </p>
+<p><img src="https://github.com/Boom618/Conversion/blob/master/image/01-%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE.png" alt="新建项目"></p>
+<p>如图：选好 <code>JDK</code> 就可以了</p>
+<h4 id="2、Step"><a href="#2、Step" class="headerlink" title="2、Step"></a>2、Step</h4><blockquote>
+<p>编写 plugin.xml </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;actions&gt;</div><div class="line">  &lt;group id=&quot;StringConversion.Generate&quot; text=&quot;StringConversion&quot; description=&quot;对 JS 文件中的特需字符转换&quot;&gt;</div><div class="line">    &lt;action id=&quot;StringConversion.StringAction&quot;</div><div class="line">            class=&quot;com.caituo.plugin.StringConversion&quot;</div><div class="line">            text=&quot;StringConversion&quot; description=&quot;StringConversion&quot;&gt;</div><div class="line">      &lt;add-to-group group-id=&quot;EditMenu&quot; anchor=&quot;first&quot;/&gt;</div><div class="line">      &lt;add-to-group group-id=&quot;EditorPopupMenu&quot; anchor=&quot;first&quot;/&gt;</div><div class="line">      &lt;keyboard-shortcut keymap=&quot;$default&quot; first-keystroke=&quot;shift ctrl P&quot;/&gt;</div><div class="line">    &lt;/action&gt;</div><div class="line">  &lt;/group&gt;</div><div class="line">&lt;/actions&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>actions</code>节点理解成 Android Studio XML 文件里的application</p>
+<p><code>group id</code>节点理解成 Android Studio XML 文件里的activity</p>
+<p><code>add-to-group group-id</code> 导航栏设置<br><code>keyboard-shortcut</code> 快捷键设置</p>
+</blockquote>
+<h4 id="3、Step"><a href="#3、Step" class="headerlink" title="3、Step"></a>3、Step</h4><blockquote>
+<p>编写类继承<code>com.intellij.openapi.actionSystem.AnAction</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 执行插件的入口，相当于java中的main方法</div><div class="line"> *</div><div class="line"> * @param anActionEvent</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public void actionPerformed(AnActionEvent anActionEvent) &#123;</div><div class="line">    if (!isFastClick(1000)) &#123;</div><div class="line">        Logger.init(getClass().getSimpleName(), Logger.DEBUG);</div><div class="line">    &#125;</div><div class="line">    Editor editor = anActionEvent.getData(PlatformDataKeys.EDITOR);</div><div class="line">    if (editor == null) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    SelectionModel model = editor.getSelectionModel();</div><div class="line">    String text = model.getSelectedText();</div><div class="line">    if (TextUtils.isEmpty(text)) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    Logger.debug(text);</div><div class="line"></div><div class="line">    //下面这句话也可以使用 lambda 语法写：Runnable runnable = () -&gt; editor.getDocument().replaceString(selectionModel.getSelectionStart(), selectionModel.getSelectionEnd(), TransitionUtils.spacingText(selectedText));</div><div class="line">    Runnable runnable = new Runnable() &#123;</div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line">            //先对空格、制表符进行换掉，然后再重新进行分隔处理。其中分行不处理，因为在写文章的时候复制的一些内容分行是有意义的。</div><div class="line">            editor.getDocument().replaceString(model.getSelectionStart(),</div><div class="line">                    model.getSelectionEnd(),</div><div class="line">                    TransitionUtils.spacingText(RegexExpressionUtils.replace(text, &quot;\\f|\\r|\\t&quot;, &quot;&quot;)));</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    WriteCommandAction.runWriteCommandAction(anActionEvent.getData(PlatformDataKeys.PROJECT), runnable);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="4、Step"><a href="#4、Step" class="headerlink" title="4、Step"></a>4、Step</h4><blockquote>
+<p>打包生成 <code>.jar</code> 文件</p>
+</blockquote>
+<p>GitHub 地址：<a href="https://github.com/Boom618/Conversion" target="_blank" rel="external">Conversion</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">插件开发</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/28/开发一个属于自己的插件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-APK 打包流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -757,6 +870,10 @@ Shift    ⌂
 <tr>
 <td>沉侵式</td>
 <td><a href="https://github.com/xuyisheng/DesignSupportLibraryDemo" target="_blank" rel="external">DesignSupportLibraryDemo</a></td>
+</tr>
+<tr>
+<td>4.4 以上沉浸式状态栏</td>
+<td><a href="https://github.com/gyf-dev/ImmersionBar" target="_blank" rel="external">ImmersionBar</a></td>
 </tr>
 <tr>
 <td>2017 春季最酷的 30 个 Android 库</td>
@@ -1667,7 +1784,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">MAC</a>
+                <a href="javascript:void(0)" class="js-tag color5">原理解析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1675,7 +1792,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">算法排序</a>
+                <a href="javascript:void(0)" class="js-tag color4">MAC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1687,6 +1804,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">算法排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
               </li>
              
@@ -1695,7 +1816,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">原理解析</a>
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
               </li>
             
             <div class="clearfix"></div>
