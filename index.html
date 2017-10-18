@@ -163,6 +163,81 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-常用 ADB 命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用-ADB-命令"><span class="toc-number">1.</span> <span class="toc-text">常用 ADB 命令</span></a></li></ol>
+		</div>
+		
+		
+        <h2 id="常用-ADB-命令"><a href="#常用-ADB-命令" class="headerlink" title="常用 ADB 命令"></a>常用 ADB 命令</h2><ul>
+<li>adb version 查看版本</li>
+<li>adb devices 查看连接设备</li>
+<li>adb install <apkfile> 安装</apkfile></li>
+<li>adb uninstall <packge> 卸载</packge></li>
+<li>adb start-server 启动Server</li>
+<li>adb kill-server 停止Server</li>
+<li>adb logcat 查看日志</li>
+<li>adb get-serialno 获取序列号 </li>
+<li>adb shell pm list packages 列出所有包名</li>
+<li>adb shell pm list packages -s 列出系统包名</li>
+<li>adb shell pm list packages -3 列出第三方包名</li>
+<li>adb shell pm list packages | grep qq grep过滤</li>
+<li>adb shell pm clear <packagename> 清除应用数据</packagename></li>
+<li>adb shell cat /sys/class/net/wlan0/address 获取MAC地址</li>
+<li>adb shell getprop ro.product.model 查看设备型号</li>
+<li>adb shell getprop ro.build.version.release 查看Android版本</li>
+<li>adb shell wm size 查看分辨率</li>
+<li>adb shell wm density 查看屏幕密度</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/30/常用 ADB 命令/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-开发一个属于自己的插件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1502,194 +1577,10 @@ Shift    ⌂
 
 
   
-    <article id="post-排序算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/23/排序算法/">算法排序</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/23/排序算法/" class="archive-article-date">
-  	<time datetime="2017-07-23T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法排序"><span class="toc-number">1.</span> <span class="toc-text">算法排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"><span class="toc-number">1.1.</span> <span class="toc-text">java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）"><span class="toc-number">1.1.1.</span> <span class="toc-text">冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"><span class="toc-number">1.1.2.</span> <span class="toc-text">选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1"><span class="toc-number">1.1.3.</span> <span class="toc-text">插入排序的时间复杂度也是O(n*n)，空间复杂度也是O(1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N"><span class="toc-number">1.1.4.</span> <span class="toc-text">快速排序通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">1.1.5.</span> <span class="toc-text">测试</span></a></li></ol></li></ol></li></ol>
-		</div>
-		
-		
-        <h1 id="算法排序"><a href="#算法排序" class="headerlink" title="算法排序"></a>算法排序</h1><h2 id="java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"><a href="#java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试" class="headerlink" title="java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"></a>java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试</h2><h3 id="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）"><a href="#冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）" class="headerlink" title="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）"></a><code>冒泡排序</code>是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）</h3><pre><code>// 冒泡排序:
-public void bubbleSort(int[] arr) {
-    for (int i = 0; i &lt; arr.length - 1; i++) {
-        // 找出最小要 arr.length - 1 - i 次
-        for (int j = arr.length - 1; j &gt; i; j--) {
-            if (arr[j - 1] &gt; arr[j]) {
-                int temp = arr[j - 1];
-                arr[j - 1] = arr[j];
-                arr[j] = temp;
-            }
-        }
-    }
-}
-</code></pre><h3 id="选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"><a href="#选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。" class="headerlink" title="选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"></a><code>选择排序</code>的时间复杂度还有空间复杂度跟冒泡是一样的。</h3><pre><code> // 选择排序：
-public void chooseSort(int[] arr) {
-    for (int i = 0; i &lt; arr.length; i++) {
-        for (int j = i + 1; j &lt; arr.length; j++) {
-            if (arr[i] &gt; arr[j]) {
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
-    }
-}
-</code></pre><h3 id="插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1"><a href="#插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1" class="headerlink" title="插入排序的时间复杂度也是O(n*n)，空间复杂度也是O(1)"></a><code>插入排序</code>的时间复杂度也是O(n*n)，空间复杂度也是O(1)</h3><pre><code> // 插入排序：
-public void insertSort(int[] arr) {
-    for (int j = 1; j &lt; arr.length; j++) {
-        for (int i = 0; i &lt; j; i++) {
-            if (arr[i] &gt; arr[j]) {
-                int tmp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = tmp;
-            }
-        }
-    }
-}
-</code></pre><h3 id="快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N"><a href="#快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N" class="headerlink" title="快速排序通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)"></a><code>快速排序</code>通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)</h3><pre><code> // 快速排序
-public void quickSort(int[] arr, int head, int tail) {
-    int i = head;
-    int j = tail;
-    if (i &gt; j) {
-        return;
-    }
-    int key = arr[i];
-    while (i &lt; j) {
-        while (i &lt; j &amp;&amp; key &lt;= arr[j]) {
-            j--;
-        }
-        if (i &lt; j) {
-            arr[i++] = arr[j];
-        }
-        while (i &lt; j &amp;&amp; key &gt;= arr[i]) {
-            i++;
-        }
-        if (i &lt; j) {
-            arr[j--] = arr[i];
-        }
-    }
-    arr[j] = key;
-    quickSort(arr, head, j - 1);
-    quickSort(arr, j + 1, tail);
-} 
-</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>@Test
-public void TestSort() {
-    int[] arr1 = new int[6000];
-    for (int i = 0; i &lt; arr1.length; i++) {
-        arr1[i] = new Random().nextInt(6000) + 1;
-    }
-    int[] arr2 = new int[6000];
-    for (int i = 0; i &lt; arr2.length; i++) {
-        arr2[i] = new Random().nextInt(6000) + 1;
-    }
-    int[] arr3 = new int[6000];
-    for (int i = 0; i &lt; arr3.length; i++) {
-        arr3[i] = new Random().nextInt(6000) + 1;
-    }
-    int[] arr4 = new int[6000];
-    for (int i = 0; i &lt; arr4.length; i++) {
-        arr4[i] = new Random().nextInt(6000) + 1;
-    }
-    long m = System.currentTimeMillis();
-    bubbleSort(arr1);
-    long n = System.currentTimeMillis();
-    System.out.println(&quot;冒泡排序耗时：&quot; + (n - m) + &quot;ms&quot;);
-
-    long p = System.currentTimeMillis();
-    int[] arr6 = {77,43,56,78};
-    chooseSort(arr2);
-    long q = System.currentTimeMillis();
-    System.out.println(&quot;选择排序耗时：&quot; + (q - p) + &quot;ms&quot;);
-
-    long e = System.currentTimeMillis();
-    insertSort(arr3);
-    long d = System.currentTimeMillis();
-    System.out.println(&quot;插入排序耗时：&quot; + (d - e) + &quot;ms&quot;);
-
-    long a = System.currentTimeMillis();
-    quickSort(arr4, 0, arr4.length - 1);
-    long b = System.currentTimeMillis();
-    System.out.println(&quot;快速排序耗时：&quot; + (b - a) + &quot;ms&quot;);
-}
-
-冒泡排序耗时：106ms
-选择排序耗时：107ms
-插入排序耗时：47ms
-快速排序耗时：2ms
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法排序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/23/排序算法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -1799,19 +1690,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">算法排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数组使用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
+                <a href="javascript:void(0)" class="js-tag color5">算法排序</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">生活书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
               </li>
              
               <li class="article-tag-list-item">

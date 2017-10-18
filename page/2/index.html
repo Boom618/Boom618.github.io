@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 数组使用 | BoomHe</title>
+  <title>BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="你好">
 <meta property="og:type" content="website">
 <meta property="og:title" content="BoomHe">
-<meta property="og:url" content="http://yoursite.com/tags/数组使用/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="BoomHe">
 <meta property="og:description" content="你好">
 <meta property="og:locale" content="zh-Hans">
@@ -163,58 +163,199 @@
           <div id="js-content" class="content-ll">
             
   
-  
+    <article id="post-排序算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/23/数组使用/" class="archive-article-date">
-  	<time datetime="2017-08-23T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/23/数组使用/">JS 数组使用</a>
+      <a class="article-title" href="/2017/07/23/排序算法/">算法排序</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/07/23/排序算法/" class="archive-article-date">
+  	<time datetime="2017-07-23T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法排序"><span class="toc-number">1.</span> <span class="toc-text">算法排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"><span class="toc-number">1.1.</span> <span class="toc-text">java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）"><span class="toc-number">1.1.1.</span> <span class="toc-text">冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"><span class="toc-number">1.1.2.</span> <span class="toc-text">选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1"><span class="toc-number">1.1.3.</span> <span class="toc-text">插入排序的时间复杂度也是O(n*n)，空间复杂度也是O(1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N"><span class="toc-number">1.1.4.</span> <span class="toc-text">快速排序通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">1.1.5.</span> <span class="toc-text">测试</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		
+        <h1 id="算法排序"><a href="#算法排序" class="headerlink" title="算法排序"></a>算法排序</h1><h2 id="java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"><a href="#java-实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试" class="headerlink" title="java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试"></a>java 实现冒泡排序，选择排序，插入排序，快速排序（简洁版）及性能测试</h2><h3 id="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）"><a href="#冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n-n），空间复杂度是O（1）" class="headerlink" title="冒泡排序是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）"></a><code>冒泡排序</code>是排序里面最简单的了，但性能也最差，数量小的时候还可以，数量一多，是非常慢的它的时间复杂度是O（n*n），空间复杂度是O（1）</h3><pre><code>// 冒泡排序:
+public void bubbleSort(int[] arr) {
+    for (int i = 0; i &lt; arr.length - 1; i++) {
+        // 找出最小要 arr.length - 1 - i 次
+        for (int j = arr.length - 1; j &gt; i; j--) {
+            if (arr[j - 1] &gt; arr[j]) {
+                int temp = arr[j - 1];
+                arr[j - 1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+</code></pre><h3 id="选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"><a href="#选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。" class="headerlink" title="选择排序的时间复杂度还有空间复杂度跟冒泡是一样的。"></a><code>选择排序</code>的时间复杂度还有空间复杂度跟冒泡是一样的。</h3><pre><code> // 选择排序：
+public void chooseSort(int[] arr) {
+    for (int i = 0; i &lt; arr.length; i++) {
+        for (int j = i + 1; j &lt; arr.length; j++) {
+            if (arr[i] &gt; arr[j]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+</code></pre><h3 id="插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1"><a href="#插入排序的时间复杂度也是O-n-n-，空间复杂度也是O-1" class="headerlink" title="插入排序的时间复杂度也是O(n*n)，空间复杂度也是O(1)"></a><code>插入排序</code>的时间复杂度也是O(n*n)，空间复杂度也是O(1)</h3><pre><code> // 插入排序：
+public void insertSort(int[] arr) {
+    for (int j = 1; j &lt; arr.length; j++) {
+        for (int i = 0; i &lt; j; i++) {
+            if (arr[i] &gt; arr[j]) {
+                int tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+            }
+        }
+    }
+}
+</code></pre><h3 id="快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N"><a href="#快速排序通常情况下是最快的，名不虚传啊-平均时间复杂度是-O-Nlog2N-，最差也是O-N-N-，空间复杂度O-Nlog2N" class="headerlink" title="快速排序通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)"></a><code>快速排序</code>通常情况下是最快的，名不虚传啊~平均时间复杂度是 O(Nlog2N)，最差也是O(N*N)，空间复杂度O(Nlog2N)</h3><pre><code> // 快速排序
+public void quickSort(int[] arr, int head, int tail) {
+    int i = head;
+    int j = tail;
+    if (i &gt; j) {
+        return;
+    }
+    int key = arr[i];
+    while (i &lt; j) {
+        while (i &lt; j &amp;&amp; key &lt;= arr[j]) {
+            j--;
+        }
+        if (i &lt; j) {
+            arr[i++] = arr[j];
+        }
+        while (i &lt; j &amp;&amp; key &gt;= arr[i]) {
+            i++;
+        }
+        if (i &lt; j) {
+            arr[j--] = arr[i];
+        }
+    }
+    arr[j] = key;
+    quickSort(arr, head, j - 1);
+    quickSort(arr, j + 1, tail);
+} 
+</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>@Test
+public void TestSort() {
+    int[] arr1 = new int[6000];
+    for (int i = 0; i &lt; arr1.length; i++) {
+        arr1[i] = new Random().nextInt(6000) + 1;
+    }
+    int[] arr2 = new int[6000];
+    for (int i = 0; i &lt; arr2.length; i++) {
+        arr2[i] = new Random().nextInt(6000) + 1;
+    }
+    int[] arr3 = new int[6000];
+    for (int i = 0; i &lt; arr3.length; i++) {
+        arr3[i] = new Random().nextInt(6000) + 1;
+    }
+    int[] arr4 = new int[6000];
+    for (int i = 0; i &lt; arr4.length; i++) {
+        arr4[i] = new Random().nextInt(6000) + 1;
+    }
+    long m = System.currentTimeMillis();
+    bubbleSort(arr1);
+    long n = System.currentTimeMillis();
+    System.out.println(&quot;冒泡排序耗时：&quot; + (n - m) + &quot;ms&quot;);
+
+    long p = System.currentTimeMillis();
+    int[] arr6 = {77,43,56,78};
+    chooseSort(arr2);
+    long q = System.currentTimeMillis();
+    System.out.println(&quot;选择排序耗时：&quot; + (q - p) + &quot;ms&quot;);
+
+    long e = System.currentTimeMillis();
+    insertSort(arr3);
+    long d = System.currentTimeMillis();
+    System.out.println(&quot;插入排序耗时：&quot; + (d - e) + &quot;ms&quot;);
+
+    long a = System.currentTimeMillis();
+    quickSort(arr4, 0, arr4.length - 1);
+    long b = System.currentTimeMillis();
+    System.out.println(&quot;快速排序耗时：&quot; + (b - a) + &quot;ms&quot;);
+}
+
+冒泡排序耗时：106ms
+选择排序耗时：107ms
+插入排序耗时：47ms
+快速排序耗时：2ms
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数组使用</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法排序</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/23/排序算法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
-  
 
-    
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 
 
           </div>
@@ -236,10 +377,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
