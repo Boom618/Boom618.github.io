@@ -163,6 +163,277 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java 序列化错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/06/Java 序列化错误/">java.io.NotSerializableException</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/06/Java 序列化错误/" class="archive-article-date">
+  	<time datetime="2018-02-06T07:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#先来看看日志："><span class="toc-number">1.</span> <span class="toc-text">先来看看日志：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第一次找到的信息"><span class="toc-number">2.</span> <span class="toc-text">第一次找到的信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二次"><span class="toc-number">3.</span> <span class="toc-text">第二次</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三次"><span class="toc-number">4.</span> <span class="toc-text">第三次</span></a></li></ol>
+		</div>
+		
+		
+        <p>这是一个不简单的 java 序列化的错误。</p>
+<h3 id="先来看看日志："><a href="#先来看看日志：" class="headerlink" title="先来看看日志："></a>先来看看日志：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">1 java.lang.RuntimeException:Parcelable encountered IOException writing serializable object (name = com.czcg.gwt.view.activity.map.POIMapActivity$3)</div><div class="line">2 android.os.Parcel.writeSerializable(Parcel.java:1505)</div><div class="line">3 ......</div><div class="line">4 Caused by:</div><div class="line">5 java.io.NotSerializableException:com.czcg.gwt.view.activity.map.POIMapActivity</div><div class="line">6 java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1224)</div><div class="line">7 java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1584)</div><div class="line">8 java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1549)</div><div class="line">9 java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1472)</div><div class="line">10 java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1218)</div><div class="line">11 java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:346)</div><div class="line">12 android.os.Parcel.writeSerializable(Parcel.java:1500)</div><div class="line">13 android.os.Parcel.writeValue(Parcel.java:1453)</div><div class="line">14 android.os.Parcel.writeArrayMapInternal(Parcel.java:702)</div><div class="line">15 android.os.BaseBundle.writeToParcelInner(BaseBundle.java:1412)</div><div class="line">16 android.os.Bundle.writeToParcel(Bundle.java:1133)</div><div class="line">17 android.os.Parcel.writeBundle(Parcel.java:742)</div><div class="line">18 android.support.v4.app.FragmentState.writeToParcel(Fragment.java)</div><div class="line">19 android.os.Parcel.writeTypedArray(Parcel.java:1285)</div><div class="line">20 android.support.v4.app.FragmentManagerState.writeToParcel(FragmentManager.java)</div><div class="line">21 android.os.Parcel.writeParcelable(Parcel.java:1474)</div><div class="line">22 android.os.Parcel.writeValue(Parcel.java:1380)</div><div class="line">23 android.os.Parcel.writeArrayMapInternal(Parcel.java:702)</div><div class="line">24 android.os.BaseBundle.writeToParcelInner(BaseBundle.java:1412)</div><div class="line">25 android.os.Bundle.writeToParcel(Bundle.java:1133)</div><div class="line">26 android.os.Parcel.writeBundle(Parcel.java:742)</div><div class="line">27 android.app.ActivityManagerProxy.activityStopped(ActivityManagerNative.java:3629)</div><div class="line">28 android.app.ActivityThread$StopInfo.run(ActivityThread.java:3974)</div><div class="line">29 android.os.Handler.handleCallback(Handler.java:761)</div><div class="line">30 android.os.Handler.dispatchMessage(Handler.java:98)</div><div class="line">31 android.os.Looper.loop(Looper.java:156)</div><div class="line">32 android.app.ActivityThread.main(ActivityThread.java:6523)</div><div class="line">33 java.lang.reflect.Method.invoke(Native Method)</div><div class="line">34 com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:942)</div><div class="line">35 com.android.internal.os.ZygoteInit.main(ZygoteInit.java:832)</div></pre></td></tr></table></figure>
+<p>项目中用到的日志管理是腾讯的 bugly。从日记中能一眼发现问题还是比较有难度的：</p>
+<h3 id="第一次找到的信息"><a href="#第一次找到的信息" class="headerlink" title="第一次找到的信息"></a>第一次找到的信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android.os.Parcel.writeSerializable(Parcel.java:1505)</div></pre></td></tr></table></figure>
+<p>根据第二行的提示我们找到 Parcel 类中的 <code>writeSerializable</code> 方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Write a generic serializable object in to a Parcel.  It is strongly</div><div class="line"> * recommended that this method be avoided, since the serialization</div><div class="line"> * overhead is extremely large, and this approach will be much slower than</div><div class="line"> * using the other approaches to writing data in to a Parcel.</div><div class="line"> */</div><div class="line"> // 意思大概就是：把一个通用的可序列化的对象写入到 Parcel 中、</div><div class="line"> // 但是它不推荐这么做、因为产生的开销非常大</div><div class="line">public final void writeSerializable(Serializable s) &#123;</div><div class="line">    if (s == null) &#123;</div><div class="line">        writeString(null);</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    String name = s.getClass().getName();</div><div class="line">    writeString(name);</div><div class="line"></div><div class="line">    ByteArrayOutputStream baos = new ByteArrayOutputStream();</div><div class="line">    try &#123;</div><div class="line">    // 从日志中我们可以看出报错就是在这里开始的</div><div class="line">        ObjectOutputStream oos = new ObjectOutputStream(baos);</div><div class="line">        oos.writeObject(s);</div><div class="line">        oos.close();</div><div class="line"></div><div class="line">        writeByteArray(baos.toByteArray());</div><div class="line">    &#125; catch (IOException ioe) &#123;</div><div class="line">        throw new RuntimeException(&quot;Parcelable encountered &quot; +</div><div class="line">            &quot;IOException writing serializable object (name = &quot; + name +</div><div class="line">            &quot;)&quot;, ioe);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着我们找到 <code>ObjectOutputStream</code> 这个类、看看它的构造方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 创建一个写入指定 OutputStream 的 ObjectOutputStream。</div><div class="line">// 这个构造函数将序列化流头写入</div><div class="line">public ObjectOutputStream(OutputStream out) throws IOException &#123;</div><div class="line">        verifySubclass();</div><div class="line">        bout = new BlockDataOutputStream(out);</div><div class="line">        handles = new HandleTable(10, (float) 3.00);</div><div class="line">        subs = new ReplaceTable(10, (float) 3.00);</div><div class="line">        enableOverride = false;</div><div class="line">        writeStreamHeader();</div><div class="line">        bout.setBlockDataMode(true);</div><div class="line">        if (extendedDebugInfo) &#123;</div><div class="line">            debugInfoStack = new DebugTraceInfoStack();</div><div class="line">        &#125; else &#123;</div><div class="line">            debugInfoStack = null;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>接着我们找到日志中出现的几个方法 <code>writeObject</code> 和 <code>defaultWriteFields</code>、<code>writeSerialData</code> 我就不贴源码了</p>
+<ul>
+<li><code>writeObject -&gt; writeObject0 -&gt; writeOrdinaryObject</code>：写入对象</li>
+<li><code>writeObject0 ：Underlying writeObject/writeUnshared implementation.</code>实现基本的写对象共享问题[不知道怎么理解、就这样理解吧]</li>
+<li><code>writeOrdinaryObject：这个方法是被 writeObject0 方法调用的</code>：写入一个可序列号对象流</li>
+<li><code>defaultWriteFields</code>获取并写入给定对象的可序列化字段的值</li>
+<li><code>writeSerialData ：Writes instance data for each serializable class of given object, from superclass to subclass.</code> ：从父类写入给定对象的每个可序列化类的实例数据到子类[不知道怎么翻译、大佬们别打我]。</li>
+</ul>
+<h3 id="第二次"><a href="#第二次" class="headerlink" title="第二次"></a>第二次</h3><p>其实经过前一次的排查、心里基本有点 B Number 了、Java 层的 <code>serializable</code> 序列化问题出错了、是啥数据？带着这个问题找到代码中序列号的数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onSaveInstanceState(Bundle outState) &#123;</div><div class="line">    super.onSaveInstanceState(outState);</div><div class="line">    outState.putParcelableArrayList(&quot;mPoiInfos&quot;, mPoiInfos);</div><div class="line">    outState.putString(&quot;mAddress&quot;, mAddress);</div><div class="line">    outState.putParcelable(&quot;mLatLng&quot;, mLatLng);</div><div class="line">    outState.putParcelable(&quot;mBDLocation&quot;, mBDLocation);</div><div class="line">    outState.putInt(&quot;mCurrentPosition&quot;, mCurrentPosition);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对、就这些数据、如果出错也就是这个 list 了。 看日志 12 行、这里我们又回到了 Parcel 类中的 <code>writeSerializable</code> 方法、这里不去扒源码了、简单的走下流程就是下面这样的：</p>
+<p><code>writeArrayMapInternal -&gt; writeValue -&gt; writeSerializable</code></p>
+<p>说到底就是数据没有序列化成功。</p>
+<h3 id="第三次"><a href="#第三次" class="headerlink" title="第三次"></a>第三次</h3><p>其实找到这里整个人都崩溃了、有没有 98 年的雪碧、给我来一打、因为自己根本就没有思路来、完全找不到路了。人人处处是惊喜、就在这时、我们项目中的大佬不知道经过了怎样的坎坷（可能是买肉了）、终于找到了问题的根本所在、给他 10086 个赞。<br>信息就在日志第一句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1 java.lang.RuntimeException:Parcelable encountered IOException writing serializable object (name = com.czcg.gwt.view.activity.map.POIMapActivity$3)</div></pre></td></tr></table></figure>
+<p>请注意看 <code>POIMapActivity$3</code> 中的 <code>$3</code> 、啥意思呢：就是说它表示<code>POIMapActivity</code> 类中第三个动态产生的对象。</p>
+<ul>
+<li><code>mPoiSearch.setOnGetPoiSearchResultListener(new OnGetPoiSearchResultListener()</code>：地图热点搜索监听</li>
+<li><code>BaiduMap.OnMarkerClickListener onMarkerClickListener = new BaiduMap.OnMarkerClickListener()</code>：地图标记物点击监听</li>
+<li><code>widget.setShootingListener(new SheetViewWidget.ShootingListener()</code>：组件点击监听</li>
+</ul>
+<p>问题就是说 <code>SheetViewWidget.ShootingListener</code> 这个监听在序列化的时候没成功、问题的关键是：在序列化的时候 <code>widget</code> 这个监听对象每次都是 <code>new</code> 的导致报错。</p>
+<p>处理方法：</p>
+<ul>
+<li>判断当监听对象为空时不处理事件</li>
+<li>这个控件是使用的第三方库、监听接口抽离出来</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">项目异常</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/06/Java 序列化错误/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-我的简历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#个人简历"><span class="toc-number">1.</span> <span class="toc-text">个人简历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于我-amp-amp-我会的"><span class="toc-number">1.1.</span> <span class="toc-text">关于我 && 我会的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作经验"><span class="toc-number">1.2.</span> <span class="toc-text">工作经验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目经验01"><span class="toc-number">1.3.</span> <span class="toc-text">项目经验01</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目经验02"><span class="toc-number">1.4.</span> <span class="toc-text">项目经验02</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#社交"><span class="toc-number">1.5.</span> <span class="toc-text">社交</span></a></li></ol></li></ol>
+		</div>
+		
+		
+        <h2 id="个人简历"><a href="#个人简历" class="headerlink" title="个人简历"></a>个人简历</h2><center> <strong>Tel</strong>:<em>18516597508</em><code>|</code><strong>Email</strong>:<em>ahedong@126.com</em> </center>
+
+
+<h3 id="关于我-amp-amp-我会的"><a href="#关于我-amp-amp-我会的" class="headerlink" title="关于我 &amp;&amp; 我会的"></a>关于我 &amp;&amp; 我会的</h3><ul>
+<li>姓名：<strong>何栋</strong></li>
+<li>学历：<strong>大专</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2015 年最开心的事成为一名程序员</div><div class="line">2016 年最开心的事接触了除 Android 以外的技术、脚本和前端 React</div><div class="line">2017 年最开心的事就是参加了 Google 的 GDD 大会</div></pre></td></tr></table></figure>
+<p><strong>我会的</strong></p>
+<ul>
+<li>Android 小白一枚</li>
+<li>了解一点 J2EE 知识</li>
+<li>知道一点前端知识</li>
+<li>写过脚本</li>
+<li>开发过 IDEA 插件</li>
+<li>玩过一点 Framework 源码（主要是包解析那块）</li>
+</ul>
+<h3 id="工作经验"><a href="#工作经验" class="headerlink" title="工作经验"></a>工作经验</h3><table>
+<thead>
+<tr>
+<th>公司</th>
+<th>开始时间</th>
+<th>结束时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>财拓电商</td>
+<td>2016.08</td>
+<td>至今</td>
+</tr>
+<tr>
+<td>上海威观信息科技</td>
+<td>2015.01</td>
+<td>2016.06</td>
+</tr>
+</tbody>
+</table>
+<h3 id="项目经验01"><a href="#项目经验01" class="headerlink" title="项目经验01"></a>项目经验01</h3><ul>
+<li>时间：2016-08 <code>～</code> 至今</li>
+<li>公司：财拓电商</li>
+<li>项目：大智运、钢源城、钢掌柜、货运站</li>
+<li>开发工具：Android Studio + Git + Node.js + Jenkins</li>
+</ul>
+<p><strong>我做的事</strong></p>
+<ul>
+<li>项目开发及维护</li>
+<li>JS 知识学习及使用</li>
+<li>解决 JS 在 WebView 中的适配</li>
+<li>确定前端数据类型和后台接口文档</li>
+<li>研究新技术、以及应用到项目中</li>
+<li>项目优化</li>
+<li>日志管理</li>
+</ul>
+<p><strong>心得感悟:</strong></p>
+<p>我们是多个项目大家共同开发的、项目结构是 Android<code>/</code>IOS + React.js 混合开发</p>
+<p><strong><em>有这么几个优势</em></strong>：</p>
+<ul>
+<li>Android 和 IOS 可以共用一套代码</li>
+<li>比纯原生有更多的代码复用、页面复用</li>
+<li>项目体积更小、减少运维成本</li>
+<li>代码可以做到实时更新、只要不是原生相关代码</li>
+</ul>
+<p><strong><em>也有这么几个明显的劣势</em></strong>：</p>
+<ul>
+<li>某些功能不能很好的实现</li>
+<li>需要学习一定的前端语言</li>
+<li>需要解决更多的 WebView 问题</li>
+<li>用户体验没有纯原生流畅、操作没有原生好</li>
+</ul>
+<p><strong><em>比如</em></strong>：</p>
+<ul>
+<li>联想手机 JS 中 String 字符转换 Bug</li>
+<li>Android<code>/</code>IOS 对 JS 的渲染问题</li>
+<li>ios9 上不支持 <code>for of</code> 遍历 </li>
+<li>WebView 兼容性</li>
+</ul>
+<h3 id="项目经验02"><a href="#项目经验02" class="headerlink" title="项目经验02"></a>项目经验02</h3><ul>
+<li>时间：2015-01 <code>～</code> 2016-06</li>
+<li>公司：上海威观信息科技</li>
+<li>项目：爱闹</li>
+<li>开发工具：Android Studio + SVN</li>
+</ul>
+<p><strong>我做的事</strong></p>
+<ul>
+<li>协助注册公司信息</li>
+<li>功能模块的实现及测试</li>
+<li>第三方登陆和分享</li>
+<li>短信验证云通讯</li>
+<li>项目自定义功能</li>
+</ul>
+<p><strong>心得感悟</strong></p>
+<ul>
+<li>第一次感受到新公司成立有多麻烦</li>
+<li>加班只有更晚没有最晚[/大哭脸]</li>
+</ul>
+<h3 id="社交"><a href="#社交" class="headerlink" title="社交"></a>社交</h3><ul>
+<li><a href="https://github.com/Boom618" target="_blank" rel="external">GitHub</a></li>
+<li><a href="https://boom618.github.io/" target="_blank" rel="external">博客</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/25/我的简历/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-GDD " class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -192,8 +463,7 @@
 		
 		
         <h3 id="Google-Developer-Day"><a href="#Google-Developer-Day" class="headerlink" title="Google Developer Day"></a>Google Developer Day</h3><p>2017 年 12 月 14 日一个值的纪念的日子、参加了 GDD 大会</p>
-
-<p>我现在写了一个段落，并且想在这个段落的某一个地方[图片上传失败…(image-入场01)]引入一张图片</p>
+<p><img src="https://avatars2.githubusercontent.com/u/10544851"></p>
 <p>本来回来当晚就打算记录下大会的感受、一度怀疑自己的写作水平、以及拍照太 Low 、实在是不想写、最终在理性的大脑下决定必须得写点什么留给以后的自己、</p>
 <p>本次大会由 13 号和 14 号两天组成、我是一位候补选手[大哭脸]</p>
 <p>邮件.png</p>
@@ -869,96 +1139,6 @@
 
 
   
-    <article id="post-MAC常用操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/01/MAC常用操作/">MAC 常用操作</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/01/MAC常用操作/" class="archive-article-date">
-  	<time datetime="2017-09-01T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MAC-常用操作"><span class="toc-number">1.</span> <span class="toc-text">MAC 常用操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对应键盘"><span class="toc-number">1.1.</span> <span class="toc-text">对应键盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-number">1.2.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境配置"><span class="toc-number">1.3.</span> <span class="toc-text">环境配置</span></a></li></ol></li></ol>
-		</div>
-		
-		
-        <h2 id="MAC-常用操作"><a href="#MAC-常用操作" class="headerlink" title="MAC 常用操作"></a>MAC 常用操作</h2><h3 id="对应键盘"><a href="#对应键盘" class="headerlink" title="对应键盘"></a>对应键盘</h3><pre><code>Command    ⌘
-Option    ⌥
-Control    ⌃
-Shift    ⌂
-</code></pre><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><pre><code>显示隐藏文件    defaults write com.apple.finder AppleShowAllFiles -bool true
-关闭显示隐藏文件 defaults write com.apple.finder AppleShowAllFiles -bool false
-禁止.DS_store生成 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE    
-恢复.DS_store生成 defaults delete com.apple.desktopservices DSDontWriteNetworkStores    
-</code></pre><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1. 启动Terminal终端工具</div><div class="line">2. 输入cd ~/ 进入当前用户的 home 目录</div><div class="line">3. 创建：touch .bash_profile</div><div class="line">4. 打开并编辑：open .bash_profile</div><div class="line">5. 在文件中写入以下内容：export PATH=$&#123;PATH&#125;:/Users/boomhe/Library/Android/sdk/platform-tools</div><div class="line">6. 执行如下命令：source .bash_profile</div></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MAC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/01/MAC常用操作/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-生活书" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1053,6 +1233,96 @@ Shift    ⌂
 
 
   
+    <article id="post-MAC常用操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/01/MAC常用操作/">MAC 常用操作</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/01/MAC常用操作/" class="archive-article-date">
+  	<time datetime="2017-09-01T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MAC-常用操作"><span class="toc-number">1.</span> <span class="toc-text">MAC 常用操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对应键盘"><span class="toc-number">1.1.</span> <span class="toc-text">对应键盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-number">1.2.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境配置"><span class="toc-number">1.3.</span> <span class="toc-text">环境配置</span></a></li></ol></li></ol>
+		</div>
+		
+		
+        <h2 id="MAC-常用操作"><a href="#MAC-常用操作" class="headerlink" title="MAC 常用操作"></a>MAC 常用操作</h2><h3 id="对应键盘"><a href="#对应键盘" class="headerlink" title="对应键盘"></a>对应键盘</h3><pre><code>Command    ⌘
+Option    ⌥
+Control    ⌃
+Shift    ⌂
+</code></pre><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><pre><code>显示隐藏文件    defaults write com.apple.finder AppleShowAllFiles -bool true
+关闭显示隐藏文件 defaults write com.apple.finder AppleShowAllFiles -bool false
+禁止.DS_store生成 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE    
+恢复.DS_store生成 defaults delete com.apple.desktopservices DSDontWriteNetworkStores    
+</code></pre><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1. 启动Terminal终端工具</div><div class="line">2. 输入cd ~/ 进入当前用户的 home 目录</div><div class="line">3. 创建：touch .bash_profile</div><div class="line">4. 打开并编辑：open .bash_profile</div><div class="line">5. 在文件中写入以下内容：export PATH=$&#123;PATH&#125;:/Users/boomhe/Library/Android/sdk/platform-tools</div><div class="line">6. 执行如下命令：source .bash_profile</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MAC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/01/MAC常用操作/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-快捷键_插件_依赖库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1081,9 +1351,7 @@ Shift    ⌂
 		</div>
 		
 		
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="450" src="http://music.163.com/outchain/player?type=0&id=147994076&auto=1&height=430"></iframe>
-
-<h1 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h1><h2 id="Android-Studio-快捷键"><a href="#Android-Studio-快捷键" class="headerlink" title="Android Studio 快捷键"></a>Android Studio 快捷键</h2><table>
+        <h1 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h1><h2 id="Android-Studio-快捷键"><a href="#Android-Studio-快捷键" class="headerlink" title="Android Studio 快捷键"></a>Android Studio 快捷键</h2><table>
 <thead>
 <tr>
 <th>快捷键</th>
@@ -1441,294 +1709,6 @@ Shift    ⌂
 
 
   
-    <article id="post-数组使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/数组使用/">JS 数组使用</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/数组使用/" class="archive-article-date">
-  	<time datetime="2017-08-23T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组使用"><span class="toc-number">1.</span> <span class="toc-text">数组使用</span></a></li></ol>
-		</div>
-		
-		
-        <h2 id="数组使用"><a href="#数组使用" class="headerlink" title="数组使用"></a>数组使用</h2><blockquote>
-<p>数组合并</p>
-</blockquote>
-<p>ES5的写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let arr1=[0,1,2];</div><div class="line"></div><div class="line">let arr2=[3,4,5];</div><div class="line"></div><div class="line">Array.prototype.push.apply(arr1,arr2);</div></pre></td></tr></table></figure>
-<p>ES6的写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let arr3=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;];</div><div class="line"></div><div class="line">let arr4=[3,4,5];</div><div class="line"></div><div class="line">arr3.push(...arr4);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>几个属性的理解</p>
-</blockquote>
-<ul>
-<li>Object.keys(obj) :返回对象自身的所有可枚举的属性的键名</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let arr1keys = Object.keys(arr1);  // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;] </div><div class="line"></div><div class="line">let arr3keys = Object.keys(arr3);   // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;]</div></pre></td></tr></table></figure>
-<ul>
-<li>Object.getOwnPropertyNames(obj):返回一个数组，包含对象自身的所有属性</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let temp1 = Object.getOwnPropertyNames(arr1);// [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;length&quot;]</div></pre></td></tr></table></figure>
-<ul>
-<li>Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有Symbol属性</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let temp2 = Object.getOwnPropertySymbols(arr2);// []</div></pre></td></tr></table></figure>
-<blockquote>
-<p>for…of  、for…in 和 forEach</p>
-</blockquote>
-<ul>
-<li>for of是遍历键值</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">for( let i of arr3 )&#123;</div><div class="line"></div><div class="line">console.log(i);// a b c 3 4 5</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>for…in循环：只遍历对象自身的和继承的可枚举的属性、for in是遍历键名</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">for( let i in arr3 )&#123;</div><div class="line"></div><div class="line">console.log(i);// 0 1 2 3 4 5</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>forEach循环</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">arr3.forEach(function(item,index)&#123;</div><div class="line"></div><div class="line">console.log(item);// a b c 3 4 5</div><div class="line"></div><div class="line">console.log(index);// 0 1 2 3 4 5</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>数组过滤</p>
-</blockquote>
-<ul>
-<li>扩展数组<code>prototype</code>属性过滤数组</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">let arrayAll = [&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;,</div><div class="line">            &#123;&apos;id&apos;:&apos;222&apos;,&apos;name&apos;:&apos;bbb&apos;&#125;,</div><div class="line">            &#123;&apos;id&apos;:&apos;333&apos;,&apos;name&apos;:&apos;ccc&apos;&#125;];</div><div class="line">            </div><div class="line">let arrayDel = [&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;];</div><div class="line">            </div><div class="line">Array.prototype.indexOf = function(val) &#123;</div><div class="line">    for (var i = 0; i &lt; this.length; i++) &#123;</div><div class="line">        if (val.id == this[i].id) return i;</div><div class="line">    &#125;</div><div class="line">    return -1;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Array.prototype.remove = function(val) &#123;</div><div class="line">    var index = this.indexOf(val);</div><div class="line">    if (index &gt; -1) &#123;</div><div class="line">        this.splice(index, 1);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">for (let i of arrayDel.length) &#123;</div><div class="line">    let obj = arrayDel[i];</div><div class="line">    array.remove(obj);</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.dir(array);</div></pre></td></tr></table></figure>
-<ul>
-<li>lodash 库 <code>differenceBy</code> 方法</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let newArray = differenceBy(array,[&#123;&apos;id&apos;:&apos;111&apos;,&apos;name&apos;:&apos;aaa&apos;&#125;],&apos;id&apos;);</div><div class="line">console.dir(newArray);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>ES 6 常用 <code>API</code></p>
-</blockquote>
-<p><img src="https://github.com/Boom618/ExceptionReadme/blob/master/image/9B89CB56DB8EDB991A2A17D1243D140B.png" alt="ES 6 常用方法"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数组使用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/23/数组使用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-项目库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/项目库/">项目库依赖</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/项目库/" class="archive-article-date">
-  	<time datetime="2017-08-23T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目库"><span class="toc-number">1.</span> <span class="toc-text">项目库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#库依赖"><span class="toc-number">1.1.</span> <span class="toc-text">库依赖</span></a></li></ol></li></ol>
-		</div>
-		
-		
-        <h1 id="项目库"><a href="#项目库" class="headerlink" title="项目库"></a>项目库</h1><h2 id="库依赖"><a href="#库依赖" class="headerlink" title="库依赖"></a>库依赖</h2><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>GitHub 地址</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>TakePhoto</code> 是一款用于 Android 设备获取照片（拍照或从相册、文件中选择）、裁剪图片、压缩图片的开源工具库</td>
-<td><a href="https://github.com/crazycodeboy/TakePhoto" target="_blank" rel="external">TakePhoto</a></td>
-</tr>
-<tr>
-<td><code>PhotoView</code>一个流畅的图片浏览缩放控件</td>
-<td><a href="https://github.com/bm-x/PhotoView" target="_blank" rel="external">PhotoView</a></td>
-</tr>
-<tr>
-<td><code>FileDownloader</code>Android 文件下载引擎，稳定、高效、灵活、简单易用</td>
-<td><a href="https://github.com/lingochamp/FileDownloader" target="_blank" rel="external">FileDownloader</a></td>
-</tr>
-<tr>
-<td><code>FlycoTabLayout</code>一个 Android TabLayout 库</td>
-<td><a href="https://github.com/H07000223/FlycoTabLayout" target="_blank" rel="external">FlycoTabLayout</a></td>
-</tr>
-<tr>
-<td><code>PagerBottomTabStrip</code>Android 的底部导航栏</td>
-<td><a href="https://github.com/tyzlmjj/PagerBottomTabStrip" target="_blank" rel="external">PagerBottomTabStrip</a></td>
-</tr>
-<tr>
-<td><code>PermissionGen</code>Android API 易于使用的 Android M 权限</td>
-<td><a href="https://github.com/lovedise/PermissionGen" target="_blank" rel="external">PermissionGen</a></td>
-</tr>
-<tr>
-<td><code>PermissionsDispatcher</code>简单的基于注释的 API 来处理运行时权限</td>
-<td><a href="https://github.com/hotchemi/PermissionsDispatcher" target="_blank" rel="external">PermissionsDispatcher</a></td>
-</tr>
-<tr>
-<td><code>MaterialDateTimePicker</code>选择日期或时间</td>
-<td><a href="https://github.com/wdullaer/MaterialDateTimePicker" target="_blank" rel="external">MaterialDateTimePicker</a></td>
-</tr>
-<tr>
-<td><code>zxingLibrary</code>快速集成二维码扫描功能</td>
-<td><a href="https://github.com/yipianfengye/android-zxingLibrary" target="_blank" rel="external">zxingLibrary</a></td>
-</tr>
-<tr>
-<td><code>Luban</code> 鲁班 Android 图片压缩工具，仿微信朋友圈压缩策略</td>
-<td><a href="https://github.com/Curzibn/Luban" target="_blank" rel="external">Luban</a></td>
-</tr>
-<tr>
-<td><code>materialish-progress</code>Material Style  进度轮与 2.3 兼容</td>
-<td><a href="https://github.com/pnikosis/materialish-progress" target="_blank" rel="external">materialish-progress</a></td>
-</tr>
-<tr>
-<td><code>Logger</code>简单，漂亮和强大的 Android 日志</td>
-<td><a href="https://github.com/orhanobut/logger" target="_blank" rel="external">Logger</a></td>
-</tr>
-<tr>
-<td><code>Picasso</code>功能强大的图像下载和缓存库</td>
-<td><a href="https://github.com/square/picasso" target="_blank" rel="external">Picasso</a></td>
-</tr>
-<tr>
-<td><code>Glide</code>图像加载和缓存库</td>
-<td><a href="https://github.com/bumptech/glide" target="_blank" rel="external">Glide</a></td>
-</tr>
-<tr>
-<td><code>leakcanary</code>square 性能监控</td>
-<td><a href="https://github.com/square/leakcanary" target="_blank" rel="external">leakcanary</a></td>
-</tr>
-<tr>
-<td><code>blockcanary</code>非侵入式的性能监控组件</td>
-<td><a href="https://github.com/markzhai/AndroidPerformanceMonitor" target="_blank" rel="external">blockcanary</a></td>
-</tr>
-</tbody>
-</table>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">库依赖</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/23/项目库/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1743,7 +1723,7 @@ Shift    ⌂
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 BoomHe
+    		&copy; 2018 BoomHe
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1842,11 +1822,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
+                <a href="javascript:void(0)" class="js-tag color4">ADB</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1854,11 +1834,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数组使用</a>
+                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1866,11 +1846,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
+                <a href="javascript:void(0)" class="js-tag color5">数组使用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ADB</a>
+                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
               </li>
             
             <div class="clearfix"></div>
