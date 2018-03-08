@@ -163,6 +163,174 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-逆向常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/05/逆向常用命令/">逆向常用命令</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/05/逆向常用命令/" class="archive-article-date">
+  	<time datetime="2018-03-05T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#逆向常用命令"><span class="toc-number">1.</span> <span class="toc-text">逆向常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础命令"><span class="toc-number">1.1.</span> <span class="toc-text">基础命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非-shell-命令"><span class="toc-number">1.2.</span> <span class="toc-text">非 shell 命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-命令"><span class="toc-number">2.</span> <span class="toc-text">shell 命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程命令"><span class="toc-number">3.</span> <span class="toc-text">进程命令</span></a></li></ol>
+		</div>
+		
+		
+        <h2 id="逆向常用命令"><a href="#逆向常用命令" class="headerlink" title="逆向常用命令"></a>逆向常用命令</h2><h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><ul>
+<li><code>cat</code>：查看文件内容  例：cat demo.txt <code>|</code> grep four</li>
+<li><code>echo/touch</code>：写文件 例：echo “hello world” &gt; demo.txt(<code>&gt;</code>： 内容重定向)</li>
+</ul>
+<h3 id="非-shell-命令"><a href="#非-shell-命令" class="headerlink" title="非 shell 命令"></a>非 shell 命令</h3><ul>
+<li><code>adb shell dumpsys activity top</code> 查看当前应用的 activity 信息</li>
+<li><code>adb shell dumpsys activity activities</code>查看当前应用的任务栈</li>
+<li><code>adb shell dumpsys package [pname]</code> 查看指定应用包名详细信息 (adb shell dumpsys package com.tencent.mm)</li>
+<li><code>adb shell dumpsys meminfo [pname/pid]</code> 查看指定进程名或进程 ID 的内存信息（adb shell dumpsys meminfo com.tencent.mm）</li>
+<li><code>adb shell dumpsys dbinfo [pname]</code> 查看指定包名应用的数据库存储信息（adb shell dumpsys dbinfo com.tencent.mm）</li>
+<li><code>adb install</code> 安装应用包 apk 文件（adb install 文件名）</li>
+<li><code>adb uninstall [pname]</code> 卸载应用（adb uninstall cn.wjdiankong.demo）</li>
+<li><code>adb pull</code> 将设备中的文件放到本地（adb pull /sdcard/tmp.txt D:\）</li>
+<li><code>adb push</code> 将本地文件放到设备中（adb pull D:\tmp.txt /sdcard）</li>
+<li><code>adb shell screencap</code> 截屏操作（adb shell screencap -p /sdcard/temp.png）<ul>
+<li>adb shell screencap -p /sdcard/temp.png</li>
+<li>adb pull /sdcard/temp.png D:\</li>
+<li>start D:\temp.png</li>
+</ul>
+</li>
+<li><code>adb shell screenrecord</code>录屏操作（adb shell screenrecord /sdcard/temp.mp4）</li>
+<li><code>adb shell input text</code>输入文本内容（adb shell input text ‘HelloWorld’）</li>
+<li><code>adb forward</code> 设备的端口转发<ul>
+<li>adb forward tcp:23946 tcp:23946</li>
+<li>adb forward tcp:8700 jwdp:1786</li>
+</ul>
+</li>
+<li><code>adb jdwp</code> 查看设备中可以被调试的应用进程号</li>
+<li><code>adb logcat</code>查看当前日志<ul>
+<li>adb logcat -s tag</li>
+<li>adb logcat | findstr [pname|pid|keyword]</li>
+</ul>
+</li>
+<li><code>adb shell pm clear [pname]</code> 清空应用数据</li>
+</ul>
+<h2 id="shell-命令"><a href="#shell-命令" class="headerlink" title="shell 命令"></a>shell 命令</h2><ul>
+<li><code>run-as [pname]</code>在非 root 设备中查看指定 debug 模式的应用沙盒数据</li>
+<li><code>ps</code>查看设备的进程信息<code>/</code>指定进程的线程信息<ul>
+<li><code>ps | grep com.tencent.mm</code> 过滤信息</li>
+<li><code>ps -t [pid]</code> 查看 pid 对应的线程信息</li>
+<li><code>pm clear [pname]</code>清空指定包名应用数据</li>
+<li><code>pm install [apk 文件]</code>安装设备中的 apk 文件、和 adb install 一样（pm install /sdcard/demo.apk）</li>
+<li><code>pm uninstall [pname]</code>卸载设备中的应用</li>
+<li><code>am start</code>启动一个应用</li>
+<li><code>am start -n [pname]/[pname].[activity]</code></li>
+<li><code>am start -D -n com.android.browser/com.android.browser.BrowserActivity</code> Debug 模式启动</li>
+<li><code>am startservice</code>启动一个服务、和上面命令类似</li>
+<li><code>am broadcast</code>发送一个广播</li>
+<li><code>am broadcast -a android.NET.conn.CONNECTIVITY_CHANGE</code> 可以测试定义的广播</li>
+<li><code>netcfg</code> 查看设备的 IP 地址</li>
+<li><code>netstat</code>查看设备的端口号信息</li>
+<li><code>app_process</code>特需场景</li>
+<li><code>dalvikvm -cp [dex文件] [运行主类]</code> 运行一个 dex 文件</li>
+<li><code>dalvikvm -cp /data/demo.dex com.tencent.mm</code></li>
+<li><code>top [-n/-m/-d/-s/-t]</code>查看当前应用 CPU 消耗信息 </li>
+<li><code>top -d 1 -m 10</code> 还可以和 grep 结合使用</li>
+<li><code>-n</code> 刷新次数</li>
+<li><code>-m</code>最多显示多少个进程</li>
+<li><code>-d</code>刷新间隔时间（默认5秒）</li>
+<li><code>-s</code>按那列排序</li>
+<li><code>-t</code>显示线程信息（不是进程）</li>
+<li><code>getprop [属性值名称]</code>查看系统属性 </li>
+<li><code>getprop ro.debuggable</code>版本号、系统属性…</li>
+</ul>
+</li>
+</ul>
+<p>##操作 apk 命令<br><strong>用 aapt 操作 apk</strong></p>
+<ul>
+<li><code>aapt dump xmltree[apk] [需要查看的资源文件 xml]</code>：查看 apk 中的信息以及编辑 apk 程序包<ul>
+<li><code>aapt dump xmltree demo.apk AndroidManifest.xml &gt; xml.txt</code></li>
+</ul>
+</li>
+<li><code>dexdump [dex 文件路径]</code>：查看 dex 文件的详细信息<ul>
+<li><code>dexdump /Users/boomhe/classes.dex</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="进程命令"><a href="#进程命令" class="headerlink" title="进程命令"></a>进程命令</h2><p><strong>查看当前进程的内存加载情况</strong></p>
+<ul>
+<li><code>cat /proc/[pid]/maps</code>:查看进程的内存映射信息、加载了那些 so 、dex 文件等<ul>
+<li><code>ps | grep com.czcg.gwt</code></li>
+<li><code>cat /proc/7758/maps</code>：查看进程的内存映射信息</li>
+<li><code>cat /proc/7758/status</code>：查看进程的状态信息</li>
+<li><code>cat /proc/[pid]/net/tcp/tcp6/udp/udp6</code>：查看应用的端口信息</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/05/逆向常用命令/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java 序列化错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1139,100 +1307,6 @@
 
 
   
-    <article id="post-生活书" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/01/生活书/">生活书</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/01/生活书/" class="archive-article-date">
-  	<time datetime="2017-09-01T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#生活书"><span class="toc-number">1.</span> <span class="toc-text">生活书</span></a></li></ol>
-		</div>
-		
-		
-        <h2 id="生活书"><a href="#生活书" class="headerlink" title="生活书"></a>生活书</h2><ul>
-<li>菜根谭</li>
-<li>人性的弱点</li>
-<li>鬼谷子全集</li>
-<li>资治通鉴</li>
-<li>曾国潘全集</li>
-<li>穆斯林的葬礼</li>
-<li>贾平凹长篇散文精选</li>
-<li>父亲的雪山，母亲的草地</li>
-<li>西方哲学史</li>
-<li>周国平著作</li>
-<li>瓦尔登湖</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">生活书</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/01/生活书/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-MAC常用操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1323,20 +1397,20 @@ Shift    ⌂
 
 
   
-    <article id="post-快捷键_插件_依赖库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-生活书" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/快捷键_插件_依赖库/">常用快捷键 + 插件 + 库依赖</a>
+      <a class="article-title" href="/2017/09/01/生活书/">生活书</a>
     </h1>
   
 
         
-        <a href="/2017/08/23/快捷键_插件_依赖库/" class="archive-article-date">
-  	<time datetime="2017-08-23T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
+        <a href="/2017/09/01/生活书/" class="archive-article-date">
+  	<time datetime="2017-09-01T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
 </a>
         
       </header>
@@ -1347,315 +1421,23 @@ Shift    ⌂
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常用快捷键"><span class="toc-number">1.</span> <span class="toc-text">常用快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-Studio-快捷键"><span class="toc-number">1.1.</span> <span class="toc-text">Android Studio 快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chrome-插件推荐"><span class="toc-number">1.2.</span> <span class="toc-text">Chrome 插件推荐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-Studio-插件"><span class="toc-number">1.3.</span> <span class="toc-text">Android Studio 插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#库依赖"><span class="toc-number">1.4.</span> <span class="toc-text">库依赖</span></a></li></ol></li></ol>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#生活书"><span class="toc-number">1.</span> <span class="toc-text">生活书</span></a></li></ol>
 		</div>
 		
 		
-        <h1 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h1><h2 id="Android-Studio-快捷键"><a href="#Android-Studio-快捷键" class="headerlink" title="Android Studio 快捷键"></a>Android Studio 快捷键</h2><table>
-<thead>
-<tr>
-<th>快捷键</th>
-<th>Mac</th>
-<th>Window</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> 自动补全代码返回值</td>
-<td>command + Alt + V</td>
-<td>ctrl+2，L</td>
-</tr>
-<tr>
-<td>格式化代码</td>
-<td>command + Alt + L</td>
-<td></td>
-</tr>
-<tr>
-<td>大小写转换</td>
-<td>command ＋Shift ＋ U</td>
-<td></td>
-</tr>
-<tr>
-<td>继承、查看父类成员变量</td>
-<td>command + f12</td>
-<td></td>
-</tr>
-<tr>
-<td>重写父类方法</td>
-<td>control ＋ O</td>
-</tr>
-<tr>
-<td>查看父类方法</td>
-<td>command + U</td>
-</tr>
-<tr>
-<td>高亮选中字段</td>
-<td>Alt + Shift +O</td>
-</tr>
-<tr>
-<td>查看断点</td>
-<td>Ctrl + Shift + F8</td>
-</tr>
-<tr>
-<td>多行编辑</td>
-<td>Alt + 鼠标左键</td>
-</tr>
-<tr>
-<td>搜索所有安装插件</td>
-<td>Ctrl + Shift + A</td>
-</tr>
-<tr>
-<td>分屏</td>
-<td>Ctrl + Shift + A  / split vertically</td>
-</tr>
-</tbody>
-</table>
-<h2 id="Chrome-插件推荐"><a href="#Chrome-插件推荐" class="headerlink" title="Chrome 插件推荐"></a>Chrome 插件推荐</h2><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>插件</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>支持网页gitHub目录结构</td>
-<td>Octotree</td>
-</tr>
-<tr>
-<td>支持网页标签管理</td>
-<td>Infinity</td>
-</tr>
-<tr>
-<td>支持网页反跟踪</td>
-<td>Ghostery</td>
-</tr>
-<tr>
-<td>支持JSON格式化</td>
-<td>json-handle</td>
-</tr>
-<tr>
-<td>测试接口</td>
-<td>postman</td>
-</tr>
-<tr>
-<td>掘金</td>
-<td>掘金</td>
-</tr>
-<tr>
-<td>Listen1</td>
-<td><a href="https://github.com/listen1/listen1" target="_blank" rel="external">GitHub地址</a></td>
-</tr>
-<tr>
-<td>统计流量、来源、排名等信息</td>
-<td>Similar Web</td>
-</tr>
-<tr>
-<td>广告终结者</td>
-<td>Advertising Terminator</td>
-</tr>
-<tr>
-<td>油猴脚本</td>
-<td>Tampermonkey</td>
-</tr>
-<tr>
-<td>网址样式定制主题 、Google 、Facebook</td>
-<td>Stylish</td>
-</tr>
-<tr>
-<td>链接、图片、文字直接生成二维码</td>
-<td>Anything to QRCode</td>
-</tr>
-<tr>
-<td>截图</td>
-<td>Awesome Screenshot</td>
-</tr>
-<tr>
-<td>显示 GitHub 用户的头像</td>
-<td>Avatars for Github</td>
-</tr>
-</tbody>
-</table>
-<h2 id="Android-Studio-插件"><a href="#Android-Studio-插件" class="headerlink" title="Android Studio 插件"></a>Android Studio 插件</h2><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>名称</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>格式化数据</td>
-<td>GsonFormat Gson</td>
-</tr>
-<tr>
-<td>支持英文翻译</td>
-<td>ECTranslation</td>
-</tr>
-<tr>
-<td>快捷Toast、log编写</td>
-<td>android-postfix-plugin</td>
-</tr>
-<tr>
-<td>超赞的、类似 Sublime</td>
-<td>CodeGlance</td>
-</tr>
-<tr>
-<td>查找Bug</td>
-<td>FindBugs-IDEA-1.0.0</td>
-</tr>
-<tr>
-<td>JSon在线</td>
-<td>JSONViewerStudioPlugin</td>
-</tr>
-<tr>
-<td>主题</td>
-<td>Material Theme</td>
-</tr>
-<tr>
-<td>快速查找 Ctrl + Shaft + A</td>
-<td>CodotaPlugin</td>
-</tr>
-<tr>
-<td>自定义皮肤</td>
-<td>Sexy Editor</td>
-</tr>
-<tr>
-<td>统计被引用次数</td>
-<td><a href="https://github.com/niorgai/Android-Resource-Usage-Count" target="_blank" rel="external">Android-Resource-Usage-Count</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="库依赖"><a href="#库依赖" class="headerlink" title="库依赖"></a>库依赖</h2><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>地址</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>内存检查</td>
-<td><a href="https://github.com/square/leakcanary" target="_blank" rel="external">leakcanary</a></td>
-</tr>
-<tr>
-<td>腾讯 Bugly</td>
-<td><a href="https://bugly.qq.com/docs/user-guide/instruction-manual-android/?v=20170627170213" target="_blank" rel="external">使用指南</a></td>
-</tr>
-<tr>
-<td>UI库集合</td>
-<td><a href="https://github.com/wasabeef/awesome-android-ui" target="_blank" rel="external">awesome-android-ui</a></td>
-</tr>
-<tr>
-<td>酷炫自定义控件</td>
-<td><a href="https://github.com/madongqiang2201/views" target="_blank" rel="external">views</a></td>
-</tr>
-<tr>
-<td>郭林数据库</td>
-<td><a href="https://github.com/LitePalFramework/LitePal" target="_blank" rel="external">LitePal</a></td>
-</tr>
-<tr>
-<td>带类别的RecycleView</td>
-<td><a href="https://github.com/simplify20/PowerfulRecyclerViewAdapter" target="_blank" rel="external">Link</a></td>
-</tr>
-<tr>
-<td>RecycleView 刷新加载</td>
-<td><a href="https://github.com/WuXiaolong/PullLoadMoreRecyclerView" target="_blank" rel="external">PullLoadMoreRecyclerView</a></td>
-</tr>
-<tr>
-<td>RecycleView 刷新动画</td>
-<td><a href="https://github.com/shichaohui/AnimRefreshRecyclerView" target="_blank" rel="external">AnimRefreshRecyclerView</a></td>
-</tr>
-<tr>
-<td>严大 SwipeRecyclerView</td>
-<td><a href="https://github.com/yanzhenjie/SwipeRecyclerView" target="_blank" rel="external">SwipeRecyclerView</a></td>
-</tr>
-<tr>
-<td>鸿洋万能 Adapter</td>
-<td><a href="https://github.com/hongyangAndroid/baseAdapter" target="_blank" rel="external">baseAdapter</a></td>
-</tr>
-<tr>
-<td>下拉刷新 上拉加载</td>
-<td><a href="https://github.com/scwang90/SmartRefreshLayout" target="_blank" rel="external">SmartRefreshLayout</a></td>
-</tr>
-<tr>
-<td>检测更新 文件下载</td>
-<td><a href="https://github.com/Tailyou/RetrofitFileDownload" target="_blank" rel="external">RetrofitFileDownload</a></td>
-</tr>
-<tr>
-<td>RecyclerViewAdapter</td>
-<td><a href="https://github.com/CymChad/BaseRecyclerViewAdapterHelper" target="_blank" rel="external">BaseRecyclerViewAdapterHelper</a></td>
-</tr>
-<tr>
-<td>Android 视频相关</td>
-<td><a href="https://github.com/jackuhan/VersatileVitamioPlayer" target="_blank" rel="external">VersatileVitamioPlayer</a></td>
-</tr>
-<tr>
-<td>刷新加载</td>
-<td><a href="https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh" target="_blank" rel="external">Link</a></td>
-</tr>
-<tr>
-<td>下拉刷新 上拉加载</td>
-<td><a href="https://github.com/idisfkj/EnhanceRecyclerView" target="_blank" rel="external">EnhanceRecyclerView</a></td>
-</tr>
-<tr>
-<td>城市列表</td>
-<td><a href="https://github.com/18722527635/CityDemo" target="_blank" rel="external">CityDemo</a></td>
-</tr>
-<tr>
-<td>指示器</td>
-<td><a href="https://github.com/hackware1993/MagicIndicator" target="_blank" rel="external">MagicIndicator</a></td>
-</tr>
-<tr>
-<td>夜间模式</td>
-<td><a href="https://github.com/achenglike/NightModel" target="_blank" rel="external">NightModel</a></td>
-</tr>
-<tr>
-<td>APP 换肤</td>
-<td><a href="https://github.com/zhuguohui/StyleDemo" target="_blank" rel="external">StyleDemo</a></td>
-</tr>
-<tr>
-<td>好看的 Toast</td>
-<td><a href="https://github.com/yadav-rahul/TastyToast" target="_blank" rel="external">TastyToast</a></td>
-</tr>
-<tr>
-<td>图片预览 九宫格</td>
-<td><a href="https://github.com/bingoogolapple/BGAPhotoPicker-Android" target="_blank" rel="external">Link</a></td>
-</tr>
-<tr>
-<td>沉侵式</td>
-<td><a href="https://github.com/xuyisheng/DesignSupportLibraryDemo" target="_blank" rel="external">DesignSupportLibraryDemo</a></td>
-</tr>
-<tr>
-<td>4.4 以上沉浸式状态栏</td>
-<td><a href="https://github.com/gyf-dev/ImmersionBar" target="_blank" rel="external">ImmersionBar</a></td>
-</tr>
-<tr>
-<td>2017 春季最酷的 30 个 Android 库</td>
-<td><a href="http://www.oschina.net/translate/30-new-android-libraries-released-in-the-spring-of-2017" target="_blank" rel="external">Link</a></td>
-</tr>
-<tr>
-<td>百大框架排行榜</td>
-<td><a href="http://www.cnblogs.com/jincheng-yangchaofan/articles/7018780.html" target="_blank" rel="external">Link</a></td>
-</tr>
-<tr>
-<td>============</td>
-<td>============</td>
-</tr>
-<tr>
-<td>percent 百分比布局</td>
-<td><a href="https://github.com/JulienGenoud/android-percent-support-lib-sample" target="_blank" rel="external">support-lib-sample</a></td>
-</tr>
-<tr>
-<td>控件点击的涟漪效果</td>
-<td><a href="https://github.com/traex/RippleEffect" target="_blank" rel="external">RippleEffect</a></td>
-</tr>
-<tr>
-<td>小秋魔盒</td>
-<td><a href="https://github.com/OCNYang/QBox" target="_blank" rel="external">QBox</a></td>
-</tr>
-</tbody>
-</table>
+        <h2 id="生活书"><a href="#生活书" class="headerlink" title="生活书"></a>生活书</h2><ul>
+<li>菜根谭</li>
+<li>人性的弱点</li>
+<li>鬼谷子全集</li>
+<li>资治通鉴</li>
+<li>曾国潘全集</li>
+<li>穆斯林的葬礼</li>
+<li>贾平凹长篇散文精选</li>
+<li>父亲的雪山，母亲的草地</li>
+<li>西方哲学史</li>
+<li>周国平著作</li>
+<li>瓦尔登湖</li>
+</ul>
 
       
 
@@ -1669,7 +1451,7 @@ Shift    ⌂
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">插件</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">生活书</a>
         		</li>
       		
 		</ul>
@@ -1679,7 +1461,7 @@ Shift    ⌂
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/23/快捷键_插件_依赖库/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/09/01/生活书/">展开全文 >></a>
         </p>
       
 
@@ -1810,7 +1592,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GDD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1818,11 +1608,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
+                <a href="javascript:void(0)" class="js-tag color4">ADB</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ADB</a>
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1834,15 +1624,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">生活书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1850,7 +1636,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
+                <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
               </li>
             
             <div class="clearfix"></div>

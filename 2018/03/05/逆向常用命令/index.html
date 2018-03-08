@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | BoomHe</title>
+  <title>逆向常用命令 | BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell dumpsys activi">
+<meta name="keywords" content="Android 应用安全维护和逆向分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/08/23/hello-world/index.html">
+<meta property="og:title" content="逆向常用命令">
+<meta property="og:url" content="http://yoursite.com/2018/03/05/逆向常用命令/index.html">
 <meta property="og:site_name" content="BoomHe">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell dumpsys activi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-23T02:46:38.000Z">
+<meta property="og:updated_time" content="2018-03-08T01:22:58.064Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="逆向常用命令">
+<meta name="twitter:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell dumpsys activi">
   
     <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
   
@@ -162,20 +163,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-逆向常用命令" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      逆向常用命令
     </h1>
   
 
         
-        <a href="/2017/08/23/hello-world/" class="archive-article-date">
-  	<time datetime="2017-08-23T02:46:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
+        <a href="/2018/03/05/逆向常用命令/" class="archive-article-date">
+  	<time datetime="2018-03-05T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-05</time>
 </a>
         
       </header>
@@ -186,19 +187,97 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#逆向常用命令"><span class="toc-number">1.</span> <span class="toc-text">逆向常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础命令"><span class="toc-number">1.1.</span> <span class="toc-text">基础命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非-shell-命令"><span class="toc-number">1.2.</span> <span class="toc-text">非 shell 命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-命令"><span class="toc-number">2.</span> <span class="toc-text">shell 命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程命令"><span class="toc-number">3.</span> <span class="toc-text">进程命令</span></a></li></ol>
 		</div>
 		
 		
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h2 id="逆向常用命令"><a href="#逆向常用命令" class="headerlink" title="逆向常用命令"></a>逆向常用命令</h2><h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><ul>
+<li><code>cat</code>：查看文件内容  例：cat demo.txt <code>|</code> grep four</li>
+<li><code>echo/touch</code>：写文件 例：echo “hello world” &gt; demo.txt(<code>&gt;</code>： 内容重定向)</li>
+</ul>
+<h3 id="非-shell-命令"><a href="#非-shell-命令" class="headerlink" title="非 shell 命令"></a>非 shell 命令</h3><ul>
+<li><code>adb shell dumpsys activity top</code> 查看当前应用的 activity 信息</li>
+<li><code>adb shell dumpsys activity activities</code>查看当前应用的任务栈</li>
+<li><code>adb shell dumpsys package [pname]</code> 查看指定应用包名详细信息 (adb shell dumpsys package com.tencent.mm)</li>
+<li><code>adb shell dumpsys meminfo [pname/pid]</code> 查看指定进程名或进程 ID 的内存信息（adb shell dumpsys meminfo com.tencent.mm）</li>
+<li><code>adb shell dumpsys dbinfo [pname]</code> 查看指定包名应用的数据库存储信息（adb shell dumpsys dbinfo com.tencent.mm）</li>
+<li><code>adb install</code> 安装应用包 apk 文件（adb install 文件名）</li>
+<li><code>adb uninstall [pname]</code> 卸载应用（adb uninstall cn.wjdiankong.demo）</li>
+<li><code>adb pull</code> 将设备中的文件放到本地（adb pull /sdcard/tmp.txt D:\）</li>
+<li><code>adb push</code> 将本地文件放到设备中（adb pull D:\tmp.txt /sdcard）</li>
+<li><code>adb shell screencap</code> 截屏操作（adb shell screencap -p /sdcard/temp.png）<ul>
+<li>adb shell screencap -p /sdcard/temp.png</li>
+<li>adb pull /sdcard/temp.png D:\</li>
+<li>start D:\temp.png</li>
+</ul>
+</li>
+<li><code>adb shell screenrecord</code>录屏操作（adb shell screenrecord /sdcard/temp.mp4）</li>
+<li><code>adb shell input text</code>输入文本内容（adb shell input text ‘HelloWorld’）</li>
+<li><code>adb forward</code> 设备的端口转发<ul>
+<li>adb forward tcp:23946 tcp:23946</li>
+<li>adb forward tcp:8700 jwdp:1786</li>
+</ul>
+</li>
+<li><code>adb jdwp</code> 查看设备中可以被调试的应用进程号</li>
+<li><code>adb logcat</code>查看当前日志<ul>
+<li>adb logcat -s tag</li>
+<li>adb logcat | findstr [pname|pid|keyword]</li>
+</ul>
+</li>
+<li><code>adb shell pm clear [pname]</code> 清空应用数据</li>
+</ul>
+<h2 id="shell-命令"><a href="#shell-命令" class="headerlink" title="shell 命令"></a>shell 命令</h2><ul>
+<li><code>run-as [pname]</code>在非 root 设备中查看指定 debug 模式的应用沙盒数据</li>
+<li><code>ps</code>查看设备的进程信息<code>/</code>指定进程的线程信息<ul>
+<li><code>ps | grep com.tencent.mm</code> 过滤信息</li>
+<li><code>ps -t [pid]</code> 查看 pid 对应的线程信息</li>
+<li><code>pm clear [pname]</code>清空指定包名应用数据</li>
+<li><code>pm install [apk 文件]</code>安装设备中的 apk 文件、和 adb install 一样（pm install /sdcard/demo.apk）</li>
+<li><code>pm uninstall [pname]</code>卸载设备中的应用</li>
+<li><code>am start</code>启动一个应用</li>
+<li><code>am start -n [pname]/[pname].[activity]</code></li>
+<li><code>am start -D -n com.android.browser/com.android.browser.BrowserActivity</code> Debug 模式启动</li>
+<li><code>am startservice</code>启动一个服务、和上面命令类似</li>
+<li><code>am broadcast</code>发送一个广播</li>
+<li><code>am broadcast -a android.NET.conn.CONNECTIVITY_CHANGE</code> 可以测试定义的广播</li>
+<li><code>netcfg</code> 查看设备的 IP 地址</li>
+<li><code>netstat</code>查看设备的端口号信息</li>
+<li><code>app_process</code>特需场景</li>
+<li><code>dalvikvm -cp [dex文件] [运行主类]</code> 运行一个 dex 文件</li>
+<li><code>dalvikvm -cp /data/demo.dex com.tencent.mm</code></li>
+<li><code>top [-n/-m/-d/-s/-t]</code>查看当前应用 CPU 消耗信息 </li>
+<li><code>top -d 1 -m 10</code> 还可以和 grep 结合使用</li>
+<li><code>-n</code> 刷新次数</li>
+<li><code>-m</code>最多显示多少个进程</li>
+<li><code>-d</code>刷新间隔时间（默认5秒）</li>
+<li><code>-s</code>按那列排序</li>
+<li><code>-t</code>显示线程信息（不是进程）</li>
+<li><code>getprop [属性值名称]</code>查看系统属性 </li>
+<li><code>getprop ro.debuggable</code>版本号、系统属性…</li>
+</ul>
+</li>
+</ul>
+<p>##操作 apk 命令<br><strong>用 aapt 操作 apk</strong></p>
+<ul>
+<li><code>aapt dump xmltree[apk] [需要查看的资源文件 xml]</code>：查看 apk 中的信息以及编辑 apk 程序包<ul>
+<li><code>aapt dump xmltree demo.apk AndroidManifest.xml &gt; xml.txt</code></li>
+</ul>
+</li>
+<li><code>dexdump [dex 文件路径]</code>：查看 dex 文件的详细信息<ul>
+<li><code>dexdump /Users/boomhe/classes.dex</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="进程命令"><a href="#进程命令" class="headerlink" title="进程命令"></a>进程命令</h2><p><strong>查看当前进程的内存加载情况</strong></p>
+<ul>
+<li><code>cat /proc/[pid]/maps</code>:查看进程的内存映射信息、加载了那些 so 、dex 文件等<ul>
+<li><code>ps | grep com.czcg.gwt</code></li>
+<li><code>cat /proc/7758/maps</code>：查看进程的内存映射信息</li>
+<li><code>cat /proc/7758/status</code>：查看进程的状态信息</li>
+<li><code>cat /proc/[pid]/net/tcp/tcp6/udp/udp6</code>：查看应用的端口信息</li>
+</ul>
+</li>
+</ul>
 
       
 
@@ -207,6 +286,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -257,7 +347,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/23/hello-world/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/05/逆向常用命令/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -271,18 +361,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/08/23/项目库/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          项目库依赖
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/07/28/项目异常/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">异常总结</div>
+    <a href="/2018/02/06/Java 序列化错误/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java.io.NotSerializableException</div>
       <i class="icon-circle-right"></i>
     </a>
   
