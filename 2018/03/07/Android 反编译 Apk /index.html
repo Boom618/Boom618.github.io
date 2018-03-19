@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/9 | BoomHe</title>
+  <title>MultiDex 使用 与 反编译 | BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="你好">
-<meta property="og:type" content="website">
-<meta property="og:title" content="BoomHe">
-<meta property="og:url" content="http://yoursite.com/archives/2017/09/index.html">
+  <meta name="description" content="Android 反编译 Apk环境安装  brew install apktool：Homebrew 安装 apktool  下载JD_GUI  JD_GUI 主要是为了方便查看 dex2jar 转换的jar文件结构和部分代码(未混淆) jd_gui 下载地址  下载 dex2jar  dex2jar 主要用于将解压后的 Apk 包中 classes.dex 转换为 classesdex.jar">
+<meta name="keywords" content="Android 应用安全维护和逆向分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MultiDex 使用 与 反编译">
+<meta property="og:url" content="http://yoursite.com/2018/03/07/Android 反编译 Apk /index.html">
 <meta property="og:site_name" content="BoomHe">
-<meta property="og:description" content="你好">
+<meta property="og:description" content="Android 反编译 Apk环境安装  brew install apktool：Homebrew 安装 apktool  下载JD_GUI  JD_GUI 主要是为了方便查看 dex2jar 转换的jar文件结构和部分代码(未混淆) jd_gui 下载地址  下载 dex2jar  dex2jar 主要用于将解压后的 Apk 包中 classes.dex 转换为 classesdex.jar">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-16T09:51:25.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BoomHe">
-<meta name="twitter:description" content="你好">
+<meta name="twitter:title" content="MultiDex 使用 与 反编译">
+<meta name="twitter:description" content="Android 反编译 Apk环境安装  brew install apktool：Homebrew 安装 apktool  下载JD_GUI  JD_GUI 主要是为了方便查看 dex2jar 转换的jar文件结构和部分代码(未混淆) jd_gui 下载地址  下载 dex2jar  dex2jar 主要用于将解压后的 Apk 包中 classes.dex 转换为 classesdex.jar">
   
     <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
   
@@ -161,174 +163,231 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Android 反编译 Apk " class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MultiDex 使用 与 反编译
+    </h1>
+  
+
+        
+        <a href="/2018/03/07/Android 反编译 Apk /" class="archive-article-date">
+  	<time datetime="2018-03-07T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-反编译-Apk"><span class="toc-number">1.</span> <span class="toc-text">Android 反编译 Apk</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#工具使用"><span class="toc-number">1.1.</span> <span class="toc-text">工具使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MultiDex-使用"><span class="toc-number">2.</span> <span class="toc-text">MultiDex 使用</span></a></li></ol>
+		</div>
+		
+		
+        <h2 id="Android-反编译-Apk"><a href="#Android-反编译-Apk" class="headerlink" title="Android 反编译 Apk"></a>Android 反编译 Apk</h2><p><strong>环境安装</strong></p>
+<blockquote>
+<p><code>brew install apktool</code>：<code>Homebrew</code> 安装 <code>apktool</code></p>
+</blockquote>
+<p><strong>下载JD_GUI</strong></p>
+<blockquote>
+<p>JD_GUI 主要是为了方便查看 dex2jar 转换的jar文件结构和部分代码(未混淆)</p>
+<p>jd_gui <a href="http://jd.benow.ca/" target="_blank" rel="external">下载地址</a></p>
+</blockquote>
+<p><strong>下载 dex2jar</strong></p>
+<blockquote>
+<p>dex2jar 主要用于将解压后的 Apk 包中 classes.dex 转换为 classesdex.jar 包便于 jd_gui 查看</p>
+<p>dex2jar <a href="http://sourceforge.net/projects/dex2jar/files/" target="_blank" rel="external">下载地址</a></p>
+</blockquote>
+<p><strong>dex2jar使用说明</strong></p>
+<blockquote>
+<p><a href="http://sourceforge.net/p/dex2jar/wiki/UserGuide/" target="_blank" rel="external">使用说明地址</a></p>
+</blockquote>
+<h3 id="工具使用"><a href="#工具使用" class="headerlink" title="工具使用"></a>工具使用</h3><blockquote>
+<p>Apktool 反编译和二次打包</p>
+</blockquote>
+<ul>
+<li><p><code>apktool d -f demo.apk -o 存放反编译文件路径</code></p>
+<ul>
+<li><code>apktool d -f /Users/boomhe/debug.apk -o Game/Apk</code></li>
+</ul>
+</li>
+<li><p><code>apktool b -f 二次打包文件路径 -o demo.apk</code></p>
+<ul>
+<li><code>apktool b -f /Users/boomhe/Game/Apk -o /Users/boomhe/Game/debug.apk</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="MultiDex-使用"><a href="#MultiDex-使用" class="headerlink" title="MultiDex 使用"></a>MultiDex 使用</h2><p><strong>什么是 .dex 文件</strong></p>
+<blockquote>
+<p>Dalvik VM executes : Android Dalvik 虚拟机执行文件</p>
+</blockquote>
+<p><strong>什么是 art</strong></p>
+<blockquote>
+<p>Android Runtime :Android 运行时、Android<br> 4.4 引入</p>
+</blockquote>
+<ul>
+<li>AndroidManifest.xml 配置信息</li>
+<li>META-INF 签名信息</li>
+<li>classes.dex Java 字节码文件</li>
+<li>res 资源文件</li>
+<li>resources.arsc 二进制资源文件</li>
+</ul>
+<blockquote>
+<p>直接对 .apk 文件解压会保留 META-INF 签名信息文件</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip /Users/boomhe/Game/GWT.apk -d /Users/boomhe/Game/unzipGWT</div></pre></td></tr></table></figure>
+<blockquote>
+<p>采用 ApkTool 工具反编译的文件没有 META-INF 签名信息文件</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apktool d -f /Users/boomhe/Game/GWT.apk  -o Game/apktoolApk</div></pre></td></tr></table></figure>
+<p><strong>项目集成 MultiDex</strong></p>
+<blockquote>
+<p>引入依赖和开启multiDex</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    defaultConfig &#123;</div><div class="line">        ...</div><div class="line">        minSdkVersion <span class="number">15</span> </div><div class="line">        targetSdkVersion <span class="number">26</span></div><div class="line">        <span class="comment">// 第一步 开启 multiDex</span></div><div class="line">        multiDexEnabled <span class="keyword">true</span></div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">	<span class="comment">// 第二步：引入依赖</span></div><div class="line">  compile <span class="string">'com.android.support:multidex:1.0.1'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>重写 attachBaseContext() 方法并调用 MultiDex.install(this) 来启用 Dalvik 可执行文件分包</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第三步：重写 attachBaseContext()</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">attachBaseContext</span><span class="params">(Context base)</span> </span>&#123;</div><div class="line">     <span class="keyword">super</span>.attachBaseContext(context);</div><div class="line">     Multidex.install(<span class="keyword">this</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>配置 manifest 文件</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第四步：配置</span></div><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</div><div class="line"></div><div class="line">&lt;manifest </div><div class="line">xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="keyword">package</span>=<span class="string">"com.example.myapp"</span>&gt;</div><div class="line">    &lt;application</div><div class="line">            android:name=<span class="string">"com.czcg.qlsct.MyApplication"</span> &gt;</div><div class="line">        ...</div><div class="line">    &lt;/application&gt;</div><div class="line">&lt;/manifest&gt;</div></pre></td></tr></table></figure>
+<p><strong>参考文献</strong></p>
+<p><a href="http://mrljdx.com/2015/12/30/Mac%E4%B8%8B%E9%85%8D%E7%BD%AEApktool%E5%8F%8D%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/" target="_blank" rel="external">Mac下配置Apktool反编译环境</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/28/开发一个属于自己的插件/" class="archive-article-date">
-  	<time datetime="2017-09-28T05:19:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/28/开发一个属于自己的插件/">开发一个属于自己的插件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">插件开发</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/07/Android 反编译 Apk /" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/21/APK 打包流程/" class="archive-article-date">
-  	<time datetime="2017-09-21T08:36:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/保险/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          保险
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/05/逆向常用命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">逆向常用命令</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/21/APK 打包流程/">APK 打包流程</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">原理解析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/01/生活书/" class="archive-article-date">
-  	<time datetime="2017-09-01T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/01/生活书/">生活书</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">生活书</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/01/MAC常用操作/" class="archive-article-date">
-  	<time datetime="2017-09-01T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/01/MAC常用操作/">MAC 常用操作</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MAC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -351,8 +410,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

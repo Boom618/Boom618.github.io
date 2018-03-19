@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>逆向常用命令 | BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell dumpsys activi">
+  <meta name="description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; /Users/boomhe/demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell">
 <meta name="keywords" content="Android 应用安全维护和逆向分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="逆向常用命令">
 <meta property="og:url" content="http://yoursite.com/2018/03/05/逆向常用命令/index.html">
 <meta property="og:site_name" content="BoomHe">
-<meta property="og:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell dumpsys activi">
+<meta property="og:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; /Users/boomhe/demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-08T01:22:58.064Z">
+<meta property="og:updated_time" content="2018-03-13T06:12:25.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="逆向常用命令">
-<meta name="twitter:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell dumpsys activi">
+<meta name="twitter:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; /Users/boomhe/demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell">
   
     <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
   
@@ -193,7 +193,7 @@
 		
         <h2 id="逆向常用命令"><a href="#逆向常用命令" class="headerlink" title="逆向常用命令"></a>逆向常用命令</h2><h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><ul>
 <li><code>cat</code>：查看文件内容  例：cat demo.txt <code>|</code> grep four</li>
-<li><code>echo/touch</code>：写文件 例：echo “hello world” &gt; demo.txt(<code>&gt;</code>： 内容重定向)</li>
+<li><code>echo/touch</code>：写文件 例：echo “hello world” &gt; /Users/boomhe/demo.txt(<code>&gt;</code>： 内容重定向)</li>
 </ul>
 <h3 id="非-shell-命令"><a href="#非-shell-命令" class="headerlink" title="非 shell 命令"></a>非 shell 命令</h3><ul>
 <li><code>adb shell dumpsys activity top</code> 查看当前应用的 activity 信息</li>
@@ -203,12 +203,12 @@
 <li><code>adb shell dumpsys dbinfo [pname]</code> 查看指定包名应用的数据库存储信息（adb shell dumpsys dbinfo com.tencent.mm）</li>
 <li><code>adb install</code> 安装应用包 apk 文件（adb install 文件名）</li>
 <li><code>adb uninstall [pname]</code> 卸载应用（adb uninstall cn.wjdiankong.demo）</li>
-<li><code>adb pull</code> 将设备中的文件放到本地（adb pull /sdcard/tmp.txt D:\）</li>
-<li><code>adb push</code> 将本地文件放到设备中（adb pull D:\tmp.txt /sdcard）</li>
+<li><code>adb pull</code> 将设备中的文件放到本地（adb pull /sdcard/tmp.txt /Users/boomhe/）</li>
+<li><code>adb push</code> 将本地文件放到设备中（adb pull /Users/boomhe/temp.txt /sdcard）</li>
 <li><code>adb shell screencap</code> 截屏操作（adb shell screencap -p /sdcard/temp.png）<ul>
 <li>adb shell screencap -p /sdcard/temp.png</li>
-<li>adb pull /sdcard/temp.png D:\</li>
-<li>start D:\temp.png</li>
+<li>adb pull /sdcard/temp.png /Users/boomhe/</li>
+<li>start /Users/boomhe/temp.png</li>
 </ul>
 </li>
 <li><code>adb shell screenrecord</code>录屏操作（adb shell screenrecord /sdcard/temp.mp4）</li>
@@ -221,7 +221,7 @@
 <li><code>adb jdwp</code> 查看设备中可以被调试的应用进程号</li>
 <li><code>adb logcat</code>查看当前日志<ul>
 <li>adb logcat -s tag</li>
-<li>adb logcat | findstr [pname|pid|keyword]</li>
+<li>adb logcat | grep/findstr [pname|pid|keyword]</li>
 </ul>
 </li>
 <li><code>adb shell pm clear [pname]</code> 清空应用数据</li>
@@ -361,11 +361,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/08/保险/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/07/Android 反编译 Apk /" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          保险
+          MultiDex 使用 与 反编译
         
       </div>
     </a>
@@ -500,11 +500,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GDD</a>
+                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
+                <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GDD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,19 +520,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RxJava 和 RxAndroid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">保险</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ADB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -544,11 +544,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
             
             <div class="clearfix"></div>
