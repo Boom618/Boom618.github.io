@@ -163,241 +163,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-RxJava 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/08/RxJava 总结/">RxJava 总结</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/08/RxJava 总结/" class="archive-article-date">
-  	<time datetime="2018-03-08T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RxJava"><span class="toc-number">1.</span> <span class="toc-text">RxJava</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#调度器的种类"><span class="toc-number">1.1.</span> <span class="toc-text">调度器的种类</span></a></li></ol></li></ol>
-		</div>
-		
-		
-        <h2 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h2><p><strong>什么是 RxJava</strong></p>
-<ul>
-<li>Observable：被观察者</li>
-<li>Observer：观察者</li>
-<li>subscribe：订阅者</li>
-</ul>
-<p>&gt;</p>
-<ul>
-<li>Observable 就是事件的发出者、可以理解成管道的<code>上游</code>、事件源</li>
-<li>Observer 就是事件的接受者、可以理解成管道的<code>下游</code>、接受者</li>
-<li>subscribe 就是 Observable 与 Observer 之间的连接者</li>
-</ul>
-<p>这三者之间的对应关系就是 RxJava</p>
-<blockquote>
-<p>RxJava 也是观察者模式的扩展、普通的观察者模式只负责事件的分发与接受、而 RxJava 在观察者模式上增强了 onComplete、onError。</p>
-</blockquote>
-<p><strong>Rxjava 中的 Flowable 和 Backpressure</strong> </p>
-<p>&gt;</p>
-<ul>
-<li>Flowable：事件源 <code>上游</code></li>
-<li>Subscriber：接收者 <code>下游</code></li>
-<li>subscribe：就是 Flowable 与 Subscriber 之间的连接者</li>
-</ul>
-<blockquote>
-<p>Subscription：Backpressure 中控制数据处理能力的开关和 Disposable(开关) 类似、s.request(Long.MAX_VALUE)。</p>
-</blockquote>
-<p>Flowable 和 Backpressure 组合使用就是对数据发送的各种策略</p>
-<blockquote>
-<p>如果 Flowable <code>上游</code> 产生大量数据、导致 Subscriber <code>下游</code> 接收数据跟不上时内存就会 OOM 、不采用 <code>Flowable</code> 的解决思路就是： </p>
-</blockquote>
-<ul>
-<li>一是从<code>数量</code>上进行治理、减少发送进水缸里的事件<ul>
-<li>filter // 数据过滤</li>
-</ul>
-</li>
-<li>二是从<code>速度</code>上进行治理、减缓事件发送进水缸的速度<ul>
-<li>延时发送数据 </li>
-<li>sample(2, TimeUnit.SECONDS)  //sample 取样</li>
-</ul>
-</li>
-</ul>
-<p><strong>创建操作符</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">Observable.create(<span class="keyword">new</span> ObservableOnSubscribe&lt;Integer&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(ObservableEmitter&lt;Integer&gt; e)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">                e.onNext(<span class="number">6</span>);</div><div class="line">                e.onNext(<span class="number">7</span>);</div><div class="line">                e.onNext(<span class="number">8</span>);</div><div class="line">                e.onNext(<span class="number">88</span>);</div><div class="line">				<span class="comment">// subscribe 中不调用 e.onComplete 方法、事件会一直发送</span></div><div class="line">                e.onComplete();</div><div class="line"></div><div class="line">                e.onNext(<span class="number">19</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;).subscribe(<span class="keyword">new</span> Observer&lt;Integer&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSubscribe</span><span class="params">(Disposable d)</span> </span>&#123;</div><div class="line"></div><div class="line">				<span class="comment">// 调用 d.dispose 后下游 Observer 将不再接受到事件</span></div><div class="line">                d.dispose();</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(Integer integer)</span> </span>&#123;</div><div class="line">                System.out.println(integer);</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onComplete</span><span class="params">()</span> </span>&#123;</div><div class="line">                System.out.println(<span class="string">"接收事件结束"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>ObservableEmitter： Emitter 是发射器的意思、这个就是用来发出事件的、它可以发出三种类型的事件、通过调用 emitter 的 onNext(T value)、onComplete() 和 onError(Throwable error) 就可以分别发出 next 事件、complete 事件和 error 事件。</p>
-<p>Disposable: 这个单词的字面意思是一次性用品,用完即可丢弃的. 那么在RxJava 中怎么去理解它呢、 对应于上面的水管的例子、 我们可以把它理解成两根管道之间的一个机关、 当调用它的 dispose() 方法时、 它就会将两根管道切断、 从而导致下游收不到事件.</p>
-</blockquote>
-<ul>
-<li>create：创建一个常规的 Observable</li>
-<li>just：将一个/一组对象转换为一个可发射的 Observable</li>
-<li>defer：在订阅之前不创建 Observable</li>
-<li>from：将其他对象转换为 Observable</li>
-<li>start：创建一个可以发出函数返回值的 Observable</li>
-<li>timer：创建一个延迟发出的 Observable</li>
-<li>range：创建一个发射一系列连续整数的 Observable</li>
-<li>repeat：创建一个可重复发射特定序列的 Observable</li>
-<li>interval：创建一个特定时间隔的一系列整数 Observable</li>
-<li>empty/never/throw：创建非常精确和有限行为的 Observable</li>
-</ul>
-<p><strong>转换操作符</strong></p>
-<ul>
-<li>Map：一对一 对象转换</li>
-<li>FlatMap：一对多 对象转换</li>
-<li>GroupBy：分组转换</li>
-<li>Buffer：定期将 Observable 中的数据打包、然后发出整个数据</li>
-<li>Window：分段发送 Observable 中的数据包（类似 Buffer ）</li>
-<li>Scan：按顺序对 Observable 中的数据统计发送（斐波那契数列）</li>
-</ul>
-<p><strong>过滤操作符</strong></p>
-<ul>
-<li>Debounce：过滤发射速率过快的数据项</li>
-<li>Distinct：控制 Observable 发出重复的数据</li>
-<li>ElementAt：发射指定位置的数据</li>
-<li>Filter：仅发射通过条件的数据</li>
-<li>First：发射第一个数据</li>
-<li>IgnoreElements：不发射任何数据、但会走 onComplete 和 onError</li>
-<li>Last：发射最后一个数据</li>
-<li>Sample：采集时间间隔中最近的数据</li>
-<li>Skip：发射跳过指定 N 项后的数据</li>
-<li>SkipLast：发射去掉最后指定 N 项的数据</li>
-<li>Take：只发射指定的前 N 项数据</li>
-<li>TakeLast：只发射指定的最后 N 项数据</li>
-</ul>
-<p><strong>组合操作符</strong></p>
-<ul>
-<li>And/Then/When：将两个或多个 Observable 发射的数据集合并到一起</li>
-<li>CombineLatest：结合它们最近发射的数据、然后发射这个函数的返回值</li>
-<li>Join：有一个 Observable 发射了数据、另一个 Observable 就结合发射的数据</li>
-<li>Merge：合并组合</li>
-<li>StarWith：发射数据之前发送指定的序列</li>
-<li>Switch：转换为单个 Observable 、发射最近的数据</li>
-<li>Zip：通过指定函数将多个 Observable 组合在一起、结果未每个组合发射单个项目</li>
-</ul>
-<p><strong>异常操作符</strong></p>
-<ul>
-<li>Catch<ul>
-<li>onError 通过继续顺序无措的恢复通知</li>
-</ul>
-</li>
-<li>Retry：如果 Observable 发送了一个 onError 的通知、重新订阅它</li>
-</ul>
-<blockquote>
-<p>还有更多的操作符。。。</p>
-</blockquote>
-<p><strong>辅助操作符</strong></p>
-<p><strong>条件和布尔操作符</strong></p>
-<p><strong>算术和聚合操作符</strong></p>
-<p><strong>异步操作符</strong></p>
-<p><strong>连接操作符</strong></p>
-<p><strong>转换操作符</strong></p>
-<p><strong>阻塞操作符</strong></p>
-<p><strong>字符串操作符</strong></p>
-<p><strong>线程控制 调度器 Scheduler</strong></p>
-<blockquote>
-<p>调度器 Scheduler： 可以实现多线程功能、指定操作符（或者特定的 Observable）在特定的调度器上执行</p>
-</blockquote>
-<h3 id="调度器的种类"><a href="#调度器的种类" class="headerlink" title="调度器的种类"></a>调度器的种类</h3><table>
-<thead>
-<tr>
-<th>调度器类型</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Schedulers.computation()</td>
-<td>用于普通计算任务、如果事件循环和回调处理不要用 IO 操作</td>
-</tr>
-<tr>
-<td>Schedulers.from(executor)</td>
-<td>使用指定的 Executor 作为调度器</td>
-</tr>
-<tr>
-<td>Schedulers.immediate()</td>
-<td>在当前线程立即开始执行任务</td>
-</tr>
-<tr>
-<td>Schedulers.newThread()</td>
-<td>为每个任务创建一个新的线程</td>
-</tr>
-<tr>
-<td>Schedulers.trampoline()</td>
-<td>当其它排队的任务完成后、在当前线程排队开始执行</td>
-</tr>
-<tr>
-<td>Schedulers.io()</td>
-<td>用于 IO 耗时任务、如异步阻塞 IO 操作、它默认是一个 CachedThreadScheduler 很像一个缓存线程池</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>SubscribeOn：subscribeOn(Schedulers.newThread()) 指定的是上游发送事件的线程、多次指定上游线程只有第一次指定的有效、其余忽略</p>
-<p>ObserveOn：observeOn(AndroidSchedulers.mainThread()) 指定的是下游接收事件的线程、多次指定下游线程是可以的、也就是说没调用一次 observeOn() 、下游线程就会切换一次</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RxJava 和 RxAndroid</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/08/RxJava 总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-保险" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -538,6 +303,247 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/08/保险/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-RxJava 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/08/RxJava 总结/">RxJava 总结</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/08/RxJava 总结/" class="archive-article-date">
+  	<time datetime="2018-03-08T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RxJava"><span class="toc-number">1.</span> <span class="toc-text">RxJava</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#调度器的种类"><span class="toc-number">1.1.</span> <span class="toc-text">调度器的种类</span></a></li></ol></li></ol>
+		</div>
+		
+		
+        <h2 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h2><p><strong>什么是 RxJava</strong></p>
+<ul>
+<li>Observable：被观察者</li>
+<li>Observer：观察者</li>
+<li>subscribe：订阅者</li>
+</ul>
+<blockquote>
+<ul>
+<li>Observable 就是事件的发出者、可以理解成管道的<code>上游</code>、事件源</li>
+<li>Observer 就是事件的接受者、可以理解成管道的<code>下游</code>、接受者</li>
+<li>subscribe 就是 Observable 与 Observer 之间的连接者</li>
+</ul>
+</blockquote>
+<p>这三者之间的对应关系就是 RxJava</p>
+<blockquote>
+<p>RxJava 也是观察者模式的扩展、普通的观察者模式只负责事件的分发与接受、而 RxJava 在观察者模式上增强了 onComplete、onError。</p>
+</blockquote>
+<p><strong>Rxjava 中的 Flowable 和 Backpressure</strong> </p>
+<blockquote>
+<ul>
+<li>Flowable：事件源 <code>上游</code></li>
+<li>Subscriber：接收者 <code>下游</code></li>
+<li>subscribe：就是 Flowable 与 Subscriber 之间的连接者</li>
+</ul>
+<p>Subscription：Backpressure 中控制数据处理能力的开关和 Disposable(开关) 类似、s.request(Long.MAX_VALUE)。</p>
+</blockquote>
+<p>Flowable 和 Backpressure 组合使用就是对数据发送的各种策略</p>
+<blockquote>
+<p>如果 Flowable <code>上游</code> 产生大量数据、导致 Subscriber <code>下游</code> 接收数据跟不上时内存就会 OOM 、不采用 <code>Flowable</code> 的解决思路就是： </p>
+</blockquote>
+<ul>
+<li>一是从<code>数量</code>上进行治理、减少发送进水缸里的事件<ul>
+<li>filter // 数据过滤</li>
+</ul>
+</li>
+<li>二是从<code>速度</code>上进行治理、减缓事件发送进水缸的速度<ul>
+<li>延时发送数据 </li>
+<li>sample(2, TimeUnit.SECONDS)  //sample 取样</li>
+</ul>
+</li>
+</ul>
+<p><strong>创建操作符</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">Observable.create(<span class="keyword">new</span> ObservableOnSubscribe&lt;Integer&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(ObservableEmitter&lt;Integer&gt; e)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">                e.onNext(<span class="number">6</span>);</div><div class="line">                e.onNext(<span class="number">7</span>);</div><div class="line">                e.onNext(<span class="number">8</span>);</div><div class="line">                e.onNext(<span class="number">88</span>);</div><div class="line">				<span class="comment">// subscribe 中不调用 e.onComplete 方法、事件会一直发送</span></div><div class="line">                e.onComplete();</div><div class="line"></div><div class="line">                e.onNext(<span class="number">19</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;).subscribe(<span class="keyword">new</span> Observer&lt;Integer&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSubscribe</span><span class="params">(Disposable d)</span> </span>&#123;</div><div class="line"></div><div class="line">				<span class="comment">// 调用 d.dispose 后下游 Observer 将不再接受到事件</span></div><div class="line">                d.dispose();</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(Integer integer)</span> </span>&#123;</div><div class="line">                System.out.println(integer);</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onComplete</span><span class="params">()</span> </span>&#123;</div><div class="line">                System.out.println(<span class="string">"接收事件结束"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>ObservableEmitter： Emitter 是发射器的意思、这个就是用来发出事件的、它可以发出三种类型的事件、通过调用 emitter 的 onNext(T value)、onComplete() 和 onError(Throwable error) 就可以分别发出 next 事件、complete 事件和 error 事件。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Disposable: 这个单词的字面意思是一次性用品,用完即可丢弃的. 那么在RxJava 中怎么去理解它呢、 对应于上面的水管的例子、 我们可以把它理解成两根管道之间的一个机关、 当调用它的 dispose() 方法时、 它就会将两根管道切断、 从而导致下游收不到事件.</p>
+</blockquote>
+<ul>
+<li>create：创建一个常规的 Observable</li>
+<li>just：将一个/一组对象转换为一个可发射的 Observable</li>
+<li>defer：在订阅之前不创建 Observable</li>
+<li>from：将其他对象转换为 Observable</li>
+<li>start：创建一个可以发出函数返回值的 Observable</li>
+<li>timer：创建一个延迟发出的 Observable</li>
+<li>range：创建一个发射一系列连续整数的 Observable</li>
+<li>repeat：创建一个可重复发射特定序列的 Observable</li>
+<li>interval：创建一个特定时间隔的一系列整数 Observable</li>
+<li>empty/never/throw：创建非常精确和有限行为的 Observable</li>
+</ul>
+<p><strong>转换操作符</strong></p>
+<ul>
+<li>Map：一对一 对象转换</li>
+<li>FlatMap：一对多 对象转换</li>
+<li>GroupBy：分组转换</li>
+<li>Buffer：定期将 Observable 中的数据打包、然后发出整个数据</li>
+<li>Window：分段发送 Observable 中的数据包（类似 Buffer ）</li>
+<li>Scan：按顺序对 Observable 中的数据统计发送（斐波那契数列）</li>
+</ul>
+<p><strong>过滤操作符</strong></p>
+<ul>
+<li>Debounce：过滤发射速率过快的数据项</li>
+<li>Distinct：控制 Observable 发出重复的数据</li>
+<li>ElementAt：发射指定位置的数据</li>
+<li>Filter：仅发射通过条件的数据</li>
+<li>First：发射第一个数据</li>
+<li>IgnoreElements：不发射任何数据、但会走 onComplete 和 onError</li>
+<li>Last：发射最后一个数据</li>
+<li>Sample：采集时间间隔中最近的数据</li>
+<li>Skip：发射跳过指定 N 项后的数据</li>
+<li>SkipLast：发射去掉最后指定 N 项的数据</li>
+<li>Take：只发射指定的前 N 项数据</li>
+<li>TakeLast：只发射指定的最后 N 项数据</li>
+</ul>
+<p><strong>组合操作符</strong></p>
+<ul>
+<li>And/Then/When：将两个或多个 Observable 发射的数据集合并到一起</li>
+<li>CombineLatest：结合它们最近发射的数据、然后发射这个函数的返回值</li>
+<li>Join：有一个 Observable 发射了数据、另一个 Observable 就结合发射的数据</li>
+<li>Merge：合并组合</li>
+<li>StarWith：发射数据之前发送指定的序列</li>
+<li>Switch：转换为单个 Observable 、发射最近的数据</li>
+<li>Zip：通过指定函数将多个 Observable 组合在一起、结果未每个组合发射单个项目</li>
+</ul>
+<p><strong>异常操作符</strong></p>
+<ul>
+<li>Catch<ul>
+<li>onError 通过继续顺序无措的恢复通知</li>
+</ul>
+</li>
+<li>Retry：如果 Observable 发送了一个 onError 的通知、重新订阅它</li>
+</ul>
+<blockquote>
+<p>还有更多的操作符。。。</p>
+</blockquote>
+<p><strong>辅助操作符</strong></p>
+<p><strong>条件和布尔操作符</strong></p>
+<p><strong>算术和聚合操作符</strong></p>
+<p><strong>异步操作符</strong></p>
+<p><strong>连接操作符</strong></p>
+<p><strong>转换操作符</strong></p>
+<p><strong>阻塞操作符</strong></p>
+<p><strong>字符串操作符</strong></p>
+<p><strong>线程控制 调度器 Scheduler</strong></p>
+<blockquote>
+<p>调度器 Scheduler： 可以实现多线程功能、指定操作符（或者特定的 Observable）在特定的调度器上执行</p>
+</blockquote>
+<h3 id="调度器的种类"><a href="#调度器的种类" class="headerlink" title="调度器的种类"></a>调度器的种类</h3><table>
+<thead>
+<tr>
+<th>调度器类型</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schedulers.computation()</td>
+<td>用于普通计算任务、如果事件循环和回调处理不要用 IO 操作</td>
+</tr>
+<tr>
+<td>Schedulers.from(executor)</td>
+<td>使用指定的 Executor 作为调度器</td>
+</tr>
+<tr>
+<td>Schedulers.immediate()</td>
+<td>在当前线程立即开始执行任务</td>
+</tr>
+<tr>
+<td>Schedulers.newThread()</td>
+<td>为每个任务创建一个新的线程</td>
+</tr>
+<tr>
+<td>Schedulers.trampoline()</td>
+<td>当其它排队的任务完成后、在当前线程排队开始执行</td>
+</tr>
+<tr>
+<td>Schedulers.io()</td>
+<td>用于 IO 耗时任务、如异步阻塞 IO 操作、它默认是一个 CachedThreadScheduler 很像一个缓存线程池</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>SubscribeOn：subscribeOn(Schedulers.newThread()) 指定的是上游发送事件的线程、多次指定上游线程只有第一次指定的有效、其余忽略</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>ObserveOn：observeOn(AndroidSchedulers.mainThread()) 指定的是下游接收事件的线程、多次指定下游线程是可以的、也就是说没调用一次 observeOn() 、下游线程就会切换一次</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RxJava 和 RxAndroid</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/08/RxJava 总结/">展开全文 >></a>
         </p>
       
 
@@ -1158,107 +1164,6 @@
 
 
   
-    <article id="post-常用 ADB 命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/常用 ADB 命令/">常用 ADB 命令</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/24/常用 ADB 命令/" class="archive-article-date">
-  	<time datetime="2017-12-24T10:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用-ADB-命令"><span class="toc-number">1.</span> <span class="toc-text">常用 ADB 命令</span></a></li></ol>
-		</div>
-		
-		
-        <h2 id="常用-ADB-命令"><a href="#常用-ADB-命令" class="headerlink" title="常用 ADB 命令"></a>常用 ADB 命令</h2><ul>
-<li>adb version 查看版本</li>
-<li>adb devices 查看连接设备</li>
-<li>adb install <apkfile> 安装</apkfile></li>
-<li>adb uninstall <packge> 卸载</packge></li>
-<li>adb start-server 启动Server</li>
-<li>adb kill-server 停止Server</li>
-<li>adb logcat 查看日志</li>
-<li>adb get-serialno 获取序列号 </li>
-<li>adb shell pm list packages 列出所有包名</li>
-<li>adb shell pm list packages -s 列出系统包名</li>
-<li>adb shell pm list packages -3 列出第三方包名</li>
-<li>adb shell pm list packages | grep qq grep过滤</li>
-<li>adb shell pm clear <packagename> 清除应用数据</packagename></li>
-<li>adb shell cat /sys/class/net/wlan0/address 获取MAC地址</li>
-<li>adb shell getprop ro.product.model 查看设备型号</li>
-<li>adb shell getprop ro.build.version.release 查看Android版本</li>
-<li>adb shell wm size 查看分辨率</li>
-<li>adb shell wm density 查看屏幕密度</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ADB</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/24/常用 ADB 命令/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-GDD " class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1354,6 +1259,107 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/12/24/GDD /">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-常用 ADB 命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/24/常用 ADB 命令/">常用 ADB 命令</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/24/常用 ADB 命令/" class="archive-article-date">
+  	<time datetime="2017-12-24T10:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用-ADB-命令"><span class="toc-number">1.</span> <span class="toc-text">常用 ADB 命令</span></a></li></ol>
+		</div>
+		
+		
+        <h2 id="常用-ADB-命令"><a href="#常用-ADB-命令" class="headerlink" title="常用 ADB 命令"></a>常用 ADB 命令</h2><ul>
+<li>adb version 查看版本</li>
+<li>adb devices 查看连接设备</li>
+<li>adb install <apkfile> 安装</apkfile></li>
+<li>adb uninstall <packge> 卸载</packge></li>
+<li>adb start-server 启动Server</li>
+<li>adb kill-server 停止Server</li>
+<li>adb logcat 查看日志</li>
+<li>adb get-serialno 获取序列号 </li>
+<li>adb shell pm list packages 列出所有包名</li>
+<li>adb shell pm list packages -s 列出系统包名</li>
+<li>adb shell pm list packages -3 列出第三方包名</li>
+<li>adb shell pm list packages | grep qq grep过滤</li>
+<li>adb shell pm clear <packagename> 清除应用数据</packagename></li>
+<li>adb shell cat /sys/class/net/wlan0/address 获取MAC地址</li>
+<li>adb shell getprop ro.product.model 查看设备型号</li>
+<li>adb shell getprop ro.build.version.release 查看Android版本</li>
+<li>adb shell wm size 查看分辨率</li>
+<li>adb shell wm density 查看屏幕密度</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ADB</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/24/常用 ADB 命令/">展开全文 >></a>
         </p>
       
 
@@ -1870,10 +1876,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MAC</a>
               </li>
              
@@ -1882,11 +1884,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">保险</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ADB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1902,15 +1916,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
             
             <div class="clearfix"></div>

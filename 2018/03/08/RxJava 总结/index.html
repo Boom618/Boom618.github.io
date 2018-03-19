@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>RxJava 总结 | BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="RxJava什么是 RxJava  Observable：被观察者 Observer：观察者 subscribe：订阅者  &amp;gt;  Observable 就是事件的发出者、可以理解成管道的上游、事件源 Observer 就是事件的接受者、可以理解成管道的下游、接受者 subscribe 就是 Observable 与 Observer 之间的连接者  这三者之间的对应关系就是 RxJava">
+  <meta name="description" content="RxJava什么是 RxJava  Observable：被观察者 Observer：观察者 subscribe：订阅者    Observable 就是事件的发出者、可以理解成管道的上游、事件源 Observer 就是事件的接受者、可以理解成管道的下游、接受者 subscribe 就是 Observable 与 Observer 之间的连接者   这三者之间的对应关系就是 RxJava  RxJ">
 <meta name="keywords" content="RxJava 和 RxAndroid">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RxJava 总结">
 <meta property="og:url" content="http://yoursite.com/2018/03/08/RxJava 总结/index.html">
 <meta property="og:site_name" content="BoomHe">
-<meta property="og:description" content="RxJava什么是 RxJava  Observable：被观察者 Observer：观察者 subscribe：订阅者  &amp;gt;  Observable 就是事件的发出者、可以理解成管道的上游、事件源 Observer 就是事件的接受者、可以理解成管道的下游、接受者 subscribe 就是 Observable 与 Observer 之间的连接者  这三者之间的对应关系就是 RxJava">
+<meta property="og:description" content="RxJava什么是 RxJava  Observable：被观察者 Observer：观察者 subscribe：订阅者    Observable 就是事件的发出者、可以理解成管道的上游、事件源 Observer 就是事件的接受者、可以理解成管道的下游、接受者 subscribe 就是 Observable 与 Observer 之间的连接者   这三者之间的对应关系就是 RxJava  RxJ">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-19T10:42:41.743Z">
+<meta property="og:updated_time" content="2018-03-19T10:55:56.369Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RxJava 总结">
-<meta name="twitter:description" content="RxJava什么是 RxJava  Observable：被观察者 Observer：观察者 subscribe：订阅者  &amp;gt;  Observable 就是事件的发出者、可以理解成管道的上游、事件源 Observer 就是事件的接受者、可以理解成管道的下游、接受者 subscribe 就是 Observable 与 Observer 之间的连接者  这三者之间的对应关系就是 RxJava">
+<meta name="twitter:description" content="RxJava什么是 RxJava  Observable：被观察者 Observer：观察者 subscribe：订阅者    Observable 就是事件的发出者、可以理解成管道的上游、事件源 Observer 就是事件的接受者、可以理解成管道的下游、接受者 subscribe 就是 Observable 与 Observer 之间的连接者   这三者之间的对应关系就是 RxJava  RxJ">
   
     <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
   
@@ -197,24 +197,24 @@
 <li>Observer：观察者</li>
 <li>subscribe：订阅者</li>
 </ul>
-<p>&gt;</p>
+<blockquote>
 <ul>
 <li>Observable 就是事件的发出者、可以理解成管道的<code>上游</code>、事件源</li>
 <li>Observer 就是事件的接受者、可以理解成管道的<code>下游</code>、接受者</li>
 <li>subscribe 就是 Observable 与 Observer 之间的连接者</li>
 </ul>
+</blockquote>
 <p>这三者之间的对应关系就是 RxJava</p>
 <blockquote>
 <p>RxJava 也是观察者模式的扩展、普通的观察者模式只负责事件的分发与接受、而 RxJava 在观察者模式上增强了 onComplete、onError。</p>
 </blockquote>
 <p><strong>Rxjava 中的 Flowable 和 Backpressure</strong> </p>
-<p>&gt;</p>
+<blockquote>
 <ul>
 <li>Flowable：事件源 <code>上游</code></li>
 <li>Subscriber：接收者 <code>下游</code></li>
 <li>subscribe：就是 Flowable 与 Subscriber 之间的连接者</li>
 </ul>
-<blockquote>
 <p>Subscription：Backpressure 中控制数据处理能力的开关和 Disposable(开关) 类似、s.request(Long.MAX_VALUE)。</p>
 </blockquote>
 <p>Flowable 和 Backpressure 组合使用就是对数据发送的各种策略</p>
@@ -236,6 +236,9 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">Observable.create(<span class="keyword">new</span> ObservableOnSubscribe&lt;Integer&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(ObservableEmitter&lt;Integer&gt; e)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">                e.onNext(<span class="number">6</span>);</div><div class="line">                e.onNext(<span class="number">7</span>);</div><div class="line">                e.onNext(<span class="number">8</span>);</div><div class="line">                e.onNext(<span class="number">88</span>);</div><div class="line">				<span class="comment">// subscribe 中不调用 e.onComplete 方法、事件会一直发送</span></div><div class="line">                e.onComplete();</div><div class="line"></div><div class="line">                e.onNext(<span class="number">19</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;).subscribe(<span class="keyword">new</span> Observer&lt;Integer&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSubscribe</span><span class="params">(Disposable d)</span> </span>&#123;</div><div class="line"></div><div class="line">				<span class="comment">// 调用 d.dispose 后下游 Observer 将不再接受到事件</span></div><div class="line">                d.dispose();</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(Integer integer)</span> </span>&#123;</div><div class="line">                System.out.println(integer);</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onComplete</span><span class="params">()</span> </span>&#123;</div><div class="line">                System.out.println(<span class="string">"接收事件结束"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
 <blockquote>
 <p>ObservableEmitter： Emitter 是发射器的意思、这个就是用来发出事件的、它可以发出三种类型的事件、通过调用 emitter 的 onNext(T value)、onComplete() 和 onError(Throwable error) 就可以分别发出 next 事件、complete 事件和 error 事件。</p>
+</blockquote>
+<hr>
+<blockquote>
 <p>Disposable: 这个单词的字面意思是一次性用品,用完即可丢弃的. 那么在RxJava 中怎么去理解它呢、 对应于上面的水管的例子、 我们可以把它理解成两根管道之间的一个机关、 当调用它的 dispose() 方法时、 它就会将两根管道切断、 从而导致下游收不到事件.</p>
 </blockquote>
 <ul>
@@ -343,6 +346,9 @@
 </table>
 <blockquote>
 <p>SubscribeOn：subscribeOn(Schedulers.newThread()) 指定的是上游发送事件的线程、多次指定上游线程只有第一次指定的有效、其余忽略</p>
+</blockquote>
+<hr>
+<blockquote>
 <p>ObserveOn：observeOn(AndroidSchedulers.mainThread()) 指定的是下游接收事件的线程、多次指定下游线程是可以的、也就是说没调用一次 observeOn() 、下游线程就会切换一次</p>
 </blockquote>
 
@@ -428,9 +434,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/03/08/保险/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          保险
+        
+      </div>
+    </a>
   
-    <a href="/2018/03/08/保险/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">保险</div>
+  
+    <a href="/2018/03/07/Android 反编译 Apk /" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MultiDex 使用 与 反编译</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -570,10 +585,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MAC</a>
               </li>
              
@@ -582,11 +593,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">保险</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ADB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,15 +625,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
             
             <div class="clearfix"></div>
