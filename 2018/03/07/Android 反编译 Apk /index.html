@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="BoomHe">
 <meta property="og:description" content="Android 反编译 Apk环境安装  brew install apktool：Homebrew 安装 apktool  下载JD_GUI  JD_GUI 主要是为了方便查看 dex2jar 转换的jar文件结构和部分代码(未混淆) jd_gui 下载地址  下载 dex2jar  dex2jar 主要用于将解压后的 Apk 包中 classes.dex 转换为 classesdex.jar">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-16T09:51:25.313Z">
+<meta property="og:updated_time" content="2018-03-19T11:00:49.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MultiDex 使用 与 反编译">
 <meta name="twitter:description" content="Android 反编译 Apk环境安装  brew install apktool：Homebrew 安装 apktool  下载JD_GUI  JD_GUI 主要是为了方便查看 dex2jar 转换的jar文件结构和部分代码(未混淆) jd_gui 下载地址  下载 dex2jar  dex2jar 主要用于将解压后的 Apk 包中 classes.dex 转换为 classesdex.jar">
@@ -213,24 +213,20 @@
 <p>Apktool 反编译和二次打包</p>
 </blockquote>
 <ul>
-<li><p><code>apktool d -f demo.apk -o 存放反编译文件路径</code></p>
+<li>apktool d -f demo.apk -o 存放反编译文件路径</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apktool d -f /Users/boomhe/debug.apk -o Game/Apk</div></pre></td></tr></table></figure>
 <ul>
-<li><code>apktool d -f /Users/boomhe/debug.apk -o Game/Apk</code></li>
+<li>apktool b -f 二次打包文件路径 -o demo.apk</li>
 </ul>
-</li>
-<li><p><code>apktool b -f 二次打包文件路径 -o demo.apk</code></p>
-<ul>
-<li><code>apktool b -f /Users/boomhe/Game/Apk -o /Users/boomhe/Game/debug.apk</code></li>
-</ul>
-</li>
-</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apktool b -f /Users/boomhe/Game/Apk -o /Users/boomhe/Game/debug.apk</div></pre></td></tr></table></figure>
 <h2 id="MultiDex-使用"><a href="#MultiDex-使用" class="headerlink" title="MultiDex 使用"></a>MultiDex 使用</h2><p><strong>什么是 .dex 文件</strong></p>
 <blockquote>
 <p>Dalvik VM executes : Android Dalvik 虚拟机执行文件</p>
 </blockquote>
 <p><strong>什么是 art</strong></p>
 <blockquote>
-<p>Android Runtime :Android 运行时、Android<br> 4.4 引入</p>
+<p>Android Runtime :Android 运行时、Android 4.4 引入</p>
 </blockquote>
 <ul>
 <li>AndroidManifest.xml 配置信息</li>
@@ -345,11 +341,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/08/RxJava 总结/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/08/保险/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          RxJava 总结
+          保险
         
       </div>
     </a>
@@ -480,11 +476,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">原理解析</a>
+                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
+                <a href="javascript:void(0)" class="js-tag color5">原理解析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,6 +492,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MAC</a>
               </li>
              
@@ -504,15 +504,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">保险</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,7 +512,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,11 +524,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
+                <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
               </li>
             
             <div class="clearfix"></div>

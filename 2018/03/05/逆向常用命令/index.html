@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="BoomHe">
 <meta property="og:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; /Users/boomhe/demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-13T06:12:25.672Z">
+<meta property="og:updated_time" content="2018-03-27T05:38:17.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="逆向常用命令">
 <meta name="twitter:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; /Users/boomhe/demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell">
@@ -187,7 +187,7 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#逆向常用命令"><span class="toc-number">1.</span> <span class="toc-text">逆向常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础命令"><span class="toc-number">1.1.</span> <span class="toc-text">基础命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非-shell-命令"><span class="toc-number">1.2.</span> <span class="toc-text">非 shell 命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-命令"><span class="toc-number">2.</span> <span class="toc-text">shell 命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程命令"><span class="toc-number">3.</span> <span class="toc-text">进程命令</span></a></li></ol>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#逆向常用命令"><span class="toc-number">1.</span> <span class="toc-text">逆向常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础命令"><span class="toc-number">1.1.</span> <span class="toc-text">基础命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非-shell-命令"><span class="toc-number">1.2.</span> <span class="toc-text">非 shell 命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-命令"><span class="toc-number">2.</span> <span class="toc-text">shell 命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作-apk-命令"><span class="toc-number">3.</span> <span class="toc-text">操作 apk 命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程命令"><span class="toc-number">4.</span> <span class="toc-text">进程命令</span></a></li></ol>
 		</div>
 		
 		
@@ -226,48 +226,79 @@
 </li>
 <li><code>adb shell pm clear [pname]</code> 清空应用数据</li>
 </ul>
+<p><strong>数据备份和恢复</strong></p>
+<blockquote>
+<p>allowBackup：在没有 root 的设备中去获取用户的数据</p>
+</blockquote>
+<ul>
+<li>后台启动一个 service 定时去轮询、获取当前的 topActivity 然后操作</li>
+<li>Android 5.0 以后获取 当前 topActivity 需要授权</li>
+<li>通过辅助功能可以监听当前 Window 的变化</li>
+</ul>
+<p><strong>数据备份</strong></p>
+<p><code>adb backup [-system|-nosystem] -all [-apk|-noapk] [-shared|-noshared] -f &lt;存档名称&gt; [pname]</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb backup -nosystem -all -apk -f gwt.ab com.czcg.gwt</div></pre></td></tr></table></figure>
+<ul>
+<li>[-system|-nosystem]：备份时是否需要连系统一起备份、默认是</li>
+<li>-all：是否要备份全部 app 、若有加 -nosystem 、那么只会备份已安装的 app、不会备份系统 app</li>
+<li>[-apk|-noapk]：是否备份安装的 apk 、-noapk 只会备份 apk 的资料数据</li>
+<li>[-shared|-noshared]：是否备份 SD 卡</li>
+</ul>
+<p><strong>数据恢复</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb restore gwt.ab</div></pre></td></tr></table></figure>
+<blockquote>
+<p>备份的数据为 *.ab 格式文件</p>
+</blockquote>
 <h2 id="shell-命令"><a href="#shell-命令" class="headerlink" title="shell 命令"></a>shell 命令</h2><ul>
 <li><code>run-as [pname]</code>在非 root 设备中查看指定 debug 模式的应用沙盒数据</li>
 <li><code>ps</code>查看设备的进程信息<code>/</code>指定进程的线程信息<ul>
 <li><code>ps | grep com.tencent.mm</code> 过滤信息</li>
 <li><code>ps -t [pid]</code> 查看 pid 对应的线程信息</li>
+</ul>
+</li>
 <li><code>pm clear [pname]</code>清空指定包名应用数据</li>
 <li><code>pm install [apk 文件]</code>安装设备中的 apk 文件、和 adb install 一样（pm install /sdcard/demo.apk）</li>
 <li><code>pm uninstall [pname]</code>卸载设备中的应用</li>
-<li><code>am start</code>启动一个应用</li>
+<li><code>am start</code>启动一个应用<ul>
 <li><code>am start -n [pname]/[pname].[activity]</code></li>
 <li><code>am start -D -n com.android.browser/com.android.browser.BrowserActivity</code> Debug 模式启动</li>
+</ul>
+</li>
 <li><code>am startservice</code>启动一个服务、和上面命令类似</li>
-<li><code>am broadcast</code>发送一个广播</li>
+<li><code>am broadcast</code>发送一个广播<ul>
 <li><code>am broadcast -a android.NET.conn.CONNECTIVITY_CHANGE</code> 可以测试定义的广播</li>
+</ul>
+</li>
 <li><code>netcfg</code> 查看设备的 IP 地址</li>
 <li><code>netstat</code>查看设备的端口号信息</li>
 <li><code>app_process</code>特需场景</li>
-<li><code>dalvikvm -cp [dex文件] [运行主类]</code> 运行一个 dex 文件</li>
+<li><code>dalvikvm -cp [dex文件] [运行主类]</code> 运行一个 dex 文件<ul>
 <li><code>dalvikvm -cp /data/demo.dex com.tencent.mm</code></li>
-<li><code>top [-n/-m/-d/-s/-t]</code>查看当前应用 CPU 消耗信息 </li>
+</ul>
+</li>
+<li><code>top [-n/-m/-d/-s/-t]</code>查看当前应用 CPU 消耗信息 <ul>
 <li><code>top -d 1 -m 10</code> 还可以和 grep 结合使用</li>
 <li><code>-n</code> 刷新次数</li>
 <li><code>-m</code>最多显示多少个进程</li>
 <li><code>-d</code>刷新间隔时间（默认5秒）</li>
 <li><code>-s</code>按那列排序</li>
 <li><code>-t</code>显示线程信息（不是进程）</li>
-<li><code>getprop [属性值名称]</code>查看系统属性 </li>
-<li><code>getprop ro.debuggable</code>版本号、系统属性…</li>
+</ul>
+</li>
+<li><code>getprop [属性值名称]</code> 查看系统属性 <ul>
+<li><code>getprop ro.debuggable</code> 版本号、系统属性…</li>
 </ul>
 </li>
 </ul>
-<p>##操作 apk 命令<br><strong>用 aapt 操作 apk</strong></p>
+<h2 id="操作-apk-命令"><a href="#操作-apk-命令" class="headerlink" title="操作 apk 命令"></a>操作 apk 命令</h2><p><strong>用 aapt 操作 apk</strong></p>
 <ul>
-<li><code>aapt dump xmltree[apk] [需要查看的资源文件 xml]</code>：查看 apk 中的信息以及编辑 apk 程序包<ul>
-<li><code>aapt dump xmltree demo.apk AndroidManifest.xml &gt; xml.txt</code></li>
+<li><code>aapt dump xmltree[apk] [需要查看的资源文件 xml]</code>：查看 apk 中的信息以及编辑 apk 程序包</li>
 </ul>
-</li>
-<li><code>dexdump [dex 文件路径]</code>：查看 dex 文件的详细信息<ul>
-<li><code>dexdump /Users/boomhe/classes.dex</code></li>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aapt dump xmltree demo.apk AndroidManifest.xml &gt; xml.txt</div></pre></td></tr></table></figure>
+<ul>
+<li><code>dexdump [dex 文件路径]</code>：查看 dex 文件的详细信息</li>
 </ul>
-</li>
-</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dexdump /Users/boomhe/classes.dex</div></pre></td></tr></table></figure>
 <h2 id="进程命令"><a href="#进程命令" class="headerlink" title="进程命令"></a>进程命令</h2><p><strong>查看当前进程的内存加载情况</strong></p>
 <ul>
 <li><code>cat /proc/[pid]/maps</code>:查看进程的内存映射信息、加载了那些 so 、dex 文件等<ul>
@@ -496,11 +527,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">原理解析</a>
+                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
+                <a href="javascript:void(0)" class="js-tag color5">原理解析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -512,6 +543,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MAC</a>
               </li>
              
@@ -520,15 +555,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">保险</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -536,7 +563,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -548,11 +575,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
+                <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
               </li>
             
             <div class="clearfix"></div>
