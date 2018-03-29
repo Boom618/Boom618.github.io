@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="BoomHe">
 <meta property="og:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; /Users/boomhe/demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-27T05:38:17.424Z">
+<meta property="og:updated_time" content="2018-03-27T09:37:40.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="逆向常用命令">
 <meta name="twitter:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; /Users/boomhe/demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell">
@@ -228,7 +228,7 @@
 </ul>
 <p><strong>数据备份和恢复</strong></p>
 <blockquote>
-<p>allowBackup：在没有 root 的设备中去获取用户的数据</p>
+<p>allowBackup：manifest 文件中 allowBackup 的属性设置是 true 时、可以在没有 root 的设备中去获取用户的数据</p>
 </blockquote>
 <ul>
 <li>后台启动一个 service 定时去轮询、获取当前的 topActivity 然后操作</li>
@@ -392,7 +392,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/07/Android 反编译 Apk /" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/07/Multidex和反编译 Apk /" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -527,7 +527,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
+                <a href="javascript:void(0)" class="js-tag color4">GDD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -535,19 +535,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">MAC</a>
+                <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,15 +551,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">保险</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ADB</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MAC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">保险</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">插件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -576,14 +584,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
               </li>
             
             <div class="clearfix"></div>
