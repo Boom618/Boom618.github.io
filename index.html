@@ -163,20 +163,20 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-代码混淆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-我的简历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/28/代码混淆/">java 代码 与 资源文件混淆</a>
+      <a class="article-title" href="/2018/03/30/我的简历/">关于我</a>
     </h1>
   
 
         
-        <a href="/2018/03/28/代码混淆/" class="archive-article-date">
-  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
+        <a href="/2018/03/30/我的简历/" class="archive-article-date">
+  	<time datetime="2018-03-30T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-30</time>
 </a>
         
       </header>
@@ -187,35 +187,113 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-混淆"><span class="toc-number">1.</span> <span class="toc-text">Java 混淆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资源混淆"><span class="toc-number">2.</span> <span class="toc-text">资源混淆</span></a></li></ol>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#个人简历"><span class="toc-number">1.</span> <span class="toc-text">个人简历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于我-amp-amp-我会的"><span class="toc-number">1.1.</span> <span class="toc-text">关于我 && 我会的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作经验"><span class="toc-number">1.2.</span> <span class="toc-text">工作经验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目经验01"><span class="toc-number">1.3.</span> <span class="toc-text">项目经验01</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目经验02"><span class="toc-number">1.4.</span> <span class="toc-text">项目经验02</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#社交"><span class="toc-number">1.5.</span> <span class="toc-text">社交</span></a></li></ol></li></ol>
 		</div>
 		
 		
-        <h2 id="Java-混淆"><a href="#Java-混淆" class="headerlink" title="Java 混淆"></a>Java 混淆</h2><blockquote>
-<p>ProGuard：工具能够移除无用代码、重命名类、字段、方法从而达到压缩、优化和混淆的目的</p>
-</blockquote>
-<ul>
-<li>压缩：检测和删除没有使用的类、字段、方法和属性</li>
-<li>优化：对字节码优化、移除无用的指令</li>
-<li>混淆：使用 a、b、c、等无意义的名称重命名</li>
-<li>预检：主要是在 Java 平台上对处理后的代码进行预检</li>
+        <h2 id="个人简历"><a href="#个人简历" class="headerlink" title="个人简历"></a>个人简历</h2><center> <strong>Tel</strong>:<em>18516597508</em><code>|</code><strong>Email</strong>:<em>ahedong@126.com</em> </center>
+
+
+<h3 id="关于我-amp-amp-我会的"><a href="#关于我-amp-amp-我会的" class="headerlink" title="关于我 &amp;&amp; 我会的"></a>关于我 &amp;&amp; 我会的</h3><ul>
+<li>姓名：<strong>何栋</strong></li>
+<li>学历：<strong>大专</strong></li>
 </ul>
+<p><strong>2015 年最开心的事成为一名程序员</strong></p>
+<p><strong>2016 年最开心的事接触了除 Android 以外的技术、脚本和前端 React</strong></p>
+<p><strong>2017 年最开心的事就是参加了 Google 的 GDD 大会</strong></p>
 <blockquote>
-<p>要通过 ProGuard 启用代码压缩，请在 build.gradle 文件内相应的构建类型中添加 minifyEnabled true。</p>
+<p>我会的</p>
 </blockquote>
-<p>请注意，代码压缩会拖慢构建速度，因此您应该尽可能避免在调试构建中使用。不过，重要的是您一定要为用于测试的最终 APK 启用代码压缩，因为如果您不能充分地自定义要保留的代码，可能会引入错误。</p>
-<p>Q：混淆为什么要保留类名或方法名</p>
 <ul>
-<li>让 C/C++ 程序可以通过 jni 使用对应的 java 方法</li>
-<li>四大组件由于在 AndroidManifest.xml 里面注册了、所以需要保留</li>
-<li>R 文件混淆会导致引用错误</li>
+<li>三年 Android 客户端开发经验</li>
+<li>熟悉常见用设计模式、RxJava 等框架</li>
+<li>具有 ES6/React 等移动设备上前端开发经验</li>
+<li>熟悉各调试分析工具：adb、apktool、aapt、IDA、linux shell常用命令</li>
+<li>了解底层代码（framework 层、主要是包解析那块）安全、逆向</li>
 </ul>
-<p><strong>ProGuard 基本命令</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#代码混淆压缩比，在0~7之间，默认为5，一般不做修改</div><div class="line">-optimizationpasses <span class="number">5</span></div><div class="line"></div><div class="line">#混合时不使用大小写混合，混合后的类名为小写</div><div class="line">-dontusemixedcaseclassnames</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclasses</div><div class="line"></div><div class="line">#这句话能够使我们的项目混淆后产生映射文件</div><div class="line">#包含有类名-&gt;混淆后类名的映射关系</div><div class="line">-verbose</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclassmembers</div><div class="line"></div><div class="line">#不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。</div><div class="line">-dontpreverify</div><div class="line"></div><div class="line">#保留Annotation不混淆</div><div class="line">-keepattributes *Annotation*,InnerClasses</div><div class="line"></div><div class="line">#避免混淆泛型</div><div class="line">-keepattributes Signature</div><div class="line"></div><div class="line">#抛出异常时保留代码行号</div><div class="line">-keepattributes SourceFile,LineNumberTable</div><div class="line"></div><div class="line">#指定混淆是采用的算法，后面的参数是一个过滤器</div><div class="line">#这个过滤器是谷歌推荐的算法，一般不做更改</div><div class="line">-optimizations !code/simplification/cast,!field<span class="comment">/*,!class/merging/*</span></div></pre></td></tr></table></figure>
-<h2 id="资源混淆"><a href="#资源混淆" class="headerlink" title="资源混淆"></a>资源混淆</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    ...</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">        	  <span class="comment">// 资源压缩只与代码压缩协同工作</span></div><div class="line">            shrinkResources <span class="keyword">true</span></div><div class="line">            <span class="comment">// java 代码压缩</span></div><div class="line">            minifyEnabled <span class="keyword">true</span></div><div class="line">            <span class="function">proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>,</span></div><div class="line"><span class="function">                    'proguard-rules.pro'</span></div><div class="line"><span class="function">        &#125;</span></div><div class="line"><span class="function">    &#125;</span></div><div class="line"><span class="function">&#125;</span></div></pre></td></tr></table></figure>
-<p>参考：</p>
-<p><a href="https://developer.android.google.cn/studio/build/shrink-code.html" target="_blank" rel="external">官方文档</a></p>
-<p><a href="https://blog.csdn.net/ljd2038/article/details/51308768" target="_blank" rel="external">ProGuard详解</a></p>
+<h3 id="工作经验"><a href="#工作经验" class="headerlink" title="工作经验"></a>工作经验</h3><table>
+<thead>
+<tr>
+<th>公司</th>
+<th>开始时间</th>
+<th>结束时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>财拓电商</td>
+<td>2016.08</td>
+<td>至今</td>
+</tr>
+<tr>
+<td>上海威观信息科技</td>
+<td>2015.01</td>
+<td>2016.06</td>
+</tr>
+</tbody>
+</table>
+<h3 id="项目经验01"><a href="#项目经验01" class="headerlink" title="项目经验01"></a>项目经验01</h3><ul>
+<li>时间：2016-08 <code>～</code> 至今</li>
+<li>公司：财拓电商</li>
+<li>项目：大智运、钢源城、钢掌柜、货运站</li>
+<li>开发工具：Android Studio + Git + Node.js + Jenkins</li>
+</ul>
+<p><strong>我做的事</strong></p>
+<ul>
+<li>项目开发及维护</li>
+<li>JS 知识学习及使用</li>
+<li>解决 JS 在 WebView 中的适配</li>
+<li>确定前端数据类型和后台接口文档</li>
+<li>研究新技术、以及应用到项目中</li>
+<li>项目优化</li>
+<li>日志管理</li>
+</ul>
+<p><strong>心得感悟:</strong></p>
+<p>我们是多个项目大家共同开发的、项目结构是 Android<code>/</code>IOS + React.js 混合开发</p>
+<p><strong><em>有这么几个优势</em></strong>：</p>
+<ul>
+<li>Android 和 IOS 可以共用一套代码</li>
+<li>比纯原生有更多的代码复用、页面复用</li>
+<li>项目体积更小、减少运维成本</li>
+<li>代码可以做到实时更新、只要不是原生相关代码</li>
+</ul>
+<p><strong><em>也有这么几个明显的劣势</em></strong>：</p>
+<ul>
+<li>某些功能不能很好的实现</li>
+<li>需要学习一定的前端语言</li>
+<li>需要解决更多的 WebView 问题</li>
+<li>用户体验没有纯原生流畅、操作没有原生好</li>
+</ul>
+<p><strong><em>比如</em></strong>：</p>
+<ul>
+<li>联想手机 JS 中 String 字符转换 Bug</li>
+<li>Android<code>/</code>IOS 对 JS 的渲染问题</li>
+<li>ios9 上不支持 <code>for of</code> 遍历 </li>
+<li>WebView 兼容性</li>
+</ul>
+<h3 id="项目经验02"><a href="#项目经验02" class="headerlink" title="项目经验02"></a>项目经验02</h3><ul>
+<li>时间：2015-01 <code>～</code> 2016-06</li>
+<li>公司：上海威观信息科技</li>
+<li>项目：爱闹</li>
+<li>开发工具：Android Studio + SVN</li>
+</ul>
+<p><strong>我做的事</strong></p>
+<ul>
+<li>协助注册公司信息</li>
+<li>功能模块的实现及测试</li>
+<li>第三方登陆和分享</li>
+<li>短信验证云通讯</li>
+<li>项目自定义功能</li>
+</ul>
+<p><strong>心得感悟</strong></p>
+<ul>
+<li>第一次感受到新公司成立有多麻烦</li>
+<li>加班只有更晚没有最晚[/大哭脸]</li>
+</ul>
+<h3 id="社交"><a href="#社交" class="headerlink" title="社交"></a>社交</h3><ul>
+<li><a href="https://github.com/Boom618" target="_blank" rel="external">GitHub</a></li>
+<li><a href="https://boom618.github.io/" target="_blank" rel="external">博客</a></li>
+</ul>
 
       
 
@@ -229,7 +307,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">关于我</a>
         		</li>
       		
 		</ul>
@@ -239,7 +317,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/28/代码混淆/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/03/30/我的简历/">展开全文 >></a>
         </p>
       
 
@@ -331,6 +409,112 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/28/so 文件解析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-代码混淆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/28/代码混淆/">java 代码 与 资源文件混淆</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/28/代码混淆/" class="archive-article-date">
+  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-混淆"><span class="toc-number">1.</span> <span class="toc-text">Java 混淆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资源混淆"><span class="toc-number">2.</span> <span class="toc-text">资源混淆</span></a></li></ol>
+		</div>
+		
+		
+        <h2 id="Java-混淆"><a href="#Java-混淆" class="headerlink" title="Java 混淆"></a>Java 混淆</h2><blockquote>
+<p>ProGuard：工具能够移除无用代码、重命名类、字段、方法从而达到压缩、优化和混淆的目的</p>
+</blockquote>
+<ul>
+<li>压缩：检测和删除没有使用的类、字段、方法和属性</li>
+<li>优化：对字节码优化、移除无用的指令</li>
+<li>混淆：使用 a、b、c、等无意义的名称重命名</li>
+<li>预检：主要是在 Java 平台上对处理后的代码进行预检</li>
+</ul>
+<blockquote>
+<p>要通过 ProGuard 启用代码压缩，请在 build.gradle 文件内相应的构建类型中添加 minifyEnabled true。</p>
+</blockquote>
+<p>请注意，代码压缩会拖慢构建速度，因此您应该尽可能避免在调试构建中使用。不过，重要的是您一定要为用于测试的最终 APK 启用代码压缩，因为如果您不能充分地自定义要保留的代码，可能会引入错误。</p>
+<p>Q：混淆为什么要保留类名或方法名</p>
+<ul>
+<li>让 C/C++ 程序可以通过 jni 使用对应的 java 方法</li>
+<li>四大组件由于在 AndroidManifest.xml 里面注册了、所以需要保留</li>
+<li>R 文件混淆会导致引用错误</li>
+</ul>
+<p><strong>ProGuard 基本命令</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#代码混淆压缩比，在0~7之间，默认为5，一般不做修改</div><div class="line">-optimizationpasses <span class="number">5</span></div><div class="line"></div><div class="line">#混合时不使用大小写混合，混合后的类名为小写</div><div class="line">-dontusemixedcaseclassnames</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclasses</div><div class="line"></div><div class="line">#这句话能够使我们的项目混淆后产生映射文件</div><div class="line">#包含有类名-&gt;混淆后类名的映射关系</div><div class="line">-verbose</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclassmembers</div><div class="line"></div><div class="line">#不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。</div><div class="line">-dontpreverify</div><div class="line"></div><div class="line">#保留Annotation不混淆</div><div class="line">-keepattributes *Annotation*,InnerClasses</div><div class="line"></div><div class="line">#避免混淆泛型</div><div class="line">-keepattributes Signature</div><div class="line"></div><div class="line">#抛出异常时保留代码行号</div><div class="line">-keepattributes SourceFile,LineNumberTable</div><div class="line"></div><div class="line">#指定混淆是采用的算法，后面的参数是一个过滤器</div><div class="line">#这个过滤器是谷歌推荐的算法，一般不做更改</div><div class="line">-optimizations !code/simplification/cast,!field<span class="comment">/*,!class/merging/*</span></div></pre></td></tr></table></figure>
+<h2 id="资源混淆"><a href="#资源混淆" class="headerlink" title="资源混淆"></a>资源混淆</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    ...</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">        	  <span class="comment">// 资源压缩只与代码压缩协同工作</span></div><div class="line">            shrinkResources <span class="keyword">true</span></div><div class="line">            <span class="comment">// java 代码压缩</span></div><div class="line">            minifyEnabled <span class="keyword">true</span></div><div class="line">            <span class="function">proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>,</span></div><div class="line"><span class="function">                    'proguard-rules.pro'</span></div><div class="line"><span class="function">        &#125;</span></div><div class="line"><span class="function">    &#125;</span></div><div class="line"><span class="function">&#125;</span></div></pre></td></tr></table></figure>
+<p>参考：</p>
+<p><a href="https://developer.android.google.cn/studio/build/shrink-code.html" target="_blank" rel="external">官方文档</a></p>
+<p><a href="https://blog.csdn.net/ljd2038/article/details/51308768" target="_blank" rel="external">ProGuard详解</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/28/代码混淆/">展开全文 >></a>
         </p>
       
 
@@ -1283,8 +1467,23 @@
 
 
   
-    <article id="post-我的简历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-常用 ADB 命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/24/常用 ADB 命令/">常用 ADB 命令</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/24/常用 ADB 命令/" class="archive-article-date">
+  	<time datetime="2017-12-24T10:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-24</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -1292,112 +1491,29 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#个人简历"><span class="toc-number">1.</span> <span class="toc-text">个人简历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于我-amp-amp-我会的"><span class="toc-number">1.1.</span> <span class="toc-text">关于我 && 我会的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作经验"><span class="toc-number">1.2.</span> <span class="toc-text">工作经验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目经验01"><span class="toc-number">1.3.</span> <span class="toc-text">项目经验01</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目经验02"><span class="toc-number">1.4.</span> <span class="toc-text">项目经验02</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#社交"><span class="toc-number">1.5.</span> <span class="toc-text">社交</span></a></li></ol></li></ol>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用-ADB-命令"><span class="toc-number">1.</span> <span class="toc-text">常用 ADB 命令</span></a></li></ol>
 		</div>
 		
 		
-        <h2 id="个人简历"><a href="#个人简历" class="headerlink" title="个人简历"></a>个人简历</h2><center> <strong>Tel</strong>:<em>18516597508</em><code>|</code><strong>Email</strong>:<em>ahedong@126.com</em> </center>
-
-
-<h3 id="关于我-amp-amp-我会的"><a href="#关于我-amp-amp-我会的" class="headerlink" title="关于我 &amp;&amp; 我会的"></a>关于我 &amp;&amp; 我会的</h3><ul>
-<li>姓名：<strong>何栋</strong></li>
-<li>学历：<strong>大专</strong></li>
-</ul>
-<p><strong>2015 年最开心的事成为一名程序员</strong></p>
-<p><strong>2016 年最开心的事接触了除 Android 以外的技术、脚本和前端 React</strong></p>
-<p><strong>2017 年最开心的事就是参加了 Google 的 GDD 大会</strong></p>
-<blockquote>
-<p>我会的</p>
-</blockquote>
-<ul>
-<li>三年 Android 客户端开发经验</li>
-<li>熟悉常见用设计模式、RxJava 等框架</li>
-<li>具有 ES6/React 等移动设备上前端开发经验</li>
-<li>熟悉各调试分析工具：adb、apktool、aapt、IDA、linux shell常用命令</li>
-<li>了解底层代码（framework 层、主要是包解析那块）安全、逆向</li>
-</ul>
-<h3 id="工作经验"><a href="#工作经验" class="headerlink" title="工作经验"></a>工作经验</h3><table>
-<thead>
-<tr>
-<th>公司</th>
-<th>开始时间</th>
-<th>结束时间</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>财拓电商</td>
-<td>2016.08</td>
-<td>至今</td>
-</tr>
-<tr>
-<td>上海威观信息科技</td>
-<td>2015.01</td>
-<td>2016.06</td>
-</tr>
-</tbody>
-</table>
-<h3 id="项目经验01"><a href="#项目经验01" class="headerlink" title="项目经验01"></a>项目经验01</h3><ul>
-<li>时间：2016-08 <code>～</code> 至今</li>
-<li>公司：财拓电商</li>
-<li>项目：大智运、钢源城、钢掌柜、货运站</li>
-<li>开发工具：Android Studio + Git + Node.js + Jenkins</li>
-</ul>
-<p><strong>我做的事</strong></p>
-<ul>
-<li>项目开发及维护</li>
-<li>JS 知识学习及使用</li>
-<li>解决 JS 在 WebView 中的适配</li>
-<li>确定前端数据类型和后台接口文档</li>
-<li>研究新技术、以及应用到项目中</li>
-<li>项目优化</li>
-<li>日志管理</li>
-</ul>
-<p><strong>心得感悟:</strong></p>
-<p>我们是多个项目大家共同开发的、项目结构是 Android<code>/</code>IOS + React.js 混合开发</p>
-<p><strong><em>有这么几个优势</em></strong>：</p>
-<ul>
-<li>Android 和 IOS 可以共用一套代码</li>
-<li>比纯原生有更多的代码复用、页面复用</li>
-<li>项目体积更小、减少运维成本</li>
-<li>代码可以做到实时更新、只要不是原生相关代码</li>
-</ul>
-<p><strong><em>也有这么几个明显的劣势</em></strong>：</p>
-<ul>
-<li>某些功能不能很好的实现</li>
-<li>需要学习一定的前端语言</li>
-<li>需要解决更多的 WebView 问题</li>
-<li>用户体验没有纯原生流畅、操作没有原生好</li>
-</ul>
-<p><strong><em>比如</em></strong>：</p>
-<ul>
-<li>联想手机 JS 中 String 字符转换 Bug</li>
-<li>Android<code>/</code>IOS 对 JS 的渲染问题</li>
-<li>ios9 上不支持 <code>for of</code> 遍历 </li>
-<li>WebView 兼容性</li>
-</ul>
-<h3 id="项目经验02"><a href="#项目经验02" class="headerlink" title="项目经验02"></a>项目经验02</h3><ul>
-<li>时间：2015-01 <code>～</code> 2016-06</li>
-<li>公司：上海威观信息科技</li>
-<li>项目：爱闹</li>
-<li>开发工具：Android Studio + SVN</li>
-</ul>
-<p><strong>我做的事</strong></p>
-<ul>
-<li>协助注册公司信息</li>
-<li>功能模块的实现及测试</li>
-<li>第三方登陆和分享</li>
-<li>短信验证云通讯</li>
-<li>项目自定义功能</li>
-</ul>
-<p><strong>心得感悟</strong></p>
-<ul>
-<li>第一次感受到新公司成立有多麻烦</li>
-<li>加班只有更晚没有最晚[/大哭脸]</li>
-</ul>
-<h3 id="社交"><a href="#社交" class="headerlink" title="社交"></a>社交</h3><ul>
-<li><a href="https://github.com/Boom618" target="_blank" rel="external">GitHub</a></li>
-<li><a href="https://boom618.github.io/" target="_blank" rel="external">博客</a></li>
+        <h2 id="常用-ADB-命令"><a href="#常用-ADB-命令" class="headerlink" title="常用 ADB 命令"></a>常用 ADB 命令</h2><ul>
+<li>adb version 查看版本</li>
+<li>adb devices 查看连接设备</li>
+<li>adb install <apkfile> 安装</apkfile></li>
+<li>adb uninstall <packge> 卸载</packge></li>
+<li>adb start-server 启动Server</li>
+<li>adb kill-server 停止Server</li>
+<li>adb logcat 查看日志</li>
+<li>adb get-serialno 获取序列号 </li>
+<li>adb shell pm list packages 列出所有包名</li>
+<li>adb shell pm list packages -s 列出系统包名</li>
+<li>adb shell pm list packages -3 列出第三方包名</li>
+<li>adb shell pm list packages | grep qq grep过滤</li>
+<li>adb shell pm clear <packagename> 清除应用数据</packagename></li>
+<li>adb shell cat /sys/class/net/wlan0/address 获取MAC地址</li>
+<li>adb shell getprop ro.product.model 查看设备型号</li>
+<li>adb shell getprop ro.build.version.release 查看Android版本</li>
+<li>adb shell wm size 查看分辨率</li>
+<li>adb shell wm density 查看屏幕密度</li>
 </ul>
 
       
@@ -1407,11 +1523,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ADB</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/25/我的简历/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/12/24/常用 ADB 命令/">展开全文 >></a>
         </p>
       
 
@@ -1565,107 +1692,6 @@
 
 
   
-    <article id="post-常用 ADB 命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/常用 ADB 命令/">常用 ADB 命令</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/24/常用 ADB 命令/" class="archive-article-date">
-  	<time datetime="2017-12-24T10:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用-ADB-命令"><span class="toc-number">1.</span> <span class="toc-text">常用 ADB 命令</span></a></li></ol>
-		</div>
-		
-		
-        <h2 id="常用-ADB-命令"><a href="#常用-ADB-命令" class="headerlink" title="常用 ADB 命令"></a>常用 ADB 命令</h2><ul>
-<li>adb version 查看版本</li>
-<li>adb devices 查看连接设备</li>
-<li>adb install <apkfile> 安装</apkfile></li>
-<li>adb uninstall <packge> 卸载</packge></li>
-<li>adb start-server 启动Server</li>
-<li>adb kill-server 停止Server</li>
-<li>adb logcat 查看日志</li>
-<li>adb get-serialno 获取序列号 </li>
-<li>adb shell pm list packages 列出所有包名</li>
-<li>adb shell pm list packages -s 列出系统包名</li>
-<li>adb shell pm list packages -3 列出第三方包名</li>
-<li>adb shell pm list packages | grep qq grep过滤</li>
-<li>adb shell pm clear <packagename> 清除应用数据</packagename></li>
-<li>adb shell cat /sys/class/net/wlan0/address 获取MAC地址</li>
-<li>adb shell getprop ro.product.model 查看设备型号</li>
-<li>adb shell getprop ro.build.version.release 查看Android版本</li>
-<li>adb shell wm size 查看分辨率</li>
-<li>adb shell wm density 查看屏幕密度</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ADB</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/24/常用 ADB 命令/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1775,15 +1801,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1799,11 +1825,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
+                <a href="javascript:void(0)" class="js-tag color4">关于我</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
