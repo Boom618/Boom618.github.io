@@ -163,20 +163,20 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-我的简历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-如何实现高效地线程安全" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/30/我的简历/">关于我</a>
+      <a class="article-title" href="/2018/05/28/如何实现高效地线程安全/">如何实现高效的线程安全</a>
     </h1>
   
 
         
-        <a href="/2018/03/30/我的简历/" class="archive-article-date">
-  	<time datetime="2018-03-30T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-30</time>
+        <a href="/2018/05/28/如何实现高效地线程安全/" class="archive-article-date">
+  	<time datetime="2018-05-28T08:42:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
@@ -187,7 +187,135 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#个人简历"><span class="toc-number">1.</span> <span class="toc-text">个人简历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于我-amp-amp-我会的"><span class="toc-number">1.1.</span> <span class="toc-text">关于我 && 我会的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作经验"><span class="toc-number">1.2.</span> <span class="toc-text">工作经验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目经验01"><span class="toc-number">1.3.</span> <span class="toc-text">项目经验01</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目经验02"><span class="toc-number">1.4.</span> <span class="toc-text">项目经验02</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#社交"><span class="toc-number">1.5.</span> <span class="toc-text">社交</span></a></li></ol></li></ol>
+	 	 	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何保证集合是线程安全的-ConcurrentHashMap-如何实现高效地线程安全"><span class="toc-number">1.</span> <span class="toc-text">如何保证集合是线程安全的? ConcurrentHashMap 如何实现高效地线程安全</span></a></li></ol>
+		</div>
+		
+		
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-05-28</code></p>
+</blockquote>
+<h3 id="如何保证集合是线程安全的-ConcurrentHashMap-如何实现高效地线程安全"><a href="#如何保证集合是线程安全的-ConcurrentHashMap-如何实现高效地线程安全" class="headerlink" title="如何保证集合是线程安全的? ConcurrentHashMap 如何实现高效地线程安全"></a>如何保证集合是线程安全的? ConcurrentHashMap 如何实现高效地线程安全</h3><p>经典回答：</p>
+<p>Java 提供了不同层面上的线程安全支持、除了 <code>HashTable</code> 同步容器外、还有同步包装器(<code>Synchronized Wrapper</code>)、调用 <code>Collections</code> 工具类中的 <code>Collections.synchronizedMap</code> 但是这些都是利用粗力度的同步方式、在高并发下性能比较低：</p>
+<p>更加普遍的方式是利用并发包下的线程安全容器：</p>
+<ul>
+<li>并发容器、比如 ConcurrentHashMap、CopyOnWriteArrayList</li>
+<li>线程安全队列 Queue/Deque 、如 ArrayBlockingQueue、SynchronousQueue </li>
+</ul>
+<p>具体保证线程安全的方式是从简单的 synchronize 到更加精细化的方式、比如分离锁实现的 ConcurrentHashMap 并发容器.</p>
+<hr>
+<p>扩展分析</p>
+<ul>
+<li>理解基本的线程安全工具</li>
+<li>早期并发并发编程中 Map 存在的问题、简单同步方式的不足</li>
+<li>ConcurrentHashMap 采用了哪些方式提高并发表现</li>
+<li>ConcurrentHashMap 自身演进</li>
+</ul>
+<p style="text-align:center;color:#1e819e;font-size:1.3em;font-weight: bold;"><br>为什么需要 ConcurrentHashMap<br></p>
+
+<p>HashTable 比较低效、它的实现基本都是将 put、get、size 等方法加上<code>synchronized</code>这就导致所有同步操作都竞争同一把锁、大大降低了并发操作的效率、Hashtable 或者同步包装版本、都只是适合在非高度并发的场景下</p>
+<p>ConcurrentHashMap 的设计实现其实一直在演化早期 ConcurrentHashMap 其实现是基于：</p>
+<ul>
+<li>分离锁、也就是将内部进行分段(<code>Segment</code>)里面则是 HashEntry 的数组、和 HashMap 类似、哈希相同的条目以链的形式存放</li>
+<li>HashEntry 内部使用<code>volatile</code>的 Value 字段保证值的可见性、也利用了不可变对象(<code>final</code>)的机制改进 Unsafe 的底层能力</li>
+</ul>
+<p>早期 ConcurrentHashMap 核心是利用分段设计、在进行并发操作的时候只需要锁定相应段、这样就避免了类似 HashMap 整体同步的问题</p>
+<p>从 JDK 7 源码可以看出 ConcurrentHashMap 在进行并发操作时：</p>
+<ul>
+<li>ConcurrentHashMap 会获取再入锁、保证数据一致性</li>
+<li>在最初时进行重复性扫描、确定相应 Key 值是否在数组中、决定是更新还是放置操作、重复扫描和检测冲突是 ConcurrentHashMap 的常用操作</li>
+<li>ConcurrentHaspMap 是单独对 Segment 进行扩容</li>
+</ul>
+<p>在 Java 8 和之后的版本中 ConcurrentHashMap 发生了的变化：</p>
+<ul>
+<li>总体上、它的内部存储结构和 HashMap 非常相似、同样是大的桶(bucket)数组、内部是链表结构(bin)、同步粒度更细致</li>
+<li>内部仍然有 Segment 定义、仅仅是为了保证序列化的兼容、不再有结构上的用处</li>
+<li>因为不再使用 Segment、初始化大大简化、采用 lazy-load 形式</li>
+<li>数据存储采用 volatile 保证可见性</li>
+<li>使用 CAS 等操作、特定场所进行无锁操作</li>
+<li>使用 Unsafe、LongAdder 之类底层手段、进行极端情况优化 </li>
+</ul>
+<p>CAS（Compare and Swap）即比较并替换、实现并发算法时常用到的一种技术</p>
+<blockquote>
+<p>我是一名有备而来的 Android 开发者<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/28/如何实现高效地线程安全/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-我的简历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/24/我的简历/">个人简历</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/24/我的简历/" class="archive-article-date">
+  	<time datetime="2018-05-24T10:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#个人简历"><span class="toc-number">1.</span> <span class="toc-text">个人简历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于我-amp-amp-我会的"><span class="toc-number">1.1.</span> <span class="toc-text">关于我 && 我会的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作经验"><span class="toc-number">1.2.</span> <span class="toc-text">工作经验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目经验01"><span class="toc-number">1.3.</span> <span class="toc-text">项目经验01</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目经验02"><span class="toc-number">1.4.</span> <span class="toc-text">项目经验02</span></a></li></ol></li></ol>
 		</div>
 		
 		
@@ -197,15 +325,19 @@
 <h3 id="关于我-amp-amp-我会的"><a href="#关于我-amp-amp-我会的" class="headerlink" title="关于我 &amp;&amp; 我会的"></a>关于我 &amp;&amp; 我会的</h3><ul>
 <li>姓名：<strong>何栋</strong></li>
 <li>学历：<strong>大专</strong></li>
-<li>工作：<strong>四年工作经验</strong></li>
+<li>专业：<strong>计算机软件</strong></li>
+<li>四年工作经验、热爱学习、热衷了解前沿技术</li>
+<li>熟悉 Android 网络和多线程的编程以及跨平台应用</li>
+<li>了解 Http 协议和 JVM 基本原理</li>
+<li>平常写过 IDEA 插件和 Node 脚本并应用到实际的开发项目中</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="number">2015</span> 年最开心的事成为一名程序员</div><div class="line"><span class="number">2016</span> 年最开心的事接触了除 Android 以外的技术、脚本和前端 React</div><div class="line"><span class="number">2017</span> 年最开心的事就是参加了 Google 的 GDD 大会</div><div class="line"><span class="number">2018</span> 年最开心的事成为上海 GDG 志愿者</div><div class="line"></div><div class="line">三年半的工作经验、热爱学习、热衷了解前沿技术</div><div class="line">熟悉 Android 网络和多线程的编程以及跨平台应用</div><div class="line">了解 Http 协议和 JVM 基本原理</div><div class="line">平常写过 IDEA 插件和 Node 脚本并应用到实际的开发项目中</div></pre></td></tr></table></figure>
 <blockquote>
 <p>我会的</p>
 </blockquote>
 <ul>
-<li>三年 Android 客户端开发经验</li>
+<li>三年半 Android 客户端开发经验</li>
 <li>熟悉 Http TCP/IP 协议</li>
+<li>熟悉 Handler 机制 View 事件分发</li>
 <li>熟悉常见用设计模式、了解 RxJava、OkHttp 等框架</li>
 <li>具有 ES6/React 等移动设备上前端开发经验</li>
 <li>了解 JVM、adb、apktool、shell 操作</li>
@@ -223,25 +355,24 @@
 <tr>
 <td>财拓电商</td>
 <td>2016.08</td>
-<td>至今</td>
+<td>2018.07</td>
 </tr>
 <tr>
 <td>上海威观信息科技</td>
-<td>2015.01</td>
-<td>2016.06</td>
+<td>2014.07</td>
+<td>2016.07</td>
 </tr>
 </tbody>
 </table>
 <h3 id="项目经验01"><a href="#项目经验01" class="headerlink" title="项目经验01"></a>项目经验01</h3><ul>
-<li>时间：2016-08 <code>～</code> 至今</li>
+<li>时间：2016-08 <code>～</code> 2018-07</li>
 <li>公司：财拓电商</li>
 <li>项目：大智运、钢源城、钢掌柜、货运站</li>
 <li>开发工具：Android Studio + Git + Node.js + Jenkins</li>
 </ul>
 <p><strong>我做的事</strong></p>
 <ul>
-<li>项目开发及维护</li>
-<li>JS 知识学习及使用</li>
+<li>项目搭建开发及维护</li>
 <li>解决 JS 在 WebView 中的适配</li>
 <li>确定前端数据类型和后台接口文档</li>
 <li>研究新技术、以及应用到项目中</li>
@@ -303,15 +434,8 @@
 <li>数据显示：SwipeRefreshLayout 加 RecyclerView </li>
 <li>主体结构：Activity 、Fragment 、DialogActivity、DialogFragment 及 自定义 View</li>
 </ul>
-<p><strong>心得感悟</strong></p>
-<ul>
-<li>第一次感受到新公司成立有多麻烦</li>
-<li>加班只有更晚没有最晚[/大哭脸]</li>
-</ul>
-<h3 id="社交"><a href="#社交" class="headerlink" title="社交"></a>社交</h3><ul>
-<li><a href="https://github.com/Boom618" target="_blank" rel="external">GitHub</a></li>
-<li><a href="https://boom618.github.io/" target="_blank" rel="external">博客</a></li>
-</ul>
+<p><a href="https://github.com/Boom618" target="_blank" rel="external">GitHub</a></p>
+<p><a href="https://boom618.github.io/" target="_blank" rel="external">博客</a></p>
 
       
 
@@ -335,113 +459,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/30/我的简历/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-代码混淆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/28/代码混淆/">java 代码 与 资源文件混淆</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/28/代码混淆/" class="archive-article-date">
-  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-混淆"><span class="toc-number">1.</span> <span class="toc-text">Java 混淆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资源混淆"><span class="toc-number">2.</span> <span class="toc-text">资源混淆</span></a></li></ol>
-		</div>
-		
-		
-        <h2 id="Java-混淆"><a href="#Java-混淆" class="headerlink" title="Java 混淆"></a>Java 混淆</h2><blockquote>
-<p>ProGuard：工具能够移除无用代码、重命名类、字段、方法从而达到压缩、优化和混淆的目的</p>
-</blockquote>
-<ul>
-<li>压缩：检测和删除没有使用的类、字段、方法和属性</li>
-<li>优化：对字节码优化、移除无用的指令</li>
-<li>混淆：使用 a、b、c、等无意义的名称重命名</li>
-<li>预检：主要是在 Java 平台上对处理后的代码进行预检</li>
-</ul>
-<blockquote>
-<p>要通过 ProGuard 启用代码压缩，请在 build.gradle 文件内相应的构建类型中添加 minifyEnabled true。</p>
-</blockquote>
-<p>请注意，代码压缩会拖慢构建速度，因此您应该尽可能避免在调试构建中使用。不过，重要的是您一定要为用于测试的最终 APK 启用代码压缩，因为如果您不能充分地自定义要保留的代码，可能会引入错误。</p>
-<p>Q：混淆为什么要保留类名或方法名</p>
-<ul>
-<li>让 C/C++ 程序可以通过 jni 使用对应的 java 方法</li>
-<li>四大组件由于在 AndroidManifest.xml 里面注册了、所以需要保留</li>
-<li>R 文件混淆会导致引用错误</li>
-</ul>
-<p><strong>ProGuard 基本命令</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#代码混淆压缩比，在0~7之间，默认为5，一般不做修改</div><div class="line">-optimizationpasses <span class="number">5</span></div><div class="line"></div><div class="line">#混合时不使用大小写混合，混合后的类名为小写</div><div class="line">-dontusemixedcaseclassnames</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclasses</div><div class="line"></div><div class="line">#这句话能够使我们的项目混淆后产生映射文件</div><div class="line">#包含有类名-&gt;混淆后类名的映射关系</div><div class="line">-verbose</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclassmembers</div><div class="line"></div><div class="line">#不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。</div><div class="line">-dontpreverify</div><div class="line"></div><div class="line">#保留Annotation不混淆</div><div class="line">-keepattributes *Annotation*,InnerClasses</div><div class="line"></div><div class="line">#避免混淆泛型</div><div class="line">-keepattributes Signature</div><div class="line"></div><div class="line">#抛出异常时保留代码行号</div><div class="line">-keepattributes SourceFile,LineNumberTable</div><div class="line"></div><div class="line">#指定混淆是采用的算法，后面的参数是一个过滤器</div><div class="line">#这个过滤器是谷歌推荐的算法，一般不做更改</div><div class="line">-optimizations !code/simplification/cast,!field<span class="comment">/*,!class/merging/*</span></div></pre></td></tr></table></figure>
-<h2 id="资源混淆"><a href="#资源混淆" class="headerlink" title="资源混淆"></a>资源混淆</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    ...</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">        	  <span class="comment">// 资源压缩只与代码压缩协同工作</span></div><div class="line">            shrinkResources <span class="keyword">true</span></div><div class="line">            <span class="comment">// java 代码压缩</span></div><div class="line">            minifyEnabled <span class="keyword">true</span></div><div class="line">            <span class="function">proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>,</span></div><div class="line"><span class="function">                    'proguard-rules.pro'</span></div><div class="line"><span class="function">        &#125;</span></div><div class="line"><span class="function">    &#125;</span></div><div class="line"><span class="function">&#125;</span></div></pre></td></tr></table></figure>
-<p>参考：</p>
-<p><a href="https://developer.android.google.cn/studio/build/shrink-code.html" target="_blank" rel="external">官方文档</a></p>
-<p><a href="https://blog.csdn.net/ljd2038/article/details/51308768" target="_blank" rel="external">ProGuard详解</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/28/代码混淆/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/24/我的简历/">展开全文 >></a>
         </p>
       
 
@@ -562,20 +580,20 @@
 
 
   
-    <article id="post-保险" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-代码混淆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/08/保险/">保险</a>
+      <a class="article-title" href="/2018/03/28/代码混淆/">java 代码 与 资源文件混淆</a>
     </h1>
   
 
         
-        <a href="/2018/03/08/保险/" class="archive-article-date">
-  	<time datetime="2018-03-08T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
+        <a href="/2018/03/28/代码混淆/" class="archive-article-date">
+  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
 </a>
         
       </header>
@@ -586,98 +604,35 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#保险是啥"><span class="toc-number">1.</span> <span class="toc-text">保险是啥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么买保险"><span class="toc-number">2.</span> <span class="toc-text">怎么买保险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要买这么多种保险"><span class="toc-number">3.</span> <span class="toc-text">为什么要买这么多种保险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保险配置原则："><span class="toc-number">4.</span> <span class="toc-text">保险配置原则：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我买了那些保险"><span class="toc-number">5.</span> <span class="toc-text">我买了那些保险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后："><span class="toc-number">6.</span> <span class="toc-text">最后：</span></a></li></ol>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-混淆"><span class="toc-number">1.</span> <span class="toc-text">Java 混淆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资源混淆"><span class="toc-number">2.</span> <span class="toc-text">资源混淆</span></a></li></ol>
 		</div>
 		
 		
-        <h2 id="保险是啥"><a href="#保险是啥" class="headerlink" title="保险是啥"></a>保险是啥</h2><blockquote>
-<p>保险的本质：用少量的可承受的钱（保费）转移极端条件下自己无法承受的重大风险（保额）。同时也解释了对于购买保险的 99% 的人，花了钱什么都看不到，因为什么都不会发生。但是对于 0.5% 发生保险风险事故的人，便会有事先准备的保险金额抵御难关。</p>
+        <h2 id="Java-混淆"><a href="#Java-混淆" class="headerlink" title="Java 混淆"></a>Java 混淆</h2><blockquote>
+<p>ProGuard：工具能够移除无用代码、重命名类、字段、方法从而达到压缩、优化和混淆的目的</p>
 </blockquote>
-<h2 id="怎么买保险"><a href="#怎么买保险" class="headerlink" title="怎么买保险"></a>怎么买保险</h2><p><strong>保险到底有多少种类</strong></p>
 <ul>
-<li>社保</li>
-<li>医保</li>
-<li>重疾险</li>
-<li>医疗险</li>
-<li>意外险</li>
-<li>老年人险种</li>
-<li>儿童险</li>
-<li>终身寿和定期寿</li>
-<li>年金险</li>
-<li>万能险</li>
-<li>团险</li>
-<li>家庭财产险</li>
-<li>交通意外险</li>
-<li>。。。</li>
+<li>压缩：检测和删除没有使用的类、字段、方法和属性</li>
+<li>优化：对字节码优化、移除无用的指令</li>
+<li>混淆：使用 a、b、c、等无意义的名称重命名</li>
+<li>预检：主要是在 Java 平台上对处理后的代码进行预检</li>
 </ul>
-<p>可以看出上面列出的险种就不少、里面还有各种小险种、而且市面上最少也有 100 多家保险公司、也就导致保险多、选择难</p>
-<p><strong>什么病报什么险</strong></p>
-<table>
-<thead>
-<tr>
-<th>病种</th>
-<th>险种</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>感冒发烧看门诊</td>
-<td>自己掏钱 + 团险保销</td>
-</tr>
-<tr>
-<td>意外受伤看门诊</td>
-<td>意外医疗险 + 团险报销</td>
-</tr>
-<tr>
-<td>小病/小意外</td>
-<td>社保 + 普通医疗险 + 团险</td>
-</tr>
-<tr>
-<td>严重疾病/意外住院</td>
-<td>社保 + 普通医疗险 + 百万医疗险 + 团险</td>
-</tr>
-<tr>
-<td>重大疾病/轻症</td>
-<td>重疾险 + 百万医疗险 + 社保</td>
-</tr>
-<tr>
-<td>多次重疾/轻症</td>
-<td>多次重疾险 + 社保</td>
-</tr>
-</tbody>
-</table>
-<h2 id="为什么要买这么多种保险"><a href="#为什么要买这么多种保险" class="headerlink" title="为什么要买这么多种保险"></a>为什么要买这么多种保险</h2><p>任何一种保险都有自己限定的保障范围，没有办法面面俱到。<code>没有完美的产品，只有完美的产品组合</code>。人生那么长，那么多意料不到的状况，所以买保险是一个不断的打补丁的过程，并不是买了一个就万事大吉了。所以，以上列出的各种保险，保障的范围都是互相补充，也有部分重叠的。</p>
-<p>买保险，心态也要摆正。千人千面，认知都不同，自己才最了解自己，适合自己满足需求就好。不相信就不要买，要买就好好做功课。</p>
-<h2 id="保险配置原则："><a href="#保险配置原则：" class="headerlink" title="保险配置原则："></a>保险配置原则：</h2><p>买保险的顺序，可以按照『重疾 - 住院 - 意外 - 门诊』这个顺序来配置。对家庭经济影响越大的风险，越要先考虑。重疾虽然概率相对低，但一旦发生，动辄就是几十万的治疗费用，这个坑大，先填上。而感冒发烧这类情况，虽然出现次数可能会比较多，但是从金额上来讲，普通的门诊费用，一般家庭都能承担得起，而且报销的金额有时候都不值得去走一遍报销流程。</p>
-<p><strong>重大疾病保险</strong></p>
+<blockquote>
+<p>要通过 ProGuard 启用代码压缩，请在 build.gradle 文件内相应的构建类型中添加 minifyEnabled true。</p>
+</blockquote>
+<p>请注意，代码压缩会拖慢构建速度，因此您应该尽可能避免在调试构建中使用。不过，重要的是您一定要为用于测试的最终 APK 启用代码压缩，因为如果您不能充分地自定义要保留的代码，可能会引入错误。</p>
+<p>Q：混淆为什么要保留类名或方法名</p>
 <ul>
-<li>保障责任：只保障病种包括协会规定的《重大疾病保险的疾病定义使用规范》的 25 种重疾加部分保险公司规定的重疾、达到上述规定的重疾标准，直接给付重疾保额，其保额覆盖疾病的诊治和康复费用外，还包括生病期间的经济生活和工作收入损失补偿。</li>
-<li>风险角度：用少量的可承受的钱（保费）转移极端条件下自己无法承受的重大风险（保额）。</li>
+<li>让 C/C++ 程序可以通过 jni 使用对应的 java 方法</li>
+<li>四大组件由于在 AndroidManifest.xml 里面注册了、所以需要保留</li>
+<li>R 文件混淆会导致引用错误</li>
 </ul>
-<p><strong>医疗保险</strong></p>
-<ul>
-<li>保障责任：保障大大小小疾病、保障责任全、但是只能经济补偿上述各种产生的医疗费用，不会因此得到其他多余一分钱的补偿</li>
-<li>风险角度：可以自行承担，也可以通过保险转移风险。</li>
-</ul>
-<p><strong>意外险</strong></p>
-<ul>
-<li>保障责任：保障意外身故/伤残 </li>
-<li>风险角度：保额很高、以保万一</li>
-</ul>
-<h2 id="我买了那些保险"><a href="#我买了那些保险" class="headerlink" title="我买了那些保险"></a>我买了那些保险</h2><ul>
-<li>意外险</li>
-<li>医疗险</li>
-<li>重疾险</li>
-</ul>
-<p>意外险：先说说我自己的经历、去年年末买了款泰康 50 元的意外险、买完后没过一个礼拜就打脸了、做饭过程中被刀划伤缝了四针、整个过程中用医保卡➕自己的现金共花了一千多吧、自费大概 100 多 、其余走的医保。之后我联系保险工作人员、确认可以理赔后、把医药收据单寄送过去、正常一个礼拜就会理赔保险。整个过程全部是网络操作、所以赶快适应互联网的时代吧。这之后我果断给自己的父母也配置了这款意外险。</p>
-<p>医疗险：当了解的越多、抉择就越难、我看过微信推出的<code>微医保·医疗险</code>后、果断给自己配上了、<strong><em>保险是随着年龄的大小保费越来越贵的</em></strong>、这款保险有两个福利：</p>
-<ul>
-<li>微保运动鼓励金：意思就是说每天步行 8000 步就可以领取 1 元、累计 100 元</li>
-<li>微保专享洗牙套餐劵：这个洗牙如果你在意的话、感觉很值、因为我每年去医院洗一次牙最少也得 200 元（主要是去年去医院治疗蛀牙花了不少钱）</li>
-</ul>
-<p>重疾险：这款是属于一辈子的长期险、我目前还没有决定买那款、</p>
-<h2 id="最后："><a href="#最后：" class="headerlink" title="最后："></a>最后：</h2><p>意外险、医疗险保期都是一年的、一年过后再续。而重疾险是一辈子的、有 20  年、30 年交保终身。</p>
-<p>买再多的保险也不如坚持锻炼、按时体检、小病不拖沓、大病及时就诊、愿我们买过的所有保险都用不上、踏踏实实过好每一天。</p>
+<p><strong>ProGuard 基本命令</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#代码混淆压缩比，在0~7之间，默认为5，一般不做修改</div><div class="line">-optimizationpasses <span class="number">5</span></div><div class="line"></div><div class="line">#混合时不使用大小写混合，混合后的类名为小写</div><div class="line">-dontusemixedcaseclassnames</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclasses</div><div class="line"></div><div class="line">#这句话能够使我们的项目混淆后产生映射文件</div><div class="line">#包含有类名-&gt;混淆后类名的映射关系</div><div class="line">-verbose</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclassmembers</div><div class="line"></div><div class="line">#不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。</div><div class="line">-dontpreverify</div><div class="line"></div><div class="line">#保留Annotation不混淆</div><div class="line">-keepattributes *Annotation*,InnerClasses</div><div class="line"></div><div class="line">#避免混淆泛型</div><div class="line">-keepattributes Signature</div><div class="line"></div><div class="line">#抛出异常时保留代码行号</div><div class="line">-keepattributes SourceFile,LineNumberTable</div><div class="line"></div><div class="line">#指定混淆是采用的算法，后面的参数是一个过滤器</div><div class="line">#这个过滤器是谷歌推荐的算法，一般不做更改</div><div class="line">-optimizations !code/simplification/cast,!field<span class="comment">/*,!class/merging/*</span></div></pre></td></tr></table></figure>
+<h2 id="资源混淆"><a href="#资源混淆" class="headerlink" title="资源混淆"></a>资源混淆</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    ...</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">        	  <span class="comment">// 资源压缩只与代码压缩协同工作</span></div><div class="line">            shrinkResources <span class="keyword">true</span></div><div class="line">            <span class="comment">// java 代码压缩</span></div><div class="line">            minifyEnabled <span class="keyword">true</span></div><div class="line">            <span class="function">proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>,</span></div><div class="line"><span class="function">                    'proguard-rules.pro'</span></div><div class="line"><span class="function">        &#125;</span></div><div class="line"><span class="function">    &#125;</span></div><div class="line"><span class="function">&#125;</span></div></pre></td></tr></table></figure>
+<p>参考：</p>
+<p><a href="https://developer.android.google.cn/studio/build/shrink-code.html" target="_blank" rel="external">官方文档</a></p>
+<p><a href="https://blog.csdn.net/ljd2038/article/details/51308768" target="_blank" rel="external">ProGuard详解</a></p>
 
       
 
@@ -691,7 +646,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">保险</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
         		</li>
       		
 		</ul>
@@ -701,7 +656,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/08/保险/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/03/28/代码混淆/">展开全文 >></a>
         </p>
       
 
@@ -943,6 +898,175 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/08/RxJava 总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-保险" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/08/保险/">保险</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/08/保险/" class="archive-article-date">
+  	<time datetime="2018-03-08T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#保险是啥"><span class="toc-number">1.</span> <span class="toc-text">保险是啥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么买保险"><span class="toc-number">2.</span> <span class="toc-text">怎么买保险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要买这么多种保险"><span class="toc-number">3.</span> <span class="toc-text">为什么要买这么多种保险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保险配置原则："><span class="toc-number">4.</span> <span class="toc-text">保险配置原则：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我买了那些保险"><span class="toc-number">5.</span> <span class="toc-text">我买了那些保险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后："><span class="toc-number">6.</span> <span class="toc-text">最后：</span></a></li></ol>
+		</div>
+		
+		
+        <h2 id="保险是啥"><a href="#保险是啥" class="headerlink" title="保险是啥"></a>保险是啥</h2><blockquote>
+<p>保险的本质：用少量的可承受的钱（保费）转移极端条件下自己无法承受的重大风险（保额）。同时也解释了对于购买保险的 99% 的人，花了钱什么都看不到，因为什么都不会发生。但是对于 0.5% 发生保险风险事故的人，便会有事先准备的保险金额抵御难关。</p>
+</blockquote>
+<h2 id="怎么买保险"><a href="#怎么买保险" class="headerlink" title="怎么买保险"></a>怎么买保险</h2><p><strong>保险到底有多少种类</strong></p>
+<ul>
+<li>社保</li>
+<li>医保</li>
+<li>重疾险</li>
+<li>医疗险</li>
+<li>意外险</li>
+<li>老年人险种</li>
+<li>儿童险</li>
+<li>终身寿和定期寿</li>
+<li>年金险</li>
+<li>万能险</li>
+<li>团险</li>
+<li>家庭财产险</li>
+<li>交通意外险</li>
+<li>。。。</li>
+</ul>
+<p>可以看出上面列出的险种就不少、里面还有各种小险种、而且市面上最少也有 100 多家保险公司、也就导致保险多、选择难</p>
+<p><strong>什么病报什么险</strong></p>
+<table>
+<thead>
+<tr>
+<th>病种</th>
+<th>险种</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>感冒发烧看门诊</td>
+<td>自己掏钱 + 团险保销</td>
+</tr>
+<tr>
+<td>意外受伤看门诊</td>
+<td>意外医疗险 + 团险报销</td>
+</tr>
+<tr>
+<td>小病/小意外</td>
+<td>社保 + 普通医疗险 + 团险</td>
+</tr>
+<tr>
+<td>严重疾病/意外住院</td>
+<td>社保 + 普通医疗险 + 百万医疗险 + 团险</td>
+</tr>
+<tr>
+<td>重大疾病/轻症</td>
+<td>重疾险 + 百万医疗险 + 社保</td>
+</tr>
+<tr>
+<td>多次重疾/轻症</td>
+<td>多次重疾险 + 社保</td>
+</tr>
+</tbody>
+</table>
+<h2 id="为什么要买这么多种保险"><a href="#为什么要买这么多种保险" class="headerlink" title="为什么要买这么多种保险"></a>为什么要买这么多种保险</h2><p>任何一种保险都有自己限定的保障范围，没有办法面面俱到。<code>没有完美的产品，只有完美的产品组合</code>。人生那么长，那么多意料不到的状况，所以买保险是一个不断的打补丁的过程，并不是买了一个就万事大吉了。所以，以上列出的各种保险，保障的范围都是互相补充，也有部分重叠的。</p>
+<p>买保险，心态也要摆正。千人千面，认知都不同，自己才最了解自己，适合自己满足需求就好。不相信就不要买，要买就好好做功课。</p>
+<h2 id="保险配置原则："><a href="#保险配置原则：" class="headerlink" title="保险配置原则："></a>保险配置原则：</h2><p>买保险的顺序，可以按照『重疾 - 住院 - 意外 - 门诊』这个顺序来配置。对家庭经济影响越大的风险，越要先考虑。重疾虽然概率相对低，但一旦发生，动辄就是几十万的治疗费用，这个坑大，先填上。而感冒发烧这类情况，虽然出现次数可能会比较多，但是从金额上来讲，普通的门诊费用，一般家庭都能承担得起，而且报销的金额有时候都不值得去走一遍报销流程。</p>
+<p><strong>重大疾病保险</strong></p>
+<ul>
+<li>保障责任：只保障病种包括协会规定的《重大疾病保险的疾病定义使用规范》的 25 种重疾加部分保险公司规定的重疾、达到上述规定的重疾标准，直接给付重疾保额，其保额覆盖疾病的诊治和康复费用外，还包括生病期间的经济生活和工作收入损失补偿。</li>
+<li>风险角度：用少量的可承受的钱（保费）转移极端条件下自己无法承受的重大风险（保额）。</li>
+</ul>
+<p><strong>医疗保险</strong></p>
+<ul>
+<li>保障责任：保障大大小小疾病、保障责任全、但是只能经济补偿上述各种产生的医疗费用，不会因此得到其他多余一分钱的补偿</li>
+<li>风险角度：可以自行承担，也可以通过保险转移风险。</li>
+</ul>
+<p><strong>意外险</strong></p>
+<ul>
+<li>保障责任：保障意外身故/伤残 </li>
+<li>风险角度：保额很高、以保万一</li>
+</ul>
+<h2 id="我买了那些保险"><a href="#我买了那些保险" class="headerlink" title="我买了那些保险"></a>我买了那些保险</h2><ul>
+<li>意外险</li>
+<li>医疗险</li>
+<li>重疾险</li>
+</ul>
+<p>意外险：先说说我自己的经历、去年年末买了款泰康 50 元的意外险、买完后没过一个礼拜就打脸了、做饭过程中被刀划伤缝了四针、整个过程中用医保卡➕自己的现金共花了一千多吧、自费大概 100 多 、其余走的医保。之后我联系保险工作人员、确认可以理赔后、把医药收据单寄送过去、正常一个礼拜就会理赔保险。整个过程全部是网络操作、所以赶快适应互联网的时代吧。这之后我果断给自己的父母也配置了这款意外险。</p>
+<p>医疗险：当了解的越多、抉择就越难、我看过微信推出的<code>微医保·医疗险</code>后、果断给自己配上了、<strong><em>保险是随着年龄的大小保费越来越贵的</em></strong>、这款保险有两个福利：</p>
+<ul>
+<li>微保运动鼓励金：意思就是说每天步行 8000 步就可以领取 1 元、累计 100 元</li>
+<li>微保专享洗牙套餐劵：这个洗牙如果你在意的话、感觉很值、因为我每年去医院洗一次牙最少也得 200 元（主要是去年去医院治疗蛀牙花了不少钱）</li>
+</ul>
+<p>重疾险：这款是属于一辈子的长期险、我目前还没有决定买那款、</p>
+<h2 id="最后："><a href="#最后：" class="headerlink" title="最后："></a>最后：</h2><p>意外险、医疗险保期都是一年的、一年过后再续。而重疾险是一辈子的、有 20  年、30 年交保终身。</p>
+<p>买再多的保险也不如坚持锻炼、按时体检、小病不拖沓、大病及时就诊、愿我们买过的所有保险都用不上、踏踏实实过好每一天。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">保险</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/08/保险/">展开全文 >></a>
         </p>
       
 
@@ -1636,108 +1760,6 @@
 
 
   
-    <article id="post-常用 ADB 命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/常用 ADB 命令/">常用 ADB 命令</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/24/常用 ADB 命令/" class="archive-article-date">
-  	<time datetime="2017-12-24T10:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用-ADB-命令"><span class="toc-number">1.</span> <span class="toc-text">常用 ADB 命令</span></a></li></ol>
-		</div>
-		
-		
-        <h2 id="常用-ADB-命令"><a href="#常用-ADB-命令" class="headerlink" title="常用 ADB 命令"></a>常用 ADB 命令</h2><ul>
-<li>adb version 查看版本</li>
-<li>adb devices 查看连接设备</li>
-<li>adb install <apkfile> 安装</apkfile></li>
-<li>adb uninstall <packge> 卸载</packge></li>
-<li>adb start-server 启动Server</li>
-<li>adb kill-server 停止Server</li>
-<li>adb logcat 查看日志</li>
-<li>adb get-serialno 获取序列号 </li>
-<li>adb shell pm list packages 列出所有包名</li>
-<li>adb shell pm list packages -s 列出系统包名</li>
-<li>adb shell pm list packages -3 列出第三方包名</li>
-<li>adb shell pm list packages | grep qq grep 过滤</li>
-<li>adb shell pm clear <packagename> 清除应用数据</packagename></li>
-<li>adb shell cat /sys/class/net/wlan0/address 获取MAC地址</li>
-<li>adb shell pm list permissions -d -g 查看权限组</li>
-<li>adb shell getprop ro.product.model 查看设备型号</li>
-<li>adb shell getprop ro.build.version.release 查看Android版本</li>
-<li>adb shell wm size 查看分辨率</li>
-<li>adb shell wm density 查看屏幕密度</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ADB</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/24/常用 ADB 命令/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1835,7 +1857,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
+                <a href="javascript:void(0)" class="js-tag color5">原理解析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1843,7 +1865,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">原理解析</a>
+                <a href="javascript:void(0)" class="js-tag color4">MAC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1851,15 +1873,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目异常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">MAC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">关于我</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1871,11 +1889,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ADB</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
+                <a href="javascript:void(0)" class="js-tag color4">关于我</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1883,15 +1905,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">算法排序</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数组使用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
               </li>
              
               <li class="article-tag-list-item">

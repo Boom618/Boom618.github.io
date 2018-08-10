@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>逆向常用命令 | BoomHe</title>
+  <title>如何实现高效的线程安全 | BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; /Users/boomhe/demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell">
-<meta name="keywords" content="Android 应用安全维护和逆向分析">
+  <meta name="description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-05-28  如何保证集合是线程安全的? ConcurrentHashMap 如何实现高效地线程安全经典回答： Java 提供了不同层面上的线程安全支持、除了 HashTable 同步容器外、还有同步包装器(Synchronized Wrapper)、调用 Collections 工具类中的 Collections.synchro">
+<meta name="keywords" content="Java基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="逆向常用命令">
-<meta property="og:url" content="http://yoursite.com/2018/03/05/逆向常用命令/index.html">
+<meta property="og:title" content="如何实现高效的线程安全">
+<meta property="og:url" content="http://yoursite.com/2018/05/28/如何实现高效地线程安全/index.html">
 <meta property="og:site_name" content="BoomHe">
-<meta property="og:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; /Users/boomhe/demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell">
+<meta property="og:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-05-28  如何保证集合是线程安全的? ConcurrentHashMap 如何实现高效地线程安全经典回答： Java 提供了不同层面上的线程安全支持、除了 HashTable 同步容器外、还有同步包装器(Synchronized Wrapper)、调用 Collections 工具类中的 Collections.synchro">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-27T09:37:40.113Z">
+<meta property="og:updated_time" content="2018-05-28T09:43:54.044Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="逆向常用命令">
-<meta name="twitter:description" content="逆向常用命令基础命令 cat：查看文件内容  例：cat demo.txt | grep four echo/touch：写文件 例：echo “hello world” &amp;gt; /Users/boomhe/demo.txt(&amp;gt;： 内容重定向)  非 shell 命令 adb shell dumpsys activity top 查看当前应用的 activity 信息 adb shell">
+<meta name="twitter:title" content="如何实现高效的线程安全">
+<meta name="twitter:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-05-28  如何保证集合是线程安全的? ConcurrentHashMap 如何实现高效地线程安全经典回答： Java 提供了不同层面上的线程安全支持、除了 HashTable 同步容器外、还有同步包装器(Synchronized Wrapper)、调用 Collections 工具类中的 Collections.synchro">
   
     <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
   
@@ -163,20 +163,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-逆向常用命令" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-如何实现高效地线程安全" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      逆向常用命令
+      如何实现高效的线程安全
     </h1>
   
 
         
-        <a href="/2018/03/05/逆向常用命令/" class="archive-article-date">
-  	<time datetime="2018-03-05T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-05</time>
+        <a href="/2018/05/28/如何实现高效地线程安全/" class="archive-article-date">
+  	<time datetime="2018-05-28T08:42:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
@@ -187,128 +187,57 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#逆向常用命令"><span class="toc-number">1.</span> <span class="toc-text">逆向常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础命令"><span class="toc-number">1.1.</span> <span class="toc-text">基础命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非-shell-命令"><span class="toc-number">1.2.</span> <span class="toc-text">非 shell 命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-命令"><span class="toc-number">2.</span> <span class="toc-text">shell 命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作-apk-命令"><span class="toc-number">3.</span> <span class="toc-text">操作 apk 命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程命令"><span class="toc-number">4.</span> <span class="toc-text">进程命令</span></a></li></ol>
+	 	 	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何保证集合是线程安全的-ConcurrentHashMap-如何实现高效地线程安全"><span class="toc-number">1.</span> <span class="toc-text">如何保证集合是线程安全的? ConcurrentHashMap 如何实现高效地线程安全</span></a></li></ol>
 		</div>
 		
 		
-        <h2 id="逆向常用命令"><a href="#逆向常用命令" class="headerlink" title="逆向常用命令"></a>逆向常用命令</h2><h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><ul>
-<li><code>cat</code>：查看文件内容  例：cat demo.txt <code>|</code> grep four</li>
-<li><code>echo/touch</code>：写文件 例：echo “hello world” &gt; /Users/boomhe/demo.txt(<code>&gt;</code>： 内容重定向)</li>
-</ul>
-<h3 id="非-shell-命令"><a href="#非-shell-命令" class="headerlink" title="非 shell 命令"></a>非 shell 命令</h3><ul>
-<li><code>adb shell dumpsys activity top</code> 查看当前应用的 activity 信息</li>
-<li><code>adb shell dumpsys activity activities</code>查看当前应用的任务栈</li>
-<li><code>adb shell dumpsys package [pname]</code> 查看指定应用包名详细信息 (adb shell dumpsys package com.tencent.mm)</li>
-<li><code>adb shell dumpsys meminfo [pname/pid]</code> 查看指定进程名或进程 ID 的内存信息（adb shell dumpsys meminfo com.tencent.mm）</li>
-<li><code>adb shell dumpsys dbinfo [pname]</code> 查看指定包名应用的数据库存储信息（adb shell dumpsys dbinfo com.tencent.mm）</li>
-<li><code>adb install</code> 安装应用包 apk 文件（adb install 文件名）</li>
-<li><code>adb uninstall [pname]</code> 卸载应用（adb uninstall cn.wjdiankong.demo）</li>
-<li><code>adb pull</code> 将设备中的文件放到本地（adb pull /sdcard/tmp.txt /Users/boomhe/）</li>
-<li><code>adb push</code> 将本地文件放到设备中（adb pull /Users/boomhe/temp.txt /sdcard）</li>
-<li><code>adb shell screencap</code> 截屏操作（adb shell screencap -p /sdcard/temp.png）<ul>
-<li>adb shell screencap -p /sdcard/temp.png</li>
-<li>adb pull /sdcard/temp.png /Users/boomhe/</li>
-<li>start /Users/boomhe/temp.png</li>
-</ul>
-</li>
-<li><code>adb shell screenrecord</code>录屏操作（adb shell screenrecord /sdcard/temp.mp4）</li>
-<li><code>adb shell input text</code>输入文本内容（adb shell input text ‘HelloWorld’）</li>
-<li><code>adb forward</code> 设备的端口转发<ul>
-<li>adb forward tcp:23946 tcp:23946</li>
-<li>adb forward tcp:8700 jwdp:1786</li>
-</ul>
-</li>
-<li><code>adb jdwp</code> 查看设备中可以被调试的应用进程号</li>
-<li><code>adb logcat</code>查看当前日志<ul>
-<li>adb logcat -s tag</li>
-<li>adb logcat | grep/findstr [pname|pid|keyword]</li>
-</ul>
-</li>
-<li><code>adb shell pm clear [pname]</code> 清空应用数据</li>
-</ul>
-<p><strong>数据备份和恢复</strong></p>
-<blockquote>
-<p>allowBackup：manifest 文件中 allowBackup 的属性设置是 true 时、可以在没有 root 的设备中去获取用户的数据</p>
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-05-28</code></p>
 </blockquote>
+<h3 id="如何保证集合是线程安全的-ConcurrentHashMap-如何实现高效地线程安全"><a href="#如何保证集合是线程安全的-ConcurrentHashMap-如何实现高效地线程安全" class="headerlink" title="如何保证集合是线程安全的? ConcurrentHashMap 如何实现高效地线程安全"></a>如何保证集合是线程安全的? ConcurrentHashMap 如何实现高效地线程安全</h3><p>经典回答：</p>
+<p>Java 提供了不同层面上的线程安全支持、除了 <code>HashTable</code> 同步容器外、还有同步包装器(<code>Synchronized Wrapper</code>)、调用 <code>Collections</code> 工具类中的 <code>Collections.synchronizedMap</code> 但是这些都是利用粗力度的同步方式、在高并发下性能比较低：</p>
+<p>更加普遍的方式是利用并发包下的线程安全容器：</p>
 <ul>
-<li>后台启动一个 service 定时去轮询、获取当前的 topActivity 然后操作</li>
-<li>Android 5.0 以后获取 当前 topActivity 需要授权</li>
-<li>通过辅助功能可以监听当前 Window 的变化</li>
+<li>并发容器、比如 ConcurrentHashMap、CopyOnWriteArrayList</li>
+<li>线程安全队列 Queue/Deque 、如 ArrayBlockingQueue、SynchronousQueue </li>
 </ul>
-<p><strong>数据备份</strong></p>
-<p><code>adb backup [-system|-nosystem] -all [-apk|-noapk] [-shared|-noshared] -f &lt;存档名称&gt; [pname]</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb backup -nosystem -all -apk -f gwt.ab com.czcg.gwt</div></pre></td></tr></table></figure>
+<p>具体保证线程安全的方式是从简单的 synchronize 到更加精细化的方式、比如分离锁实现的 ConcurrentHashMap 并发容器.</p>
+<hr>
+<p>扩展分析</p>
 <ul>
-<li>[-system|-nosystem]：备份时是否需要连系统一起备份、默认是</li>
-<li>-all：是否要备份全部 app 、若有加 -nosystem 、那么只会备份已安装的 app、不会备份系统 app</li>
-<li>[-apk|-noapk]：是否备份安装的 apk 、-noapk 只会备份 apk 的资料数据</li>
-<li>[-shared|-noshared]：是否备份 SD 卡</li>
+<li>理解基本的线程安全工具</li>
+<li>早期并发并发编程中 Map 存在的问题、简单同步方式的不足</li>
+<li>ConcurrentHashMap 采用了哪些方式提高并发表现</li>
+<li>ConcurrentHashMap 自身演进</li>
 </ul>
-<p><strong>数据恢复</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb restore gwt.ab</div></pre></td></tr></table></figure>
+<p style="text-align:center;color:#1e819e;font-size:1.3em;font-weight: bold;"><br>为什么需要 ConcurrentHashMap<br></p>
+
+<p>HashTable 比较低效、它的实现基本都是将 put、get、size 等方法加上<code>synchronized</code>这就导致所有同步操作都竞争同一把锁、大大降低了并发操作的效率、Hashtable 或者同步包装版本、都只是适合在非高度并发的场景下</p>
+<p>ConcurrentHashMap 的设计实现其实一直在演化早期 ConcurrentHashMap 其实现是基于：</p>
+<ul>
+<li>分离锁、也就是将内部进行分段(<code>Segment</code>)里面则是 HashEntry 的数组、和 HashMap 类似、哈希相同的条目以链的形式存放</li>
+<li>HashEntry 内部使用<code>volatile</code>的 Value 字段保证值的可见性、也利用了不可变对象(<code>final</code>)的机制改进 Unsafe 的底层能力</li>
+</ul>
+<p>早期 ConcurrentHashMap 核心是利用分段设计、在进行并发操作的时候只需要锁定相应段、这样就避免了类似 HashMap 整体同步的问题</p>
+<p>从 JDK 7 源码可以看出 ConcurrentHashMap 在进行并发操作时：</p>
+<ul>
+<li>ConcurrentHashMap 会获取再入锁、保证数据一致性</li>
+<li>在最初时进行重复性扫描、确定相应 Key 值是否在数组中、决定是更新还是放置操作、重复扫描和检测冲突是 ConcurrentHashMap 的常用操作</li>
+<li>ConcurrentHaspMap 是单独对 Segment 进行扩容</li>
+</ul>
+<p>在 Java 8 和之后的版本中 ConcurrentHashMap 发生了的变化：</p>
+<ul>
+<li>总体上、它的内部存储结构和 HashMap 非常相似、同样是大的桶(bucket)数组、内部是链表结构(bin)、同步粒度更细致</li>
+<li>内部仍然有 Segment 定义、仅仅是为了保证序列化的兼容、不再有结构上的用处</li>
+<li>因为不再使用 Segment、初始化大大简化、采用 lazy-load 形式</li>
+<li>数据存储采用 volatile 保证可见性</li>
+<li>使用 CAS 等操作、特定场所进行无锁操作</li>
+<li>使用 Unsafe、LongAdder 之类底层手段、进行极端情况优化 </li>
+</ul>
+<p>CAS（Compare and Swap）即比较并替换、实现并发算法时常用到的一种技术</p>
 <blockquote>
-<p>备份的数据为 *.ab 格式文件</p>
+<p>我是一名有备而来的 Android 开发者<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
 </blockquote>
-<h2 id="shell-命令"><a href="#shell-命令" class="headerlink" title="shell 命令"></a>shell 命令</h2><ul>
-<li><code>run-as [pname]</code>在非 root 设备中查看指定 debug 模式的应用沙盒数据</li>
-<li><code>ps</code>查看设备的进程信息<code>/</code>指定进程的线程信息<ul>
-<li><code>ps | grep com.tencent.mm</code> 过滤信息</li>
-<li><code>ps -t [pid]</code> 查看 pid 对应的线程信息</li>
-</ul>
-</li>
-<li><code>pm clear [pname]</code>清空指定包名应用数据</li>
-<li><code>pm install [apk 文件]</code>安装设备中的 apk 文件、和 adb install 一样（pm install /sdcard/demo.apk）</li>
-<li><code>pm uninstall [pname]</code>卸载设备中的应用</li>
-<li><code>am start</code>启动一个应用<ul>
-<li><code>am start -n [pname]/[pname].[activity]</code></li>
-<li><code>am start -D -n com.android.browser/com.android.browser.BrowserActivity</code> Debug 模式启动</li>
-</ul>
-</li>
-<li><code>am startservice</code>启动一个服务、和上面命令类似</li>
-<li><code>am broadcast</code>发送一个广播<ul>
-<li><code>am broadcast -a android.NET.conn.CONNECTIVITY_CHANGE</code> 可以测试定义的广播</li>
-</ul>
-</li>
-<li><code>netcfg</code> 查看设备的 IP 地址</li>
-<li><code>netstat</code>查看设备的端口号信息</li>
-<li><code>app_process</code>特需场景</li>
-<li><code>dalvikvm -cp [dex文件] [运行主类]</code> 运行一个 dex 文件<ul>
-<li><code>dalvikvm -cp /data/demo.dex com.tencent.mm</code></li>
-</ul>
-</li>
-<li><code>top [-n/-m/-d/-s/-t]</code>查看当前应用 CPU 消耗信息 <ul>
-<li><code>top -d 1 -m 10</code> 还可以和 grep 结合使用</li>
-<li><code>-n</code> 刷新次数</li>
-<li><code>-m</code>最多显示多少个进程</li>
-<li><code>-d</code>刷新间隔时间（默认5秒）</li>
-<li><code>-s</code>按那列排序</li>
-<li><code>-t</code>显示线程信息（不是进程）</li>
-</ul>
-</li>
-<li><code>getprop [属性值名称]</code> 查看系统属性 <ul>
-<li><code>getprop ro.debuggable</code> 版本号、系统属性…</li>
-</ul>
-</li>
-</ul>
-<h2 id="操作-apk-命令"><a href="#操作-apk-命令" class="headerlink" title="操作 apk 命令"></a>操作 apk 命令</h2><p><strong>用 aapt 操作 apk</strong></p>
-<ul>
-<li><code>aapt dump xmltree[apk] [需要查看的资源文件 xml]</code>：查看 apk 中的信息以及编辑 apk 程序包</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aapt dump xmltree demo.apk AndroidManifest.xml &gt; xml.txt</div></pre></td></tr></table></figure>
-<ul>
-<li><code>dexdump [dex 文件路径]</code>：查看 dex 文件的详细信息</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dexdump /Users/boomhe/classes.dex</div></pre></td></tr></table></figure>
-<h2 id="进程命令"><a href="#进程命令" class="headerlink" title="进程命令"></a>进程命令</h2><p><strong>查看当前进程的内存加载情况</strong></p>
-<ul>
-<li><code>cat /proc/[pid]/maps</code>:查看进程的内存映射信息、加载了那些 so 、dex 文件等<ul>
-<li><code>ps | grep com.czcg.gwt</code></li>
-<li><code>cat /proc/7758/maps</code>：查看进程的内存映射信息</li>
-<li><code>cat /proc/7758/status</code>：查看进程的状态信息</li>
-<li><code>cat /proc/[pid]/net/tcp/tcp6/udp/udp6</code>：查看应用的端口信息</li>
-</ul>
-</li>
-</ul>
 
       
 
@@ -322,7 +251,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
         		</li>
       		
 		</ul>
@@ -378,7 +307,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/05/逆向常用命令/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/05/28/如何实现高效地线程安全/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -392,18 +321,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/07/Multidex和反编译 Apk /" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          MultiDex 使用 与 反编译
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/02/06/Java 序列化错误/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">java.io.NotSerializableException</div>
+    <a href="/2018/05/24/我的简历/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">个人简历</div>
       <i class="icon-circle-right"></i>
     </a>
   
