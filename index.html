@@ -163,6 +163,118 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-数组为什么从0开始编号" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#读《数据结构与算法》笔记-数组为什么从-0-开始编号"><span class="toc-number">1.</span> <span class="toc-text">读《数据结构与算法》笔记-数组为什么从 0 开始编号</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数组-Array-是一种线性表数据结构，用一组连续的内存空间来存储一组具有相同类型的数据"><span class="toc-number">1.1.</span> <span class="toc-text">数组(Array) 是一种线性表数据结构，用一组连续的内存空间来存储一组具有相同类型的数据</span></a></li></ol></li></ol>
+		</div>
+		
+		
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-10-02</code></p>
+</blockquote>
+<h2 id="读《数据结构与算法》笔记-数组为什么从-0-开始编号"><a href="#读《数据结构与算法》笔记-数组为什么从-0-开始编号" class="headerlink" title="读《数据结构与算法》笔记-数组为什么从 0 开始编号"></a>读《数据结构与算法》笔记-数组为什么从 0 开始编号</h2><h3 id="数组-Array-是一种线性表数据结构，用一组连续的内存空间来存储一组具有相同类型的数据"><a href="#数组-Array-是一种线性表数据结构，用一组连续的内存空间来存储一组具有相同类型的数据" class="headerlink" title="数组(Array) 是一种线性表数据结构，用一组连续的内存空间来存储一组具有相同类型的数据"></a>数组(Array) 是一种线性表数据结构，用一组连续的内存空间来存储一组具有相同类型的数据</h3><blockquote>
+<p>线性结构</p>
+</blockquote>
+<ul>
+<li>线性表(Linear List)：数据排成一条线一样的结构，每个线性表上的数据最多只有前后两个方向。数组、链表、队列、栈也是线性表结构。</li>
+</ul>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E7%BA%BF%E6%80%A7%E8%A1%A8.jpg" alt=""></p>
+<ul>
+<li>非线性表：二叉树、堆、图。</li>
+</ul>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E9%9D%9E%E7%BA%BF%E6%80%A7%E8%A1%A8.jpg" alt=""></p>
+<blockquote>
+<p>随机访问</p>
+</blockquote>
+<ul>
+<li>连续的内存空间和相同类型的数据，正是这两个限制，它才有了<strong>随机访问</strong>的特性。这两个限制也让数组的删除、插入变得非常低效，为了保证连续性，就需要做大量的数据搬迁工作</li>
+</ul>
+<p>数组内存地址分配</p>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E6%95%B0%E7%BB%84%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80.jpg" alt=""></p>
+<p>数组如何实现根据下标随机访问数组元素的？</p>
+<p>计算机通过地址来访问内存中的数据，当需要随机访问数组中的某个元素时，会首先通过寻址公式计算出该元素存储的内存地址：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a[i]_address = base_address + i * data_type_size</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">base_address 内存块的首地址</div><div class="line">data_type_size 数组中每个元素的大小</div></pre></td></tr></table></figure>
+<blockquote>
+<p>为什么从 0 开始编号</p>
+</blockquote>
+<ul>
+<li>随机访问内存寻址</li>
+</ul>
+<p><code>下标</code>最确切的定义应该是<code>偏移(offset)</code>,如果用 a 来表示数组的首地址，a[0] 就是偏移为 0 的位置既首地址，a[k] 就是表示偏移为 k 个 type_size 的位置，所以计算 a[k] 的内存地址公式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a[k]_address = base_address + k * type_size</div></pre></td></tr></table></figure>
+<p>如果数组从 1 开始计数，计算 a[k] 的内存地址是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a[k]_address = base_address + (k-1) * type_size</div></pre></td></tr></table></figure>
+<p>这样每次随机访问数组元素都多了一次运算，对 CPU 来说，就是多了一次减法指令。</p>
+<ul>
+<li>最主要的原因是历史原因。</li>
+</ul>
+<blockquote>
+<p>小结：</p>
+</blockquote>
+<ul>
+<li>使用 ArrayList 不需要关系底层容器逻辑，每次存储空间不够的时候，它都会扩容 1.5 倍的大小。扩容操作涉及内存申请和数据迁移，这个操作是比较耗时的，如果能先确定存储数据的大小，最好在创建 ArrayList 的时候先指定数据大小</li>
+</ul>
+<blockquote>
+<p>纠错</p>
+</blockquote>
+<ul>
+<li>错误认识：数组的查找操作时间复杂度并不是 O(1),即便是排好的数组，用二分法查找，时间复杂度也是 O(logn)</li>
+<li>正确表述：数组支持随机访问，根据下标随机访问的时间复杂度为 O(1)。</li>
+</ul>
+<blockquote>
+<p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+<p><img src="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/04/数组为什么从0开始编号/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-如何实现高效地线程安全" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -335,13 +447,12 @@
 <p>我会的</p>
 </blockquote>
 <ul>
-<li>三年半 Android 客户端开发经验</li>
 <li>熟悉 Http TCP/IP 协议</li>
 <li>熟悉 Handler 机制 View 事件分发</li>
 <li>熟悉常见用设计模式、了解 RxJava、OkHttp 等框架</li>
 <li>具有 ES6/React 等移动设备上前端开发经验</li>
+<li>了解垃圾回收机制，以及 UI 优化和内存优化</li>
 <li>了解 JVM、adb、apktool、shell 操作</li>
-<li>了解底层代码（framework 层、主要是包解析那块）安全、逆向</li>
 </ul>
 <h3 id="工作经验"><a href="#工作经验" class="headerlink" title="工作经验"></a>工作经验</h3><table>
 <thead>
@@ -489,97 +600,6 @@
 
 
   
-    <article id="post-so 文件解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/28/so 文件解析/">so 文件解析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/28/so 文件解析/" class="archive-article-date">
-  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#so-文件"><span class="toc-number">1.</span> <span class="toc-text">so 文件</span></a></li></ol>
-		</div>
-		
-		
-        <h2 id="so-文件"><a href="#so-文件" class="headerlink" title="so 文件"></a>so 文件</h2><blockquote>
-<p>Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。</p>
-</blockquote>
-<ul>
-<li>readelf -h xxx.so:查看 so 文件的头部信息<ul>
-<li>readelf -h </li>
-<li>35032967</li>
-</ul>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/28/so 文件解析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-代码混淆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -657,6 +677,97 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/28/代码混淆/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-so 文件解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/28/so 文件解析/">so 文件解析</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/28/so 文件解析/" class="archive-article-date">
+  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#so-文件"><span class="toc-number">1.</span> <span class="toc-text">so 文件</span></a></li></ol>
+		</div>
+		
+		
+        <h2 id="so-文件"><a href="#so-文件" class="headerlink" title="so 文件"></a>so 文件</h2><blockquote>
+<p>Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。</p>
+</blockquote>
+<ul>
+<li>readelf -h xxx.so:查看 so 文件的头部信息<ul>
+<li>readelf -h </li>
+<li>35032967</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/28/so 文件解析/">展开全文 >></a>
         </p>
       
 
@@ -1636,130 +1747,6 @@
 
 
   
-    <article id="post-GDD " class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/GDD /">GDD  一个值得为之奋斗的理由</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/24/GDD /" class="archive-article-date">
-  	<time datetime="2017-12-24T10:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Google-Developer-Day"><span class="toc-number">1.</span> <span class="toc-text">Google Developer Day</span></a></li></ol>
-		</div>
-		
-		
-        <h3 id="Google-Developer-Day"><a href="#Google-Developer-Day" class="headerlink" title="Google Developer Day"></a>Google Developer Day</h3><p>2017 年 12 月 14 日一个值的纪念的日子、参加了 GDD 大会</p>
-<p><img src="https://avatars2.githubusercontent.com/u/10544851"></p>
-<p>本来回来当晚就打算记录下大会的感受、一度怀疑自己的写作水平、以及拍照太 Low 、实在是不想写、最终在理性的大脑下决定必须得写点什么留给以后的自己、</p>
-<p>本次大会由 13 号和 14 号两天组成、我是一位候补选手[大哭脸]</p>
-<p>邮件.png</p>
-<p>不过这样我也是蛮激动的</p>
-<p>这次大会的主题：</p>
-<p>Day One：12.13</p>
-<ul>
-<li>渐进式网页应用</li>
-<li>Android Oreo 和 支持库</li>
-<li>AR VR 机器学习</li>
-<li>FireBase TensorFlow</li>
-<li>Kotlin </li>
-<li>PWA 和 AMP </li>
-</ul>
-<p>Day Two：12.14</p>
-<ul>
-<li>Android Things</li>
-<li>Flutter</li>
-</ul>
-<p>早些时候在朋友圈约好了两位一同参加的小伙伴、主要是没见过世面、担心自己迷路、不知道的东西太多了、在某些方面算是给自己壮壮胆吧、</p>
-<p>这次大会主要是 Android Oreo 8.0 的更新、Kotlin 开发语言、以及机器学习</p>
-<p>人工智能将改变人们的生活方式</p>
-<p>签到处就领取到一份神秘礼品：DIY 音响</p>
-<p><img src="/2017/12/24/GDD /Users/boomhe/Downloads/GDD 大会/贴纸.JPG" alt=""></p>
-<p>根据提示自己动手合成</p>
-<p><img src="/2017/12/24/GDD /Users/boomhe/Downloads/GDD 大会/DIY 音响.JPG" alt=""></p>
-<p>场馆是这样的、超用心布置的</p>
-<p><img src="/2017/12/24/GDD /Users/boomhe/Downloads/GDD 大会/IMG_0506.JPG" alt=""></p>
-<p>这是在向广大开发者介绍 Android Oreo 如何更好的降低耗电、节省资源、提升用户体验</p>
-<p><img src="/2017/12/24/GDD /Users/boomhe/Downloads/GDD 大会/会场01.JPG" alt=""></p>
-<p><img src="/2017/12/24/GDD /Users/boomhe/Downloads/GDD 大会/会场.JPG" alt=""></p>
-<p>每场会场都有一个主题、听完反馈建议、还可以拥有 Google 回馈给广大用户的也是一份小礼品[开心]</p>
-<p>包包.JPG</p>
-<p>/包包.JPG</p>
-<p><img src="/2017/12/24/GDD /Users/boomhe/Downloads/GDD 大会/包包.JPG" alt=""></p>
-<p>场外超级热闹、各种体验、Google AI 首当其冲</p>
-<p><img src="/2017/12/24/GDD /Users/boomhe/Downloads/GDD 大会/Google AI.JPG" alt=""></p>
-<p>我这个小儿子就是用 AI 技术体验获取的[哈哈]</p>
-<p><img src="/2017/12/24/GDD /Users/boomhe/Downloads/GDD 大会/娃娃.JPG" alt=""></p>
-<p>场馆全是 Google 风格、不亲身体验完成遐想不出 Google 的魅力！</p>
-<p>Google 精神离不开 分享、技术、开源 </p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GDD</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/24/GDD /">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1865,10 +1852,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">MAC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
               </li>
              
@@ -1877,7 +1860,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
+                <a href="javascript:void(0)" class="js-tag color4">MAC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1885,11 +1868,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">保险</a>
+                <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">保险</a>
               </li>
              
               <li class="article-tag-list-item">
