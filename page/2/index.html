@@ -163,6 +163,122 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java 序列化错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/06/Java 序列化错误/">java.io.NotSerializableException</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/06/Java 序列化错误/" class="archive-article-date">
+  	<time datetime="2018-02-06T07:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#先来看看日志："><span class="toc-number">1.</span> <span class="toc-text">先来看看日志：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第一次找到的信息"><span class="toc-number">2.</span> <span class="toc-text">第一次找到的信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二次"><span class="toc-number">3.</span> <span class="toc-text">第二次</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三次"><span class="toc-number">4.</span> <span class="toc-text">第三次</span></a></li></ol>
+		</div>
+		
+		
+        <p>这是一个不简单的 java 序列化的错误。</p>
+<h3 id="先来看看日志："><a href="#先来看看日志：" class="headerlink" title="先来看看日志："></a>先来看看日志：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">1 java.lang.RuntimeException:Parcelable encountered IOException writing serializable object (name = com.czcg.gwt.view.activity.map.POIMapActivity$3)</div><div class="line">2 android.os.Parcel.writeSerializable(Parcel.java:1505)</div><div class="line">3 ......</div><div class="line">4 Caused by:</div><div class="line">5 java.io.NotSerializableException:com.czcg.gwt.view.activity.map.POIMapActivity</div><div class="line">6 java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1224)</div><div class="line">7 java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1584)</div><div class="line">8 java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1549)</div><div class="line">9 java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1472)</div><div class="line">10 java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1218)</div><div class="line">11 java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:346)</div><div class="line">12 android.os.Parcel.writeSerializable(Parcel.java:1500)</div><div class="line">13 android.os.Parcel.writeValue(Parcel.java:1453)</div><div class="line">14 android.os.Parcel.writeArrayMapInternal(Parcel.java:702)</div><div class="line">15 android.os.BaseBundle.writeToParcelInner(BaseBundle.java:1412)</div><div class="line">16 android.os.Bundle.writeToParcel(Bundle.java:1133)</div><div class="line">17 android.os.Parcel.writeBundle(Parcel.java:742)</div><div class="line">18 android.support.v4.app.FragmentState.writeToParcel(Fragment.java)</div><div class="line">19 android.os.Parcel.writeTypedArray(Parcel.java:1285)</div><div class="line">20 android.support.v4.app.FragmentManagerState.writeToParcel(FragmentManager.java)</div><div class="line">21 android.os.Parcel.writeParcelable(Parcel.java:1474)</div><div class="line">22 android.os.Parcel.writeValue(Parcel.java:1380)</div><div class="line">23 android.os.Parcel.writeArrayMapInternal(Parcel.java:702)</div><div class="line">24 android.os.BaseBundle.writeToParcelInner(BaseBundle.java:1412)</div><div class="line">25 android.os.Bundle.writeToParcel(Bundle.java:1133)</div><div class="line">26 android.os.Parcel.writeBundle(Parcel.java:742)</div><div class="line">27 android.app.ActivityManagerProxy.activityStopped(ActivityManagerNative.java:3629)</div><div class="line">28 android.app.ActivityThread$StopInfo.run(ActivityThread.java:3974)</div><div class="line">29 android.os.Handler.handleCallback(Handler.java:761)</div><div class="line">30 android.os.Handler.dispatchMessage(Handler.java:98)</div><div class="line">31 android.os.Looper.loop(Looper.java:156)</div><div class="line">32 android.app.ActivityThread.main(ActivityThread.java:6523)</div><div class="line">33 java.lang.reflect.Method.invoke(Native Method)</div><div class="line">34 com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:942)</div><div class="line">35 com.android.internal.os.ZygoteInit.main(ZygoteInit.java:832)</div></pre></td></tr></table></figure>
+<p>项目中用到的日志管理是腾讯的 bugly。从日记中能一眼发现问题还是比较有难度的：</p>
+<h3 id="第一次找到的信息"><a href="#第一次找到的信息" class="headerlink" title="第一次找到的信息"></a>第一次找到的信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android.os.Parcel.writeSerializable(Parcel.java:1505)</div></pre></td></tr></table></figure>
+<p>根据第二行的提示我们找到 Parcel 类中的 <code>writeSerializable</code> 方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Write a generic serializable object in to a Parcel.  It is strongly</div><div class="line"> * recommended that this method be avoided, since the serialization</div><div class="line"> * overhead is extremely large, and this approach will be much slower than</div><div class="line"> * using the other approaches to writing data in to a Parcel.</div><div class="line"> */</div><div class="line"> // 意思大概就是：把一个通用的可序列化的对象写入到 Parcel 中、</div><div class="line"> // 但是它不推荐这么做、因为产生的开销非常大</div><div class="line">public final void writeSerializable(Serializable s) &#123;</div><div class="line">    if (s == null) &#123;</div><div class="line">        writeString(null);</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    String name = s.getClass().getName();</div><div class="line">    writeString(name);</div><div class="line"></div><div class="line">    ByteArrayOutputStream baos = new ByteArrayOutputStream();</div><div class="line">    try &#123;</div><div class="line">    // 从日志中我们可以看出报错就是在这里开始的</div><div class="line">        ObjectOutputStream oos = new ObjectOutputStream(baos);</div><div class="line">        oos.writeObject(s);</div><div class="line">        oos.close();</div><div class="line"></div><div class="line">        writeByteArray(baos.toByteArray());</div><div class="line">    &#125; catch (IOException ioe) &#123;</div><div class="line">        throw new RuntimeException(&quot;Parcelable encountered &quot; +</div><div class="line">            &quot;IOException writing serializable object (name = &quot; + name +</div><div class="line">            &quot;)&quot;, ioe);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着我们找到 <code>ObjectOutputStream</code> 这个类、看看它的构造方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 创建一个写入指定 OutputStream 的 ObjectOutputStream。</div><div class="line">// 这个构造函数将序列化流头写入</div><div class="line">public ObjectOutputStream(OutputStream out) throws IOException &#123;</div><div class="line">        verifySubclass();</div><div class="line">        bout = new BlockDataOutputStream(out);</div><div class="line">        handles = new HandleTable(10, (float) 3.00);</div><div class="line">        subs = new ReplaceTable(10, (float) 3.00);</div><div class="line">        enableOverride = false;</div><div class="line">        writeStreamHeader();</div><div class="line">        bout.setBlockDataMode(true);</div><div class="line">        if (extendedDebugInfo) &#123;</div><div class="line">            debugInfoStack = new DebugTraceInfoStack();</div><div class="line">        &#125; else &#123;</div><div class="line">            debugInfoStack = null;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>接着我们找到日志中出现的几个方法 <code>writeObject</code> 和 <code>defaultWriteFields</code>、<code>writeSerialData</code> 我就不贴源码了</p>
+<ul>
+<li><code>writeObject -&gt; writeObject0 -&gt; writeOrdinaryObject</code>：写入对象</li>
+<li><code>writeObject0 ：Underlying writeObject/writeUnshared implementation.</code>实现基本的写对象共享问题[不知道怎么理解、就这样理解吧]</li>
+<li><code>writeOrdinaryObject：这个方法是被 writeObject0 方法调用的</code>：写入一个可序列号对象流</li>
+<li><code>defaultWriteFields</code>获取并写入给定对象的可序列化字段的值</li>
+<li><code>writeSerialData ：Writes instance data for each serializable class of given object, from superclass to subclass.</code> ：从父类写入给定对象的每个可序列化类的实例数据到子类[不知道怎么翻译、大佬们别打我]。</li>
+</ul>
+<h3 id="第二次"><a href="#第二次" class="headerlink" title="第二次"></a>第二次</h3><p>其实经过前一次的排查、心里基本有点 B Number 了、Java 层的 <code>serializable</code> 序列化问题出错了、是啥数据？带着这个问题找到代码中序列号的数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onSaveInstanceState(Bundle outState) &#123;</div><div class="line">    super.onSaveInstanceState(outState);</div><div class="line">    outState.putParcelableArrayList(&quot;mPoiInfos&quot;, mPoiInfos);</div><div class="line">    outState.putString(&quot;mAddress&quot;, mAddress);</div><div class="line">    outState.putParcelable(&quot;mLatLng&quot;, mLatLng);</div><div class="line">    outState.putParcelable(&quot;mBDLocation&quot;, mBDLocation);</div><div class="line">    outState.putInt(&quot;mCurrentPosition&quot;, mCurrentPosition);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对、就这些数据、如果出错也就是这个 list 了。 看日志 12 行、这里我们又回到了 Parcel 类中的 <code>writeSerializable</code> 方法、这里不去扒源码了、简单的走下流程就是下面这样的：</p>
+<p><code>writeArrayMapInternal -&gt; writeValue -&gt; writeSerializable</code></p>
+<p>说到底就是数据没有序列化成功。</p>
+<h3 id="第三次"><a href="#第三次" class="headerlink" title="第三次"></a>第三次</h3><p>其实找到这里整个人都崩溃了、有没有 98 年的雪碧、给我来一打、因为自己根本就没有思路来、完全找不到路了。人人处处是惊喜、就在这时、我们项目中的大佬不知道经过了怎样的坎坷（可能是买肉了）、终于找到了问题的根本所在、给他 10086 个赞。<br>信息就在日志第一句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1 java.lang.RuntimeException:Parcelable encountered IOException writing serializable object (name = com.czcg.gwt.view.activity.map.POIMapActivity$3)</div></pre></td></tr></table></figure>
+<p>请注意看 <code>POIMapActivity$3</code> 中的 <code>$3</code> 、啥意思呢：就是说它表示<code>POIMapActivity</code> 类中第三个动态产生的对象。</p>
+<ul>
+<li><code>mPoiSearch.setOnGetPoiSearchResultListener(new OnGetPoiSearchResultListener()</code>：地图热点搜索监听</li>
+<li><code>BaiduMap.OnMarkerClickListener onMarkerClickListener = new BaiduMap.OnMarkerClickListener()</code>：地图标记物点击监听</li>
+<li><code>widget.setShootingListener(new SheetViewWidget.ShootingListener()</code>：组件点击监听</li>
+</ul>
+<p>问题就是说 <code>SheetViewWidget.ShootingListener</code> 这个监听在序列化的时候没成功、问题的关键是：在序列化的时候 <code>widget</code> 这个监听对象每次都是 <code>new</code> 的导致报错。</p>
+<p>处理方法：</p>
+<ul>
+<li>判断当监听对象为空时不处理事件</li>
+<li>这个控件是使用的第三方库、监听接口抽离出来</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">项目异常</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/06/Java 序列化错误/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-GDD " class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -869,96 +985,6 @@
 
 
   
-    <article id="post-MAC常用操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/01/MAC常用操作/">MAC 常用操作</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/01/MAC常用操作/" class="archive-article-date">
-  	<time datetime="2017-09-01T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MAC-常用操作"><span class="toc-number">1.</span> <span class="toc-text">MAC 常用操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对应键盘"><span class="toc-number">1.1.</span> <span class="toc-text">对应键盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-number">1.2.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境配置"><span class="toc-number">1.3.</span> <span class="toc-text">环境配置</span></a></li></ol></li></ol>
-		</div>
-		
-		
-        <h2 id="MAC-常用操作"><a href="#MAC-常用操作" class="headerlink" title="MAC 常用操作"></a>MAC 常用操作</h2><h3 id="对应键盘"><a href="#对应键盘" class="headerlink" title="对应键盘"></a>对应键盘</h3><pre><code>Command    ⌘
-Option    ⌥
-Control    ⌃
-Shift    ⌂
-</code></pre><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><pre><code>显示隐藏文件    defaults write com.apple.finder AppleShowAllFiles -bool true
-关闭显示隐藏文件 defaults write com.apple.finder AppleShowAllFiles -bool false
-禁止.DS_store生成 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE    
-恢复.DS_store生成 defaults delete com.apple.desktopservices DSDontWriteNetworkStores    
-</code></pre><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1. 启动Terminal终端工具</div><div class="line">2. 输入cd ~/ 进入当前用户的 home 目录</div><div class="line">3. 创建：touch .bash_profile</div><div class="line">4. 打开并编辑：open .bash_profile</div><div class="line">5. 在文件中写入以下内容：export PATH=$&#123;PATH&#125;:/Users/boomhe/Library/Android/sdk/platform-tools</div><div class="line">6. 执行如下命令：source .bash_profile</div></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MAC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/01/MAC常用操作/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-生活书" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1024,6 +1050,96 @@ Shift    ⌂
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/09/01/生活书/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-MAC常用操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/01/MAC常用操作/">MAC 常用操作</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/01/MAC常用操作/" class="archive-article-date">
+  	<time datetime="2017-09-01T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MAC-常用操作"><span class="toc-number">1.</span> <span class="toc-text">MAC 常用操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对应键盘"><span class="toc-number">1.1.</span> <span class="toc-text">对应键盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-number">1.2.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境配置"><span class="toc-number">1.3.</span> <span class="toc-text">环境配置</span></a></li></ol></li></ol>
+		</div>
+		
+		
+        <h2 id="MAC-常用操作"><a href="#MAC-常用操作" class="headerlink" title="MAC 常用操作"></a>MAC 常用操作</h2><h3 id="对应键盘"><a href="#对应键盘" class="headerlink" title="对应键盘"></a>对应键盘</h3><pre><code>Command    ⌘
+Option    ⌥
+Control    ⌃
+Shift    ⌂
+</code></pre><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><pre><code>显示隐藏文件    defaults write com.apple.finder AppleShowAllFiles -bool true
+关闭显示隐藏文件 defaults write com.apple.finder AppleShowAllFiles -bool false
+禁止.DS_store生成 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE    
+恢复.DS_store生成 defaults delete com.apple.desktopservices DSDontWriteNetworkStores    
+</code></pre><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1. 启动Terminal终端工具</div><div class="line">2. 输入cd ~/ 进入当前用户的 home 目录</div><div class="line">3. 创建：touch .bash_profile</div><div class="line">4. 打开并编辑：open .bash_profile</div><div class="line">5. 在文件中写入以下内容：export PATH=$&#123;PATH&#125;:/Users/boomhe/Library/Android/sdk/platform-tools</div><div class="line">6. 执行如下命令：source .bash_profile</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MAC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/01/MAC常用操作/">展开全文 >></a>
         </p>
       
 
@@ -1572,161 +1688,6 @@ Shift    ⌂
 
 
   
-    <article id="post-项目库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/项目库/">项目库依赖</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/项目库/" class="archive-article-date">
-  	<time datetime="2017-08-23T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目库"><span class="toc-number">1.</span> <span class="toc-text">项目库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#库依赖"><span class="toc-number">1.1.</span> <span class="toc-text">库依赖</span></a></li></ol></li></ol>
-		</div>
-		
-		
-        <h1 id="项目库"><a href="#项目库" class="headerlink" title="项目库"></a>项目库</h1><h2 id="库依赖"><a href="#库依赖" class="headerlink" title="库依赖"></a>库依赖</h2><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>GitHub 地址</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>TakePhoto</code> 是一款用于 Android 设备获取照片（拍照或从相册、文件中选择）、裁剪图片、压缩图片的开源工具库</td>
-<td><a href="https://github.com/crazycodeboy/TakePhoto" target="_blank" rel="external">TakePhoto</a></td>
-</tr>
-<tr>
-<td><code>PhotoView</code>一个流畅的图片浏览缩放控件</td>
-<td><a href="https://github.com/bm-x/PhotoView" target="_blank" rel="external">PhotoView</a></td>
-</tr>
-<tr>
-<td><code>FileDownloader</code>Android 文件下载引擎，稳定、高效、灵活、简单易用</td>
-<td><a href="https://github.com/lingochamp/FileDownloader" target="_blank" rel="external">FileDownloader</a></td>
-</tr>
-<tr>
-<td><code>FlycoTabLayout</code>一个 Android TabLayout 库</td>
-<td><a href="https://github.com/H07000223/FlycoTabLayout" target="_blank" rel="external">FlycoTabLayout</a></td>
-</tr>
-<tr>
-<td><code>PagerBottomTabStrip</code>Android 的底部导航栏</td>
-<td><a href="https://github.com/tyzlmjj/PagerBottomTabStrip" target="_blank" rel="external">PagerBottomTabStrip</a></td>
-</tr>
-<tr>
-<td><code>PermissionGen</code>Android API 易于使用的 Android M 权限</td>
-<td><a href="https://github.com/lovedise/PermissionGen" target="_blank" rel="external">PermissionGen</a></td>
-</tr>
-<tr>
-<td><code>PermissionsDispatcher</code>简单的基于注释的 API 来处理运行时权限</td>
-<td><a href="https://github.com/hotchemi/PermissionsDispatcher" target="_blank" rel="external">PermissionsDispatcher</a></td>
-</tr>
-<tr>
-<td><code>MaterialDateTimePicker</code>选择日期或时间</td>
-<td><a href="https://github.com/wdullaer/MaterialDateTimePicker" target="_blank" rel="external">MaterialDateTimePicker</a></td>
-</tr>
-<tr>
-<td><code>zxingLibrary</code>快速集成二维码扫描功能</td>
-<td><a href="https://github.com/yipianfengye/android-zxingLibrary" target="_blank" rel="external">zxingLibrary</a></td>
-</tr>
-<tr>
-<td><code>Luban</code> 鲁班 Android 图片压缩工具，仿微信朋友圈压缩策略</td>
-<td><a href="https://github.com/Curzibn/Luban" target="_blank" rel="external">Luban</a></td>
-</tr>
-<tr>
-<td><code>materialish-progress</code>Material Style  进度轮与 2.3 兼容</td>
-<td><a href="https://github.com/pnikosis/materialish-progress" target="_blank" rel="external">materialish-progress</a></td>
-</tr>
-<tr>
-<td><code>Logger</code>简单，漂亮和强大的 Android 日志</td>
-<td><a href="https://github.com/orhanobut/logger" target="_blank" rel="external">Logger</a></td>
-</tr>
-<tr>
-<td><code>Picasso</code>功能强大的图像下载和缓存库</td>
-<td><a href="https://github.com/square/picasso" target="_blank" rel="external">Picasso</a></td>
-</tr>
-<tr>
-<td><code>Glide</code>图像加载和缓存库</td>
-<td><a href="https://github.com/bumptech/glide" target="_blank" rel="external">Glide</a></td>
-</tr>
-<tr>
-<td><code>leakcanary</code>square 性能监控</td>
-<td><a href="https://github.com/square/leakcanary" target="_blank" rel="external">leakcanary</a></td>
-</tr>
-<tr>
-<td><code>blockcanary</code>非侵入式的性能监控组件</td>
-<td><a href="https://github.com/markzhai/AndroidPerformanceMonitor" target="_blank" rel="external">blockcanary</a></td>
-</tr>
-</tbody>
-</table>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">库依赖</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/23/项目库/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1828,11 +1789,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GDD</a>
+                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
+                <a href="javascript:void(0)" class="js-tag color4">GDD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1844,11 +1805,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RxJava 和 RxAndroid</a>
+                <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
+                <a href="javascript:void(0)" class="js-tag color4">RxJava 和 RxAndroid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1860,11 +1821,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ADB</a>
+                <a href="javascript:void(0)" class="js-tag color4">关于我</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">关于我</a>
+                <a href="javascript:void(0)" class="js-tag color4">ADB</a>
               </li>
              
               <li class="article-tag-list-item">

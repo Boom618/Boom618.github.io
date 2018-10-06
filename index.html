@@ -163,6 +163,112 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-链表如何实现 LRU 缓存淘汰算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#读《数据结构与算法》笔记-链表如何实现-LRU-缓存淘汰算法"><span class="toc-number">1.</span> <span class="toc-text">读《数据结构与算法》笔记-链表如何实现 LRU 缓存淘汰算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#链表-Linked-List-经典的应用场景就是-LRU-缓存淘汰算法，常见的策略有三种：先进先出-FIFO-First-In-First-Out-、最少使用策略-LFU-Least-Frequently-Used-、最近最少使用策略-LRU-Least-Recently-Used"><span class="toc-number">1.1.</span> <span class="toc-text">链表(Linked List)经典的应用场景就是 LRU 缓存淘汰算法，常见的策略有三种：先进先出 FIFO(First In,First Out)、最少使用策略 LFU (Least Frequently Used)、最近最少使用策略 LRU (Least Recently Used)</span></a></li></ol></li></ol>
+		</div>
+		
+		
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-10-03</code></p>
+</blockquote>
+<h2 id="读《数据结构与算法》笔记-链表如何实现-LRU-缓存淘汰算法"><a href="#读《数据结构与算法》笔记-链表如何实现-LRU-缓存淘汰算法" class="headerlink" title="读《数据结构与算法》笔记-链表如何实现 LRU 缓存淘汰算法"></a>读《数据结构与算法》笔记-链表如何实现 LRU 缓存淘汰算法</h2><h3 id="链表-Linked-List-经典的应用场景就是-LRU-缓存淘汰算法，常见的策略有三种：先进先出-FIFO-First-In-First-Out-、最少使用策略-LFU-Least-Frequently-Used-、最近最少使用策略-LRU-Least-Recently-Used"><a href="#链表-Linked-List-经典的应用场景就是-LRU-缓存淘汰算法，常见的策略有三种：先进先出-FIFO-First-In-First-Out-、最少使用策略-LFU-Least-Frequently-Used-、最近最少使用策略-LRU-Least-Recently-Used" class="headerlink" title="链表(Linked List)经典的应用场景就是 LRU 缓存淘汰算法，常见的策略有三种：先进先出 FIFO(First In,First Out)、最少使用策略 LFU (Least Frequently Used)、最近最少使用策略 LRU (Least Recently Used)"></a>链表(Linked List)经典的应用场景就是 LRU 缓存淘汰算法，常见的策略有三种：先进先出 FIFO(First In,First Out)、最少使用策略 LFU (Least Frequently Used)、最近最少使用策略 LRU (Least Recently Used)</h3><blockquote>
+<p>数组和链表区别</p>
+</blockquote>
+<p>如果我们申请一个 100MB 大小的数组，当内存中没有连续的、足够大的存储空间时，即便内存剩余总可用空间大于 100MB 仍然会申请失败。</p>
+<p>而链表不需要一块连续的内存空间，通过“指针”将一组零散的内存块串联起来，在这种情况下根本不会有问题。</p>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.jpg" alt=""></p>
+<ul>
+<li>单链表</li>
+</ul>
+<p>第一个节点叫做头节点，最后一个节点叫做尾节点。头节点用来记录链表的基地址，有了它就可以遍历得到整条链表，尾节点指向一个空地址 NULL ，表示这是链表的最后一个节点。</p>
+<p>链表也支持数据的查找、插入和删除操作。</p>
+<p>链表不需要连续的内存空间存储数据，所以在链表中插入和删除操作非常快。插入和删除的时间复杂度是 O(1)，随机访问的时间复杂度是 O(n)。</p>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E5%8D%95%E9%93%BE%E8%A1%A8.jpg" alt=""></p>
+<ul>
+<li>循环链表</li>
+</ul>
+<p>循环链表是一种特殊的单链表，尾节点指向链表的头节点。循环链表的优点是从尾节点到头节点比较方便。当要处理的数据具有环型结构特点时，就特别适合采用循环链表，比如：<code>约瑟夫问题</code></p>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8.jpg" alt=""></p>
+<ul>
+<li>双向链表</li>
+</ul>
+<p>它支持两个方向，一个后继指针 next 指向后面的节点，一个前驱指针 prev 指向前面的节点。双向链表需要额外的两个空间来存储后继节点和前驱节点，所以比单链表占用更多的存储空间，但可以支持双向遍历。</p>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.jpg" alt=""></p>
+<p>链表中删除数据的两种情况：</p>
+<ul>
+<li>删除节点中<code>值等于某个给定值</code>的节点</li>
+<li>删除给定指针指向的节点</li>
+</ul>
+<p>对于第一种情况，都需要从头节点开始一个一个遍历直到找到给定值的节点，再通过指针操作将其删除。单纯的删除操作时间复杂度是 O(1)，但是为了遍历查找，对应的时间复杂度是 O(n) 所以删除值等于给定值的节点对应的链表操作的时间复杂度是O(n)</p>
+<p>第二种情况，单链表不支持直接获取前驱节点，所以还是要从头开始遍历链表，时间复杂度是O(n)。对于双向链表，这种情况就比较有优势了，双向链表保存了前驱节点的指针，不需要像单链表那样遍历，时间复杂度是O(1)。</p>
+<blockquote>
+<p>链表 VS 数组性能</p>
+</blockquote>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E9%93%BE%E8%A1%A8%20VS%20%E6%95%B0%E7%BB%84-%E6%80%A7%E8%83%BD.jpg" alt=""></p>
+<blockquote>
+<p>链表实现缓存淘汰算法</p>
+</blockquote>
+<p>思路：维护一个有序单链表，当有新的数据访问时，就从链表头开始遍历链表。</p>
+<p>1、如果数据缓存在链表中，遍历到数据对应的节点删除，然后再插入到链表的头部</p>
+<p>2、如果数据没有缓存在链表中</p>
+<ul>
+<li>缓存没满，直接插入到链表的头部</li>
+<li>缓存满了，删除尾节点，将新的数据节点插入链表的头部</li>
+</ul>
+<blockquote>
+<p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+<p><img src="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/04/链表如何实现 LRU 缓存淘汰算法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-数组为什么从0开始编号" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1631,122 +1737,6 @@
 
 
   
-    <article id="post-Java 序列化错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/06/Java 序列化错误/">java.io.NotSerializableException</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/06/Java 序列化错误/" class="archive-article-date">
-  	<time datetime="2018-02-06T07:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#先来看看日志："><span class="toc-number">1.</span> <span class="toc-text">先来看看日志：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第一次找到的信息"><span class="toc-number">2.</span> <span class="toc-text">第一次找到的信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二次"><span class="toc-number">3.</span> <span class="toc-text">第二次</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三次"><span class="toc-number">4.</span> <span class="toc-text">第三次</span></a></li></ol>
-		</div>
-		
-		
-        <p>这是一个不简单的 java 序列化的错误。</p>
-<h3 id="先来看看日志："><a href="#先来看看日志：" class="headerlink" title="先来看看日志："></a>先来看看日志：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">1 java.lang.RuntimeException:Parcelable encountered IOException writing serializable object (name = com.czcg.gwt.view.activity.map.POIMapActivity$3)</div><div class="line">2 android.os.Parcel.writeSerializable(Parcel.java:1505)</div><div class="line">3 ......</div><div class="line">4 Caused by:</div><div class="line">5 java.io.NotSerializableException:com.czcg.gwt.view.activity.map.POIMapActivity</div><div class="line">6 java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1224)</div><div class="line">7 java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1584)</div><div class="line">8 java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1549)</div><div class="line">9 java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1472)</div><div class="line">10 java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1218)</div><div class="line">11 java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:346)</div><div class="line">12 android.os.Parcel.writeSerializable(Parcel.java:1500)</div><div class="line">13 android.os.Parcel.writeValue(Parcel.java:1453)</div><div class="line">14 android.os.Parcel.writeArrayMapInternal(Parcel.java:702)</div><div class="line">15 android.os.BaseBundle.writeToParcelInner(BaseBundle.java:1412)</div><div class="line">16 android.os.Bundle.writeToParcel(Bundle.java:1133)</div><div class="line">17 android.os.Parcel.writeBundle(Parcel.java:742)</div><div class="line">18 android.support.v4.app.FragmentState.writeToParcel(Fragment.java)</div><div class="line">19 android.os.Parcel.writeTypedArray(Parcel.java:1285)</div><div class="line">20 android.support.v4.app.FragmentManagerState.writeToParcel(FragmentManager.java)</div><div class="line">21 android.os.Parcel.writeParcelable(Parcel.java:1474)</div><div class="line">22 android.os.Parcel.writeValue(Parcel.java:1380)</div><div class="line">23 android.os.Parcel.writeArrayMapInternal(Parcel.java:702)</div><div class="line">24 android.os.BaseBundle.writeToParcelInner(BaseBundle.java:1412)</div><div class="line">25 android.os.Bundle.writeToParcel(Bundle.java:1133)</div><div class="line">26 android.os.Parcel.writeBundle(Parcel.java:742)</div><div class="line">27 android.app.ActivityManagerProxy.activityStopped(ActivityManagerNative.java:3629)</div><div class="line">28 android.app.ActivityThread$StopInfo.run(ActivityThread.java:3974)</div><div class="line">29 android.os.Handler.handleCallback(Handler.java:761)</div><div class="line">30 android.os.Handler.dispatchMessage(Handler.java:98)</div><div class="line">31 android.os.Looper.loop(Looper.java:156)</div><div class="line">32 android.app.ActivityThread.main(ActivityThread.java:6523)</div><div class="line">33 java.lang.reflect.Method.invoke(Native Method)</div><div class="line">34 com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:942)</div><div class="line">35 com.android.internal.os.ZygoteInit.main(ZygoteInit.java:832)</div></pre></td></tr></table></figure>
-<p>项目中用到的日志管理是腾讯的 bugly。从日记中能一眼发现问题还是比较有难度的：</p>
-<h3 id="第一次找到的信息"><a href="#第一次找到的信息" class="headerlink" title="第一次找到的信息"></a>第一次找到的信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android.os.Parcel.writeSerializable(Parcel.java:1505)</div></pre></td></tr></table></figure>
-<p>根据第二行的提示我们找到 Parcel 类中的 <code>writeSerializable</code> 方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Write a generic serializable object in to a Parcel.  It is strongly</div><div class="line"> * recommended that this method be avoided, since the serialization</div><div class="line"> * overhead is extremely large, and this approach will be much slower than</div><div class="line"> * using the other approaches to writing data in to a Parcel.</div><div class="line"> */</div><div class="line"> // 意思大概就是：把一个通用的可序列化的对象写入到 Parcel 中、</div><div class="line"> // 但是它不推荐这么做、因为产生的开销非常大</div><div class="line">public final void writeSerializable(Serializable s) &#123;</div><div class="line">    if (s == null) &#123;</div><div class="line">        writeString(null);</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    String name = s.getClass().getName();</div><div class="line">    writeString(name);</div><div class="line"></div><div class="line">    ByteArrayOutputStream baos = new ByteArrayOutputStream();</div><div class="line">    try &#123;</div><div class="line">    // 从日志中我们可以看出报错就是在这里开始的</div><div class="line">        ObjectOutputStream oos = new ObjectOutputStream(baos);</div><div class="line">        oos.writeObject(s);</div><div class="line">        oos.close();</div><div class="line"></div><div class="line">        writeByteArray(baos.toByteArray());</div><div class="line">    &#125; catch (IOException ioe) &#123;</div><div class="line">        throw new RuntimeException(&quot;Parcelable encountered &quot; +</div><div class="line">            &quot;IOException writing serializable object (name = &quot; + name +</div><div class="line">            &quot;)&quot;, ioe);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>接着我们找到 <code>ObjectOutputStream</code> 这个类、看看它的构造方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 创建一个写入指定 OutputStream 的 ObjectOutputStream。</div><div class="line">// 这个构造函数将序列化流头写入</div><div class="line">public ObjectOutputStream(OutputStream out) throws IOException &#123;</div><div class="line">        verifySubclass();</div><div class="line">        bout = new BlockDataOutputStream(out);</div><div class="line">        handles = new HandleTable(10, (float) 3.00);</div><div class="line">        subs = new ReplaceTable(10, (float) 3.00);</div><div class="line">        enableOverride = false;</div><div class="line">        writeStreamHeader();</div><div class="line">        bout.setBlockDataMode(true);</div><div class="line">        if (extendedDebugInfo) &#123;</div><div class="line">            debugInfoStack = new DebugTraceInfoStack();</div><div class="line">        &#125; else &#123;</div><div class="line">            debugInfoStack = null;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>接着我们找到日志中出现的几个方法 <code>writeObject</code> 和 <code>defaultWriteFields</code>、<code>writeSerialData</code> 我就不贴源码了</p>
-<ul>
-<li><code>writeObject -&gt; writeObject0 -&gt; writeOrdinaryObject</code>：写入对象</li>
-<li><code>writeObject0 ：Underlying writeObject/writeUnshared implementation.</code>实现基本的写对象共享问题[不知道怎么理解、就这样理解吧]</li>
-<li><code>writeOrdinaryObject：这个方法是被 writeObject0 方法调用的</code>：写入一个可序列号对象流</li>
-<li><code>defaultWriteFields</code>获取并写入给定对象的可序列化字段的值</li>
-<li><code>writeSerialData ：Writes instance data for each serializable class of given object, from superclass to subclass.</code> ：从父类写入给定对象的每个可序列化类的实例数据到子类[不知道怎么翻译、大佬们别打我]。</li>
-</ul>
-<h3 id="第二次"><a href="#第二次" class="headerlink" title="第二次"></a>第二次</h3><p>其实经过前一次的排查、心里基本有点 B Number 了、Java 层的 <code>serializable</code> 序列化问题出错了、是啥数据？带着这个问题找到代码中序列号的数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onSaveInstanceState(Bundle outState) &#123;</div><div class="line">    super.onSaveInstanceState(outState);</div><div class="line">    outState.putParcelableArrayList(&quot;mPoiInfos&quot;, mPoiInfos);</div><div class="line">    outState.putString(&quot;mAddress&quot;, mAddress);</div><div class="line">    outState.putParcelable(&quot;mLatLng&quot;, mLatLng);</div><div class="line">    outState.putParcelable(&quot;mBDLocation&quot;, mBDLocation);</div><div class="line">    outState.putInt(&quot;mCurrentPosition&quot;, mCurrentPosition);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>对、就这些数据、如果出错也就是这个 list 了。 看日志 12 行、这里我们又回到了 Parcel 类中的 <code>writeSerializable</code> 方法、这里不去扒源码了、简单的走下流程就是下面这样的：</p>
-<p><code>writeArrayMapInternal -&gt; writeValue -&gt; writeSerializable</code></p>
-<p>说到底就是数据没有序列化成功。</p>
-<h3 id="第三次"><a href="#第三次" class="headerlink" title="第三次"></a>第三次</h3><p>其实找到这里整个人都崩溃了、有没有 98 年的雪碧、给我来一打、因为自己根本就没有思路来、完全找不到路了。人人处处是惊喜、就在这时、我们项目中的大佬不知道经过了怎样的坎坷（可能是买肉了）、终于找到了问题的根本所在、给他 10086 个赞。<br>信息就在日志第一句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1 java.lang.RuntimeException:Parcelable encountered IOException writing serializable object (name = com.czcg.gwt.view.activity.map.POIMapActivity$3)</div></pre></td></tr></table></figure>
-<p>请注意看 <code>POIMapActivity$3</code> 中的 <code>$3</code> 、啥意思呢：就是说它表示<code>POIMapActivity</code> 类中第三个动态产生的对象。</p>
-<ul>
-<li><code>mPoiSearch.setOnGetPoiSearchResultListener(new OnGetPoiSearchResultListener()</code>：地图热点搜索监听</li>
-<li><code>BaiduMap.OnMarkerClickListener onMarkerClickListener = new BaiduMap.OnMarkerClickListener()</code>：地图标记物点击监听</li>
-<li><code>widget.setShootingListener(new SheetViewWidget.ShootingListener()</code>：组件点击监听</li>
-</ul>
-<p>问题就是说 <code>SheetViewWidget.ShootingListener</code> 这个监听在序列化的时候没成功、问题的关键是：在序列化的时候 <code>widget</code> 这个监听对象每次都是 <code>new</code> 的导致报错。</p>
-<p>处理方法：</p>
-<ul>
-<li>判断当监听对象为空时不处理事件</li>
-<li>这个控件是使用的第三方库、监听接口抽离出来</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">项目异常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/06/Java 序列化错误/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1848,11 +1838,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GDD</a>
+                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
+                <a href="javascript:void(0)" class="js-tag color4">GDD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1864,11 +1854,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RxJava 和 RxAndroid</a>
+                <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Android 应用安全维护和逆向分析</a>
+                <a href="javascript:void(0)" class="js-tag color4">RxJava 和 RxAndroid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1880,11 +1870,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ADB</a>
+                <a href="javascript:void(0)" class="js-tag color4">关于我</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">关于我</a>
+                <a href="javascript:void(0)" class="js-tag color4">ADB</a>
               </li>
              
               <li class="article-tag-list-item">
