@@ -6,18 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 保险 | BoomHe</title>
+  <title>链表如何实现 LRU 缓存淘汰算法 | BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="你好">
-<meta property="og:type" content="website">
-<meta property="og:title" content="BoomHe">
-<meta property="og:url" content="http://yoursite.com/tags/保险/index.html">
+  <meta name="description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-03  读《数据结构与算法》笔记-链表如何实现 LRU 缓存淘汰算法链表(Linked List)经典的应用场景就是 LRU 缓存淘汰算法，常见的策略有三种：先进先出 FIFO(First In,First Out)、最少使用策略 LFU (Least Frequently Used)、最近最少使用策略 LRU (Least">
+<meta name="keywords" content="数据结构和算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链表如何实现 LRU 缓存淘汰算法">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/链表如何实现 LRU 缓存淘汰算法/index.html">
 <meta property="og:site_name" content="BoomHe">
-<meta property="og:description" content="你好">
+<meta property="og:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-03  读《数据结构与算法》笔记-链表如何实现 LRU 缓存淘汰算法链表(Linked List)经典的应用场景就是 LRU 缓存淘汰算法，常见的策略有三种：先进先出 FIFO(First In,First Out)、最少使用策略 LFU (Least Frequently Used)、最近最少使用策略 LRU (Least">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pg1yid4po.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.jpg">
+<meta property="og:image" content="http://pg1yid4po.bkt.clouddn.com/%E5%8D%95%E9%93%BE%E8%A1%A8.jpg">
+<meta property="og:image" content="http://pg1yid4po.bkt.clouddn.com/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8.jpg">
+<meta property="og:image" content="http://pg1yid4po.bkt.clouddn.com/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.jpg">
+<meta property="og:image" content="http://pg1yid4po.bkt.clouddn.com/%E9%93%BE%E8%A1%A8%20VS%20%E6%95%B0%E7%BB%84-%E6%80%A7%E8%83%BD.jpg">
+<meta property="og:image" content="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg">
+<meta property="og:updated_time" content="2018-10-06T05:43:00.139Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BoomHe">
-<meta name="twitter:description" content="你好">
+<meta name="twitter:title" content="链表如何实现 LRU 缓存淘汰算法">
+<meta name="twitter:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-03  读《数据结构与算法》笔记-链表如何实现 LRU 缓存淘汰算法链表(Linked List)经典的应用场景就是 LRU 缓存淘汰算法，常见的策略有三种：先进先出 FIFO(First In,First Out)、最少使用策略 LFU (Least Frequently Used)、最近最少使用策略 LRU (Least">
+<meta name="twitter:image" content="http://pg1yid4po.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.jpg">
   
     <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
   
@@ -161,60 +170,202 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-链表如何实现 LRU 缓存淘汰算法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/保险/" class="archive-article-date">
-  	<time datetime="2018-03-08T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/保险/">保险</a>
+    <h1 class="article-title" itemprop="name">
+      链表如何实现 LRU 缓存淘汰算法
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/10/03/链表如何实现 LRU 缓存淘汰算法/" class="archive-article-date">
+  	<time datetime="2018-10-03T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#读《数据结构与算法》笔记-链表如何实现-LRU-缓存淘汰算法"><span class="toc-number">1.</span> <span class="toc-text">读《数据结构与算法》笔记-链表如何实现 LRU 缓存淘汰算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#链表-Linked-List-经典的应用场景就是-LRU-缓存淘汰算法，常见的策略有三种：先进先出-FIFO-First-In-First-Out-、最少使用策略-LFU-Least-Frequently-Used-、最近最少使用策略-LRU-Least-Recently-Used"><span class="toc-number">1.1.</span> <span class="toc-text">链表(Linked List)经典的应用场景就是 LRU 缓存淘汰算法，常见的策略有三种：先进先出 FIFO(First In,First Out)、最少使用策略 LFU (Least Frequently Used)、最近最少使用策略 LRU (Least Recently Used)</span></a></li></ol></li></ol>
+		</div>
+		
+		
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-10-03</code></p>
+</blockquote>
+<h2 id="读《数据结构与算法》笔记-链表如何实现-LRU-缓存淘汰算法"><a href="#读《数据结构与算法》笔记-链表如何实现-LRU-缓存淘汰算法" class="headerlink" title="读《数据结构与算法》笔记-链表如何实现 LRU 缓存淘汰算法"></a>读《数据结构与算法》笔记-链表如何实现 LRU 缓存淘汰算法</h2><h3 id="链表-Linked-List-经典的应用场景就是-LRU-缓存淘汰算法，常见的策略有三种：先进先出-FIFO-First-In-First-Out-、最少使用策略-LFU-Least-Frequently-Used-、最近最少使用策略-LRU-Least-Recently-Used"><a href="#链表-Linked-List-经典的应用场景就是-LRU-缓存淘汰算法，常见的策略有三种：先进先出-FIFO-First-In-First-Out-、最少使用策略-LFU-Least-Frequently-Used-、最近最少使用策略-LRU-Least-Recently-Used" class="headerlink" title="链表(Linked List)经典的应用场景就是 LRU 缓存淘汰算法，常见的策略有三种：先进先出 FIFO(First In,First Out)、最少使用策略 LFU (Least Frequently Used)、最近最少使用策略 LRU (Least Recently Used)"></a>链表(Linked List)经典的应用场景就是 LRU 缓存淘汰算法，常见的策略有三种：先进先出 FIFO(First In,First Out)、最少使用策略 LFU (Least Frequently Used)、最近最少使用策略 LRU (Least Recently Used)</h3><blockquote>
+<p>数组和链表区别</p>
+</blockquote>
+<p>如果我们申请一个 100MB 大小的数组，当内存中没有连续的、足够大的存储空间时，即便内存剩余总可用空间大于 100MB 仍然会申请失败。</p>
+<p>而链表不需要一块连续的内存空间，通过“指针”将一组零散的内存块串联起来，在这种情况下根本不会有问题。</p>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.jpg" alt=""></p>
+<ul>
+<li>单链表</li>
+</ul>
+<p>第一个节点叫做头节点，最后一个节点叫做尾节点。头节点用来记录链表的基地址，有了它就可以遍历得到整条链表，尾节点指向一个空地址 NULL ，表示这是链表的最后一个节点。</p>
+<p>链表也支持数据的查找、插入和删除操作。</p>
+<p>链表不需要连续的内存空间存储数据，所以在链表中插入和删除操作非常快。插入和删除的时间复杂度是 O(1)，随机访问的时间复杂度是 O(n)。</p>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E5%8D%95%E9%93%BE%E8%A1%A8.jpg" alt=""></p>
+<ul>
+<li>循环链表</li>
+</ul>
+<p>循环链表是一种特殊的单链表，尾节点指向链表的头节点。循环链表的优点是从尾节点到头节点比较方便。当要处理的数据具有环型结构特点时，就特别适合采用循环链表，比如：<code>约瑟夫问题</code></p>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8.jpg" alt=""></p>
+<ul>
+<li>双向链表</li>
+</ul>
+<p>它支持两个方向，一个后继指针 next 指向后面的节点，一个前驱指针 prev 指向前面的节点。双向链表需要额外的两个空间来存储后继节点和前驱节点，所以比单链表占用更多的存储空间，但可以支持双向遍历。</p>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.jpg" alt=""></p>
+<p>链表中删除数据的两种情况：</p>
+<ul>
+<li>删除节点中<code>值等于某个给定值</code>的节点</li>
+<li>删除给定指针指向的节点</li>
+</ul>
+<p>对于第一种情况，都需要从头节点开始一个一个遍历直到找到给定值的节点，再通过指针操作将其删除。单纯的删除操作时间复杂度是 O(1)，但是为了遍历查找，对应的时间复杂度是 O(n) 所以删除值等于给定值的节点对应的链表操作的时间复杂度是O(n)</p>
+<p>第二种情况，单链表不支持直接获取前驱节点，所以还是要从头开始遍历链表，时间复杂度是O(n)。对于双向链表，这种情况就比较有优势了，双向链表保存了前驱节点的指针，不需要像单链表那样遍历，时间复杂度是O(1)。</p>
+<blockquote>
+<p>链表 VS 数组性能</p>
+</blockquote>
+<p><img src="http://pg1yid4po.bkt.clouddn.com/%E9%93%BE%E8%A1%A8%20VS%20%E6%95%B0%E7%BB%84-%E6%80%A7%E8%83%BD.jpg" alt=""></p>
+<blockquote>
+<p>链表实现缓存淘汰算法</p>
+</blockquote>
+<p>思路：维护一个有序单链表，当有新的数据访问时，就从链表头开始遍历链表。</p>
+<p>1、如果数据缓存在链表中，遍历到数据对应的节点删除，然后再插入到链表的头部</p>
+<p>2、如果数据没有缓存在链表中</p>
+<ul>
+<li>缓存没满，直接插入到链表的头部</li>
+<li>缓存满了，删除尾节点，将新的数据节点插入链表的头部</li>
+</ul>
+<blockquote>
+<p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+<p><img src="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">保险</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构和算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/10/03/链表如何实现 LRU 缓存淘汰算法/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/10/02/数组为什么从0开始编号/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数组为什么从 0 开始编号</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -237,9 +388,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
