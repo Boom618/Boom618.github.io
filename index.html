@@ -1101,6 +1101,239 @@
 
 
   
+    <article id="post-Synchronized和ReentrantLock有什么区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/05/Synchronized和ReentrantLock有什么区别/">Synchronized 和 ReentrantLock 有什么区别</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/05/Synchronized和ReentrantLock有什么区别/" class="archive-article-date">
+  	<time datetime="2018-06-05T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Synchronized-和-ReentrantLock-有什么区别"><span class="toc-number">1.</span> <span class="toc-text">Synchronized 和 ReentrantLock 有什么区别</span></a></li></ol>
+		</div>
+		
+		
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-06-07</code></p>
+</blockquote>
+<h3 id="Synchronized-和-ReentrantLock-有什么区别"><a href="#Synchronized-和-ReentrantLock-有什么区别" class="headerlink" title="Synchronized 和 ReentrantLock 有什么区别"></a>Synchronized 和 ReentrantLock 有什么区别</h3><p>经典回答：</p>
+<p><code>Synchronized</code> 是 java 内建的同步机制、它提供的互斥的语义和可见性、当一个线程获取当前锁时、其他线程只能等待或阻塞在哪里、它可以修饰方法也可以修饰特定的代码块</p>
+<p><code>ReentrantLock</code> 再入锁、语义和 <code>Synchronized</code> 基本相同、再入锁是通过调用 lock 方法获取、它能实现 <code>Synchronized</code>无法做到的细节控制、比如 fairness(公平性)、值得注意的是、必须调用 unlock 释放锁、不然会一直持有该锁</p>
+<hr>
+<p>扩展分析</p>
+<ul>
+<li>理解什么是线程安全</li>
+<li>Synchronized 和 ReentrantLock 的基本使用</li>
+<li>synchronized 和 ReentrantLock 底层实现、理解锁膨胀、降级、理解偏斜锁、自旋锁、轻量级锁、重量级锁</li>
+<li>并发包中 <code>java.util.concurrent.lock</code> 的不同实现</li>
+</ul>
+<p style="text-align:center;color:#1e819e;font-size:1.3em;font-weight: bold;"><br>知识扩展<br></p>
+
+<p>线性安全：是指在多线程环境下数据正确性的概念、保证多线程环境下<strong>共享的</strong>、<strong>可修改的</strong>数据正确性</p>
+<p>换个角度来说、如果状态不是共享的或可修改的、也就不存在线程安全问题：</p>
+<ul>
+<li>封装：将数据状态内部隐藏、保护起来</li>
+<li>不可变：final 修饰符</li>
+</ul>
+<p>线程安全基本特征：</p>
+<ul>
+<li>原子性：中途操作不会被其他线程干扰、一般采用同步机制</li>
+<li>可见性：当一个线程修改了某个共享变量、状态能够立即被其他线程知晓、也就是将线程本地状态映射到主内存上、volatile 就是负责保证可见性的</li>
+<li>有序性：保证线性内串行语义、避免指令重排</li>
+</ul>
+<blockquote>
+<p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+<p><img src="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/05/Synchronized和ReentrantLock有什么区别/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/05/单例模式/">单例模式</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/05/单例模式/" class="archive-article-date">
+  	<time datetime="2018-06-05T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#谈谈你知道的设计模式、请手动实现单例模式"><span class="toc-number">1.</span> <span class="toc-text">谈谈你知道的设计模式、请手动实现单例模式</span></a></li></ol>
+		</div>
+		
+		
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-06-05</code></p>
+</blockquote>
+<h3 id="谈谈你知道的设计模式、请手动实现单例模式"><a href="#谈谈你知道的设计模式、请手动实现单例模式" class="headerlink" title="谈谈你知道的设计模式、请手动实现单例模式"></a>谈谈你知道的设计模式、请手动实现单例模式</h3><p>典型回答：</p>
+<p>设计模式可以分为创建型模式、结构型模式和行为型模式：</p>
+<ul>
+<li><p><code>创建型模式</code>：是对对象创建过程的各种问题和解决方案的总结、包括各种工厂模式（Factory、Abstract Factory）、单例模式（Singleton）、构建器模式（Builder）、原型模式（ProtoType）</p>
+</li>
+<li><p><code>结构型模式</code>：是针对软件设计结构的总结、关注于类、对象继承、组合方式的实践经验。常见的结构型模式、包括桥接模式（Bridge）、适配器模式（Adapter）、装饰者模式（Decorator）、代理模式（Proxy）、组合模式（Composite）、外观模式（Facade）、享元模式（Flyweight）</p>
+</li>
+<li><p><code>行为型模式</code>：是从类或对象之间交互、职责划分等角度总结的模式。比较常见的行为型模式有策略模式（Strategy）、解释器模式（Interpreter）、命令模式（Command）、观察者模式（Observer）、迭代器模式（Iterator）、模板方法模式（Template Method）、访问者模式（Visitor）</p>
+</li>
+</ul>
+<hr>
+<p>扩展分析</p>
+<p style="text-align:center;color:#1e819e;font-size:1.3em;font-weight: bold;"><br>常见单例<br></p>
+
+<ul>
+<li>可以为单例定义一个 private 的构造函数</li>
+<li>使用懒加载（lazy-load）、改善初始内存开销</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class Singleton&#123;</div><div class="line">    private static Singleton instance;</div><div class="line">    private Singleton()&#123;</div><div class="line">    &#125; </div><div class="line">    public static Singleton getInstance()&#123;</div><div class="line">        if(instance == null)&#123;</div><div class="line">            instance = new Singleton();</div><div class="line">        &#125;</div><div class="line">        return instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个实现在单线性中是不存在问题的、但是在并发场景中就需要考虑线程安全、最熟悉的莫过于<code>双检锁</code>：</p>
+<p style="text-align:center;color:#1e819e;font-size:1.3em;font-weight: bold;"><br>双检锁单例<br></p>
+
+<ul>
+<li>利用 volatile 能够提供可见性、以及保证 getInstance 返回的是初始化完全的对象</li>
+<li>在同步之前 null 检查、尽量避免进入相对昂贵的代码同步块</li>
+<li>直接在 class 级别进行同步、保证线程安全的类方法调用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class Singleton&#123;</div><div class="line">    private static volatile Singleton instance = null;</div><div class="line">    private Singleton ()&#123;</div><div class="line">    &#125; </div><div class="line">    public static Singleton getInstance()&#123;</div><div class="line">        if( instance == null )&#123; // 避免重复进入代码块</div><div class="line">            synchronized(Singleton.class)&#123; // 同步 class 同步类方法调用</div><div class="line">                if(instance == null)&#123;</div><div class="line">                    instance = new Singleton();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return instance;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在这段代码中、争论较多的是 volatile 修饰静态变量、当 Singleton 类本身有多个成员变量时、需要保证初始化过程完成后、才能被 get 到</p>
+<p style="text-align:center;color:#1e819e;font-size:1.3em;font-weight: bold;"><br>内部类单例<br></p>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class Singleton&#123;</div><div class="line">    private Singleton()&#123;</div><div class="line">    &#125;</div><div class="line">    public static Singleton getInstance()&#123;</div><div class="line">        return Holder.singleton;</div><div class="line">    &#125;</div><div class="line">    public static class Holder&#123;</div><div class="line">        private static Singleton singleton = new Singleton();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>内部类模式和双检锁都可以保证线程安全</p>
+<blockquote>
+<p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/05/单例模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-如何实现高效地线程安全" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1447,203 +1680,6 @@
 
 
   
-    <article id="post-so 文件解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/28/so 文件解析/">so 文件解析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/28/so 文件解析/" class="archive-article-date">
-  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#so-文件"><span class="toc-number">1.</span> <span class="toc-text">so 文件</span></a></li></ol>
-		</div>
-		
-		
-        <h2 id="so-文件"><a href="#so-文件" class="headerlink" title="so 文件"></a>so 文件</h2><blockquote>
-<p>Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。</p>
-</blockquote>
-<ul>
-<li>readelf -h xxx.so:查看 so 文件的头部信息<ul>
-<li>readelf -h </li>
-<li>35032967</li>
-</ul>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/28/so 文件解析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-代码混淆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/28/代码混淆/">java 代码 与 资源文件混淆</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/28/代码混淆/" class="archive-article-date">
-  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-混淆"><span class="toc-number">1.</span> <span class="toc-text">Java 混淆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资源混淆"><span class="toc-number">2.</span> <span class="toc-text">资源混淆</span></a></li></ol>
-		</div>
-		
-		
-        <h2 id="Java-混淆"><a href="#Java-混淆" class="headerlink" title="Java 混淆"></a>Java 混淆</h2><blockquote>
-<p>ProGuard：工具能够移除无用代码、重命名类、字段、方法从而达到压缩、优化和混淆的目的</p>
-</blockquote>
-<ul>
-<li>压缩：检测和删除没有使用的类、字段、方法和属性</li>
-<li>优化：对字节码优化、移除无用的指令</li>
-<li>混淆：使用 a、b、c、等无意义的名称重命名</li>
-<li>预检：主要是在 Java 平台上对处理后的代码进行预检</li>
-</ul>
-<blockquote>
-<p>要通过 ProGuard 启用代码压缩，请在 build.gradle 文件内相应的构建类型中添加 minifyEnabled true。</p>
-</blockquote>
-<p>请注意，代码压缩会拖慢构建速度，因此您应该尽可能避免在调试构建中使用。不过，重要的是您一定要为用于测试的最终 APK 启用代码压缩，因为如果您不能充分地自定义要保留的代码，可能会引入错误。</p>
-<p>Q：混淆为什么要保留类名或方法名</p>
-<ul>
-<li>让 C/C++ 程序可以通过 jni 使用对应的 java 方法</li>
-<li>四大组件由于在 AndroidManifest.xml 里面注册了、所以需要保留</li>
-<li>R 文件混淆会导致引用错误</li>
-</ul>
-<p><strong>ProGuard 基本命令</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#代码混淆压缩比，在0~7之间，默认为5，一般不做修改</div><div class="line">-optimizationpasses <span class="number">5</span></div><div class="line"></div><div class="line">#混合时不使用大小写混合，混合后的类名为小写</div><div class="line">-dontusemixedcaseclassnames</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclasses</div><div class="line"></div><div class="line">#这句话能够使我们的项目混淆后产生映射文件</div><div class="line">#包含有类名-&gt;混淆后类名的映射关系</div><div class="line">-verbose</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclassmembers</div><div class="line"></div><div class="line">#不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。</div><div class="line">-dontpreverify</div><div class="line"></div><div class="line">#保留Annotation不混淆</div><div class="line">-keepattributes *Annotation*,InnerClasses</div><div class="line"></div><div class="line">#避免混淆泛型</div><div class="line">-keepattributes Signature</div><div class="line"></div><div class="line">#抛出异常时保留代码行号</div><div class="line">-keepattributes SourceFile,LineNumberTable</div><div class="line"></div><div class="line">#指定混淆是采用的算法，后面的参数是一个过滤器</div><div class="line">#这个过滤器是谷歌推荐的算法，一般不做更改</div><div class="line">-optimizations !code/simplification/cast,!field<span class="comment">/*,!class/merging/*</span></div></pre></td></tr></table></figure>
-<h2 id="资源混淆"><a href="#资源混淆" class="headerlink" title="资源混淆"></a>资源混淆</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    ...</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">        	  <span class="comment">// 资源压缩只与代码压缩协同工作</span></div><div class="line">            shrinkResources <span class="keyword">true</span></div><div class="line">            <span class="comment">// java 代码压缩</span></div><div class="line">            minifyEnabled <span class="keyword">true</span></div><div class="line">            <span class="function">proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>,</span></div><div class="line"><span class="function">                    'proguard-rules.pro'</span></div><div class="line"><span class="function">        &#125;</span></div><div class="line"><span class="function">    &#125;</span></div><div class="line"><span class="function">&#125;</span></div></pre></td></tr></table></figure>
-<p>参考：</p>
-<p><a href="https://developer.android.google.cn/studio/build/shrink-code.html" target="_blank" rel="external">官方文档</a></p>
-<p><a href="https://blog.csdn.net/ljd2038/article/details/51308768" target="_blank" rel="external">ProGuard详解</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/28/代码混淆/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1765,7 +1801,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RxJava 和 RxAndroid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1773,15 +1817,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ADB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1789,7 +1825,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数据结构和算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1798,10 +1842,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">生活书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>编码、加密和 Hash | BoomHe</title>
+  <title>单例模式 | BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-14  开发中经常遇见到容易混淆的概念，根本原因是没有理解其中的本质。今天把下面这些理解明白。  编码解码 Encoding &amp;amp; Decoding  把数据从一种形式转换为另一种形式，解码可以还原数据  加密解密 Encryption &amp;amp; Decryption   对称加密 原理：使用密钥和加密算法对数据进行">
-<meta name="keywords" content="Android 高级笔记">
+  <meta name="description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-06-05  谈谈你知道的设计模式、请手动实现单例模式典型回答： 设计模式可以分为创建型模式、结构型模式和行为型模式：  创建型模式：是对对象创建过程的各种问题和解决方案的总结、包括各种工厂模式（Factory、Abstract Factory）、单例模式（Singleton）、构建器模式（Builder）、原型模式（ProtoT">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编码、加密和 Hash">
-<meta property="og:url" content="http://yoursite.com/2018/10/14/编码、加密和 Hash/index.html">
+<meta property="og:title" content="单例模式">
+<meta property="og:url" content="http://yoursite.com/2018/06/05/单例模式/index.html">
 <meta property="og:site_name" content="BoomHe">
-<meta property="og:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-14  开发中经常遇见到容易混淆的概念，根本原因是没有理解其中的本质。今天把下面这些理解明白。  编码解码 Encoding &amp;amp; Decoding  把数据从一种形式转换为另一种形式，解码可以还原数据  加密解密 Encryption &amp;amp; Decryption   对称加密 原理：使用密钥和加密算法对数据进行">
+<meta property="og:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-06-05  谈谈你知道的设计模式、请手动实现单例模式典型回答： 设计模式可以分为创建型模式、结构型模式和行为型模式：  创建型模式：是对对象创建过程的各种问题和解决方案的总结、包括各种工厂模式（Factory、Abstract Factory）、单例模式（Singleton）、构建器模式（Builder）、原型模式（ProtoT">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg">
-<meta property="og:updated_time" content="2018-10-15T10:52:21.292Z">
+<meta property="og:updated_time" content="2018-10-19T12:51:54.058Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="编码、加密和 Hash">
-<meta name="twitter:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-14  开发中经常遇见到容易混淆的概念，根本原因是没有理解其中的本质。今天把下面这些理解明白。  编码解码 Encoding &amp;amp; Decoding  把数据从一种形式转换为另一种形式，解码可以还原数据  加密解密 Encryption &amp;amp; Decryption   对称加密 原理：使用密钥和加密算法对数据进行">
-<meta name="twitter:image" content="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg">
+<meta name="twitter:title" content="单例模式">
+<meta name="twitter:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-06-05  谈谈你知道的设计模式、请手动实现单例模式典型回答： 设计模式可以分为创建型模式、结构型模式和行为型模式：  创建型模式：是对对象创建过程的各种问题和解决方案的总结、包括各种工厂模式（Factory、Abstract Factory）、单例模式（Singleton）、构建器模式（Builder）、原型模式（ProtoT">
   
     <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
   
@@ -165,20 +163,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-编码、加密和 Hash" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-单例模式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      编码、加密和 Hash
+      单例模式
     </h1>
   
 
         
-        <a href="/2018/10/14/编码、加密和 Hash/" class="archive-article-date">
-  	<time datetime="2018-10-14T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-14</time>
+        <a href="/2018/06/05/单例模式/" class="archive-article-date">
+  	<time datetime="2018-06-05T02:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-05</time>
 </a>
         
       </header>
@@ -189,112 +187,49 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	
+	 	 	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#谈谈你知道的设计模式、请手动实现单例模式"><span class="toc-number">1.</span> <span class="toc-text">谈谈你知道的设计模式、请手动实现单例模式</span></a></li></ol>
 		</div>
 		
 		
         <blockquote>
-<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-10-14</code></p>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-06-05</code></p>
 </blockquote>
-<p>开发中经常遇见到容易混淆的概念，根本原因是没有理解其中的本质。今天把下面这些理解明白。</p>
-<blockquote>
-<p>编码解码 Encoding &amp; Decoding</p>
-</blockquote>
-<p>把数据从一种形式转换为另一种形式，解码可以还原数据</p>
-<blockquote>
-<p>加密解密 Encryption &amp; Decryption</p>
-</blockquote>
+<h3 id="谈谈你知道的设计模式、请手动实现单例模式"><a href="#谈谈你知道的设计模式、请手动实现单例模式" class="headerlink" title="谈谈你知道的设计模式、请手动实现单例模式"></a>谈谈你知道的设计模式、请手动实现单例模式</h3><p>典型回答：</p>
+<p>设计模式可以分为创建型模式、结构型模式和行为型模式：</p>
 <ul>
-<li>对称加密<ul>
-<li>原理：使用密钥和加密算法对数据进行转换，得到的无意义数据即为密文；使用密钥和解密算法对密文进行逆向转换得到原数据。</li>
-<li>经典算法：DES(56 位密钥，密钥太短⽽而逐渐被弃⽤用)，AES(128 位、192 位、256 位密钥，现在最流⾏行行) </li>
-</ul>
+<li><p><code>创建型模式</code>：是对对象创建过程的各种问题和解决方案的总结、包括各种工厂模式（Factory、Abstract Factory）、单例模式（Singleton）、构建器模式（Builder）、原型模式（ProtoType）</p>
 </li>
-<li>非对称加密<ul>
-<li>原理：使用公钥对数据进行加密得到密文，使用私钥对数据进行解密得到原数据</li>
-<li>延伸：数字签名</li>
-<li>经典算法：RSA(可⽤用于加密和签名)，DSA(仅⽤用于签名，但速度更快)</li>
-</ul>
+<li><p><code>结构型模式</code>：是针对软件设计结构的总结、关注于类、对象继承、组合方式的实践经验。常见的结构型模式、包括桥接模式（Bridge）、适配器模式（Adapter）、装饰者模式（Decorator）、代理模式（Proxy）、组合模式（Composite）、外观模式（Facade）、享元模式（Flyweight）</p>
 </li>
-<li>密钥和密码登录<ul>
-<li>密钥(key)<ul>
-<li>场景：用于加密和解密</li>
-<li>目的：保证数据被盗时不会被人读懂内容</li>
-<li>焦点：数据</li>
-</ul>
-</li>
-<li>登陆密码(password)<ul>
-<li>场景：用户进入网站或游戏前的身份验证</li>
-<li>目的：数据提供方或应用服务方对拥有者数据的保护</li>
-<li>焦点：身份</li>
-</ul>
+<li><p><code>行为型模式</code>：是从类或对象之间交互、职责划分等角度总结的模式。比较常见的行为型模式有策略模式（Strategy）、解释器模式（Interpreter）、命令模式（Command）、观察者模式（Observer）、迭代器模式（Iterator）、模板方法模式（Template Method）、访问者模式（Visitor）</p>
 </li>
 </ul>
-</li>
-<li>Base64</li>
-</ul>
-<p>Base64 就是将二进制数据转换成有 64 个字符组成的字符串的编码算法，由 A～Z、a~z、0~9、+/ 组成的 64 个字符。</p>
-<p>用途：将⼆二进制数据扩充了了储存和传输途径(例如可以把数据保存到文件、可以通过聊天对话框或 短信形式发送⼆进制数据、可以在 URL 中加⼊入简单的二进制数据)</p>
-<p>Base64 缺点：因为⾃自身的原理理(6 位变 8 位)，因此每次 Base64 编码之后，数据都会增⼤大约 1/3，所以会影响存储和传输性能。</p>
-<blockquote>
-<p>数字签名 Digital Signature</p>
-</blockquote>
-<p>数字签名是非对称密钥加密技术与数字摘要技术的应用</p>
-<blockquote>
-<p>压缩解压缩 Compression &amp; Decompression</p>
-</blockquote>
+<hr>
+<p>扩展分析</p>
+<p style="text-align:center;color:#1e819e;font-size:1.3em;font-weight: bold;"><br>常见单例<br></p>
+
 <ul>
-<li>压缩：将数据使用更具有存储优势的编码算法进行编码</li>
-<li>解压缩：将压缩数据解码还原成原来的形式</li>
-<li>常见的压缩算法：JPEG、MP3</li>
-<li>压缩属于编码吗？<ul>
-<li>编码是什么意思：把数据从一种形式转换为另一种形式，可以还原数据</li>
-<li>压缩属于编码：解压缩过程属于解码过程</li>
+<li>可以为单例定义一个 private 的构造函数</li>
+<li>使用懒加载（lazy-load）、改善初始内存开销</li>
 </ul>
-</li>
-</ul>
-<blockquote>
-<p>序列化 Serialization</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class Singleton&#123;</div><div class="line">    private static Singleton instance;</div><div class="line">    private Singleton()&#123;</div><div class="line">    &#125; </div><div class="line">    public static Singleton getInstance()&#123;</div><div class="line">        if(instance == null)&#123;</div><div class="line">            instance = new Singleton();</div><div class="line">        &#125;</div><div class="line">        return instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个实现在单线性中是不存在问题的、但是在并发场景中就需要考虑线程安全、最熟悉的莫过于<code>双检锁</code>：</p>
+<p style="text-align:center;color:#1e819e;font-size:1.3em;font-weight: bold;"><br>双检锁单例<br></p>
+
 <ul>
-<li>序列化：把数据对象(一般是内存中，JVM 中的对象)转换成字节序列的过程。</li>
-<li>反序列化：把子节码重新转换成内存中的对象</li>
-<li>目的：让内存中的对象可以被存储和传输</li>
-<li>序列化不是编码</li>
+<li>利用 volatile 能够提供可见性、以及保证 getInstance 返回的是初始化完全的对象</li>
+<li>在同步之前 null 检查、尽量避免进入相对昂贵的代码同步块</li>
+<li>直接在 class 级别进行同步、保证线程安全的类方法调用</li>
 </ul>
-<blockquote>
-<p>哈希 Hash</p>
-</blockquote>
-<ul>
-<li>定义：把任意数据转换成指定大小范围(通常很小)的数据</li>
-<li>作用：摘要，数字指纹。</li>
-<li>经典算法：MD5,SHA1,SHA256 等</li>
-<li>实际用途：<ul>
-<li>唯一性验证。例如：Java 中 hashCode 的方法</li>
-<li>快速查找：hashCode 和 HashMap</li>
-<li>隐私保护：例如：把密码 MD5 处理过后再存储到数据库（升级处理：加盐）</li>
-</ul>
-</li>
-<li>hash 不是编码也不是加密：Hash 是单向过程，不可逆，无法进行逆向恢复操作，因此不属于编码和加密 (MD5 不是加密)</li>
-</ul>
-<blockquote>
-<p>字符集 Charset</p>
-</blockquote>
-<ul>
-<li>含义：一个由整数向现实世界中的文字符号的 Map</li>
-<li>ASCII：128 个字符，1 字节</li>
-<li>ISO-8859-1:对 ASCII 进行扩充，1 字节</li>
-<li>Unicode：13 万个字符，多字节<ul>
-<li>UTF-8：Unicode 的编码分支</li>
-<li>UTF-16：Unicode 的编码分支</li>
-</ul>
-</li>
-<li>GBK / GB2313 / GB18030：中国自研标准，多字节，字符集 + 编码</li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class Singleton&#123;</div><div class="line">    private static volatile Singleton instance = null;</div><div class="line">    private Singleton ()&#123;</div><div class="line">    &#125; </div><div class="line">    public static Singleton getInstance()&#123;</div><div class="line">        if( instance == null )&#123; // 避免重复进入代码块</div><div class="line">            synchronized(Singleton.class)&#123; // 同步 class 同步类方法调用</div><div class="line">                if(instance == null)&#123;</div><div class="line">                    instance = new Singleton();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return instance;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在这段代码中、争论较多的是 volatile 修饰静态变量、当 Singleton 类本身有多个成员变量时、需要保证初始化过程完成后、才能被 get 到</p>
+<p style="text-align:center;color:#1e819e;font-size:1.3em;font-weight: bold;"><br>内部类单例<br></p>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class Singleton&#123;</div><div class="line">    private Singleton()&#123;</div><div class="line">    &#125;</div><div class="line">    public static Singleton getInstance()&#123;</div><div class="line">        return Holder.singleton;</div><div class="line">    &#125;</div><div class="line">    public static class Holder&#123;</div><div class="line">        private static Singleton singleton = new Singleton();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>内部类模式和双检锁都可以保证线程安全</p>
 <blockquote>
 <p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
 </blockquote>
-<p><img src="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg" alt=""></p>
 
       
 
@@ -308,7 +243,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android 高级笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -364,7 +299,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/10/14/编码、加密和 Hash/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/06/05/单例模式/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -378,18 +313,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/10/16/登陆与授权、TCP-IP 和 HTTPS/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/06/05/Synchronized和ReentrantLock有什么区别/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          登陆与授权、TCP/IP 和 HTTPS
+          Synchronized 和 ReentrantLock 有什么区别
         
       </div>
     </a>
   
   
-    <a href="/2018/10/13/HTTP原理和机制/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">HTTP 的原理和工作机制</div>
+    <a href="/2018/05/28/如何实现高效地线程安全/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何实现高效的线程安全</div>
       <i class="icon-circle-right"></i>
     </a>
   

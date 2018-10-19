@@ -163,6 +163,203 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-so 文件解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/28/so 文件解析/">so 文件解析</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/28/so 文件解析/" class="archive-article-date">
+  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#so-文件"><span class="toc-number">1.</span> <span class="toc-text">so 文件</span></a></li></ol>
+		</div>
+		
+		
+        <h2 id="so-文件"><a href="#so-文件" class="headerlink" title="so 文件"></a>so 文件</h2><blockquote>
+<p>Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。</p>
+</blockquote>
+<ul>
+<li>readelf -h xxx.so:查看 so 文件的头部信息<ul>
+<li>readelf -h </li>
+<li>35032967</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/28/so 文件解析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-代码混淆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/28/代码混淆/">java 代码 与 资源文件混淆</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/28/代码混淆/" class="archive-article-date">
+  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-混淆"><span class="toc-number">1.</span> <span class="toc-text">Java 混淆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资源混淆"><span class="toc-number">2.</span> <span class="toc-text">资源混淆</span></a></li></ol>
+		</div>
+		
+		
+        <h2 id="Java-混淆"><a href="#Java-混淆" class="headerlink" title="Java 混淆"></a>Java 混淆</h2><blockquote>
+<p>ProGuard：工具能够移除无用代码、重命名类、字段、方法从而达到压缩、优化和混淆的目的</p>
+</blockquote>
+<ul>
+<li>压缩：检测和删除没有使用的类、字段、方法和属性</li>
+<li>优化：对字节码优化、移除无用的指令</li>
+<li>混淆：使用 a、b、c、等无意义的名称重命名</li>
+<li>预检：主要是在 Java 平台上对处理后的代码进行预检</li>
+</ul>
+<blockquote>
+<p>要通过 ProGuard 启用代码压缩，请在 build.gradle 文件内相应的构建类型中添加 minifyEnabled true。</p>
+</blockquote>
+<p>请注意，代码压缩会拖慢构建速度，因此您应该尽可能避免在调试构建中使用。不过，重要的是您一定要为用于测试的最终 APK 启用代码压缩，因为如果您不能充分地自定义要保留的代码，可能会引入错误。</p>
+<p>Q：混淆为什么要保留类名或方法名</p>
+<ul>
+<li>让 C/C++ 程序可以通过 jni 使用对应的 java 方法</li>
+<li>四大组件由于在 AndroidManifest.xml 里面注册了、所以需要保留</li>
+<li>R 文件混淆会导致引用错误</li>
+</ul>
+<p><strong>ProGuard 基本命令</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#代码混淆压缩比，在0~7之间，默认为5，一般不做修改</div><div class="line">-optimizationpasses <span class="number">5</span></div><div class="line"></div><div class="line">#混合时不使用大小写混合，混合后的类名为小写</div><div class="line">-dontusemixedcaseclassnames</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclasses</div><div class="line"></div><div class="line">#这句话能够使我们的项目混淆后产生映射文件</div><div class="line">#包含有类名-&gt;混淆后类名的映射关系</div><div class="line">-verbose</div><div class="line"></div><div class="line">#指定不去忽略非公共库的类</div><div class="line">-dontskipnonpubliclibraryclassmembers</div><div class="line"></div><div class="line">#不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。</div><div class="line">-dontpreverify</div><div class="line"></div><div class="line">#保留Annotation不混淆</div><div class="line">-keepattributes *Annotation*,InnerClasses</div><div class="line"></div><div class="line">#避免混淆泛型</div><div class="line">-keepattributes Signature</div><div class="line"></div><div class="line">#抛出异常时保留代码行号</div><div class="line">-keepattributes SourceFile,LineNumberTable</div><div class="line"></div><div class="line">#指定混淆是采用的算法，后面的参数是一个过滤器</div><div class="line">#这个过滤器是谷歌推荐的算法，一般不做更改</div><div class="line">-optimizations !code/simplification/cast,!field<span class="comment">/*,!class/merging/*</span></div></pre></td></tr></table></figure>
+<h2 id="资源混淆"><a href="#资源混淆" class="headerlink" title="资源混淆"></a>资源混淆</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    ...</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">        	  <span class="comment">// 资源压缩只与代码压缩协同工作</span></div><div class="line">            shrinkResources <span class="keyword">true</span></div><div class="line">            <span class="comment">// java 代码压缩</span></div><div class="line">            minifyEnabled <span class="keyword">true</span></div><div class="line">            <span class="function">proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>,</span></div><div class="line"><span class="function">                    'proguard-rules.pro'</span></div><div class="line"><span class="function">        &#125;</span></div><div class="line"><span class="function">    &#125;</span></div><div class="line"><span class="function">&#125;</span></div></pre></td></tr></table></figure>
+<p>参考：</p>
+<p><a href="https://developer.android.google.cn/studio/build/shrink-code.html" target="_blank" rel="external">官方文档</a></p>
+<p><a href="https://blog.csdn.net/ljd2038/article/details/51308768" target="_blank" rel="external">ProGuard详解</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/28/代码混淆/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-保险" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1601,224 +1798,6 @@
 
 
   
-    <article id="post-开发一个属于自己的插件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/28/开发一个属于自己的插件/">开发一个属于自己的插件</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/28/开发一个属于自己的插件/" class="archive-article-date">
-  	<time datetime="2017-09-28T05:19:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#开发插件原由"><span class="toc-number">1.</span> <span class="toc-text">开发插件原由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发插件的步骤"><span class="toc-number">2.</span> <span class="toc-text">开发插件的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、Step-新建插件项目"><span class="toc-number">2.1.</span> <span class="toc-text">1、Step 新建插件项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、Step"><span class="toc-number">2.2.</span> <span class="toc-text">2、Step</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、Step"><span class="toc-number">2.3.</span> <span class="toc-text">3、Step</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、Step"><span class="toc-number">2.4.</span> <span class="toc-text">4、Step</span></a></li></ol></li></ol>
-		</div>
-		
-		
-        <h3 id="开发插件原由"><a href="#开发插件原由" class="headerlink" title="开发插件原由"></a>开发插件原由</h3><blockquote>
-<p>近期项目组考虑到编写代码的时候有个繁琐的工作</p>
-<ul>
-<li>class -&gt; className</li>
-<li>for -&gt; htmlFor</li>
-<li>style </li>
-</ul>
-<p>就是遇到类似上面这些字符的时候得转换成相应的字符</p>
-</blockquote>
-<h3 id="开发插件的步骤"><a href="#开发插件的步骤" class="headerlink" title="开发插件的步骤"></a>开发插件的步骤</h3><h4 id="1、Step-新建插件项目"><a href="#1、Step-新建插件项目" class="headerlink" title="1、Step 新建插件项目"></a>1、Step 新建插件项目</h4><blockquote>
-<p>开发工具是 IDEA</p>
-</blockquote>
-<p> 选择 <code>File</code>-&gt;<code>New</code>-&gt;<code>Project</code> 选择 <code>IntelliJ Platform Plugin</code> </p>
-<p>选好 <code>JDK</code> 就可以了</p>
-<h4 id="2、Step"><a href="#2、Step" class="headerlink" title="2、Step"></a>2、Step</h4><blockquote>
-<p>编写 plugin.xml </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;actions&gt;</div><div class="line">  &lt;group id=&quot;StringConversion.Generate&quot; text=&quot;StringConversion&quot; description=&quot;对 JS 文件中的特需字符转换&quot;&gt;</div><div class="line">    &lt;action id=&quot;StringConversion.StringAction&quot;</div><div class="line">            class=&quot;com.caituo.plugin.StringConversion&quot;</div><div class="line">            text=&quot;StringConversion&quot; description=&quot;StringConversion&quot;&gt;</div><div class="line">      &lt;add-to-group group-id=&quot;EditMenu&quot; anchor=&quot;first&quot;/&gt;</div><div class="line">      &lt;add-to-group group-id=&quot;EditorPopupMenu&quot; anchor=&quot;first&quot;/&gt;</div><div class="line">      &lt;keyboard-shortcut keymap=&quot;$default&quot; first-keystroke=&quot;shift ctrl P&quot;/&gt;</div><div class="line">    &lt;/action&gt;</div><div class="line">  &lt;/group&gt;</div><div class="line">&lt;/actions&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><code>actions</code>节点理解成 Android Studio XML 文件里的application</p>
-<p><code>group id</code>节点理解成 Android Studio XML 文件里的activity</p>
-<p><code>add-to-group group-id</code> 导航栏设置<br><code>keyboard-shortcut</code> 快捷键设置</p>
-</blockquote>
-<h4 id="3、Step"><a href="#3、Step" class="headerlink" title="3、Step"></a>3、Step</h4><blockquote>
-<p>编写类继承<code>com.intellij.openapi.actionSystem.AnAction</code></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 执行插件的入口，相当于java中的main方法</div><div class="line"> *</div><div class="line"> * @param anActionEvent</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public void actionPerformed(AnActionEvent anActionEvent) &#123;</div><div class="line">    if (!isFastClick(1000)) &#123;</div><div class="line">        Logger.init(getClass().getSimpleName(), Logger.DEBUG);</div><div class="line">    &#125;</div><div class="line">    Editor editor = anActionEvent.getData(PlatformDataKeys.EDITOR);</div><div class="line">    if (editor == null) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    SelectionModel model = editor.getSelectionModel();</div><div class="line">    String text = model.getSelectedText();</div><div class="line">    if (TextUtils.isEmpty(text)) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    Logger.debug(text);</div><div class="line"></div><div class="line">    //下面这句话也可以使用 lambda 语法写：Runnable runnable = () -&gt; editor.getDocument().replaceString(selectionModel.getSelectionStart(), selectionModel.getSelectionEnd(), TransitionUtils.spacingText(selectedText));</div><div class="line">    Runnable runnable = new Runnable() &#123;</div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line">            //先对空格、制表符进行换掉，然后再重新进行分隔处理。其中分行不处理，因为在写文章的时候复制的一些内容分行是有意义的。</div><div class="line">            editor.getDocument().replaceString(model.getSelectionStart(),</div><div class="line">                    model.getSelectionEnd(),</div><div class="line">                    TransitionUtils.spacingText(RegexExpressionUtils.replace(text, &quot;\\f|\\r|\\t&quot;, &quot;&quot;)));</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    WriteCommandAction.runWriteCommandAction(anActionEvent.getData(PlatformDataKeys.PROJECT), runnable);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="4、Step"><a href="#4、Step" class="headerlink" title="4、Step"></a>4、Step</h4><blockquote>
-<p>打包生成 <code>.jar</code> 文件</p>
-</blockquote>
-<p>GitHub 地址：<a href="https://github.com/Boom618/Conversion" target="_blank" rel="external">Conversion</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">插件开发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/28/开发一个属于自己的插件/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-APK 打包流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/21/APK 打包流程/">APK 打包流程</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/21/APK 打包流程/" class="archive-article-date">
-  	<time datetime="2017-09-21T08:36:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#APK-打包流程"><span class="toc-number">1.</span> <span class="toc-text">APK 打包流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#典型-Android-应用模块的构建流程"><span class="toc-number">1.1.</span> <span class="toc-text">典型 Android 应用模块的构建流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#参考：构建流程"><span class="toc-number">1.1.1.</span> <span class="toc-text">参考：构建流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再来看一张稍微详细一点（来自老版官网）"><span class="toc-number">1.2.</span> <span class="toc-text">再来看一张稍微详细一点（来自老版官网）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后看张更详细的"><span class="toc-number">1.3.</span> <span class="toc-text">最后看张更详细的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文章参考处-loody"><span class="toc-number">1.4.</span> <span class="toc-text">文章参考处 loody</span></a></li></ol></li></ol>
-		</div>
-		
-		
-        <h2 id="APK-打包流程"><a href="#APK-打包流程" class="headerlink" title="APK 打包流程"></a>APK 打包流程</h2><p>Android Studio 开发过程中、经常会 Run APP，APK 就会自动的安装到我们的手机上，这里来聊聊其中经历了那些过程。</p>
-<h3 id="典型-Android-应用模块的构建流程"><a href="#典型-Android-应用模块的构建流程" class="headerlink" title="典型 Android 应用模块的构建流程"></a>典型 Android 应用模块的构建流程</h3><p>官方给出的构建图：<img src="https://github.com/Boom618/ExceptionReadme/blob/master/image/build.png" alt="2017-09-21"></p>
-<ul>
-<li>编译器将您的源代码转换成 DEX（Dalvik Executable) 文件（其中包括运行在 Android 设备上的字节码），将所有其他内容转换成已编译资源。</li>
-<li>APK 打包器将 DEX 文件和已编译资源合并成单个 APK。不过，必须先签署 APK，才能将应用安装并部署到 Android 设备上。</li>
-<li>APK 打包器使用调试或发布密钥库签署您的 APK：<ul>
-<li>如果您构建的是调试版本的应用（即专用于测试和分析的应用），打包器会使用调试密钥库签署您的应用。Android Studio 自动使用调试密钥库配置新项目。</li>
-<li>如果您构建的是打算向外发布的发布版本应用，打包器会使用发布密钥库签署您的应用。要创建发布密钥库，请阅读在 Android Studio 中签署您的应用。</li>
-</ul>
-</li>
-<li>在生成最终 APK 之前，打包器会使用 zipalign 工具对应用进行优化，减少其在设备上运行时的内存占用。</li>
-</ul>
-<p>构建流程结束时，您将获得可用来进行部署、测试的调试 APK，或者可用来发布给外部用户的发布 APK。</p>
-<h4 id="参考：构建流程"><a href="#参考：构建流程" class="headerlink" title="参考：构建流程"></a>参考：<a href="https://developer.android.google.cn/studio/build/index.html?hl=zh-cn#build-process" target="_blank" rel="external">构建流程</a></h4><h3 id="再来看一张稍微详细一点（来自老版官网）"><a href="#再来看一张稍微详细一点（来自老版官网）" class="headerlink" title="再来看一张稍微详细一点（来自老版官网）"></a>再来看一张稍微详细一点（来自老版官网）</h3><p><img src="https://github.com/Boom618/ExceptionReadme/blob/master/image/android_build.png" alt="2017-09-21"><br>从上面的流程图，我们可以看出apk打包流程可以分为以下七步:</p>
-<ul>
-<li>通过aapt打包res资源文件，生成R.java、resources.arsc和res文件（二进制 &amp; 非二进制如res/raw和pic保持原样）</li>
-<li>处理.aidl文件，生成对应的Java接口文件</li>
-<li>通过Java Compiler编译R.java、Java接口文件、Java源文件，生成.class文件</li>
-<li>通过dex命令，将.class文件和第三方库中的.class文件处理生成classes.dex</li>
-<li>通过apkbuilder工具，将aapt生成的resources.arsc和res文件、assets文件和classes.dex一起打包生成 apk</li>
-<li>通过Jarsigner工具，对上面的apk进行debug或release签名</li>
-<li>通过zipalign工具，将签名后的apk进行对齐处理</li>
-</ul>
-<h3 id="最后看张更详细的"><a href="#最后看张更详细的" class="headerlink" title="最后看张更详细的"></a>最后看张更详细的</h3><p><img src="https://github.com/Boom618/ExceptionReadme/blob/master/image/android_build_detail.png" alt="2017-09-21"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apk打包好了会输出在项目的/app/build/outputs/apk目录下，在Android Studio中我们可以双击apk文件查看当前apk的目录结构，包括各个文件的大小，dex中包含了哪些方法及方法数等，非常方便</div></pre></td></tr></table></figure>
-<h3 id="文章参考处-loody"><a href="#文章参考处-loody" class="headerlink" title="文章参考处 loody"></a>文章参考处 <a href="http://loody.me/2017/02/19/Apk%E6%89%93%E5%8C%85%E6%B5%81%E7%A8%8B/#more" target="_blank" rel="external">loody</a></h3>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">原理解析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/21/APK 打包流程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1940,7 +1919,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RxJava 和 RxAndroid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1948,15 +1935,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ADB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1964,7 +1943,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数据结构和算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1973,10 +1960,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">生活书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
               </li>
              
               <li class="article-tag-list-item">
