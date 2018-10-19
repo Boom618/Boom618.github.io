@@ -163,6 +163,578 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-登陆与授权、TCP-IP 和 HTTPS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/16/登陆与授权、TCP-IP 和 HTTPS/">登陆与授权、TCP/IP 和 HTTPS</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/16/登陆与授权、TCP-IP 和 HTTPS/" class="archive-article-date">
+  	<time datetime="2018-10-16T09:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	
+		</div>
+		
+		
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-10-16</code></p>
+</blockquote>
+<p>终于理解了登录、授权是怎么一回事</p>
+<blockquote>
+<p>登录和授权的区别</p>
+</blockquote>
+<ul>
+<li>登录：身份认证，确认 你是你。登录包含授权</li>
+<li>授权：由身份或持有的令牌享有的某些权限(例如用户信息)</li>
+</ul>
+<p>在实际应用中，多数场景下的「登录」和「授权」界限是模糊的</p>
+<p>HTTP 中确认授权(登录)的两种方式</p>
+<blockquote>
+<p>通过Cookie</p>
+</blockquote>
+<p><strong>工作机制</strong></p>
+<ol>
+<li>服务器需要客户端保存的内容，放在<code>Set-Cookie</code>header 里返回，客服端会自动保存</li>
+<li>客服端保存的 Cookies,会在之后的所有请求中都携带进 <code>Cookie</code>header 里返回给服务器</li>
+<li>客户端保存的 Cookie 是按服务器域名来分类的，例如 shop.com 返回的 Cookie 保存下来以后，在之后向 games.com 的请求中并不会携带。</li>
+<li>客户端保存的 Cookie 在超时后会删除、没有设置超时时间的 Cookie (Session Cookie)在浏览器关闭后就会自动删除；另外，服务器也可以主动删除还未过期的客服端 Cookies  </li>
+</ol>
+<p><strong>Cookie 的作用</strong></p>
+<ol>
+<li>会话管理：登录状态、购物车</li>
+<li>个性化：用户偏好、主题</li>
+<li>Tracking：分析用户行为</li>
+</ol>
+<blockquote>
+<p>通过 Authorization Header</p>
+</blockquote>
+<p>两种主流方式：Basic 和 Bearer</p>
+<p><strong>Basic ：</strong></p>
+<ul>
+<li>格式：Authorization:Basic<username:password(base64ed)></username:password(base64ed)></li>
+</ul>
+<p><strong>Bearer ：</strong></p>
+<ul>
+<li>格式：Authorization:Bearer<bearer token=""></bearer></li>
+<li>brarer token 的获取方式：通过 OAuth2 的授权流程</li>
+<li>OAuth2 的流程：『掘金网站用 GitHub 登录』<ol>
+<li>第三方网站(掘金)向授权方网站(GitHub)申请第三方授权合作，拿到 client id 和 client secret</li>
+<li>用户在使用第三方网站(掘金)时，点击「通过 XX(如 GitHub)授权」按钮，第三方网站(掘金)将页面跳转到授权方网站(GitHub)，并传入 client id 作为自己的身份标识</li>
+<li>授权方网站(GitHub)根据 client id ,将第三方网站的信息和第三方网站需要的用户权限展示给用户，并询问用户是否同意授权</li>
+<li>用户点击「同意授权」按钮后，授权方网站(GitHub)将页面跳转回第三方网站(掘金)，并传入 Authorization code 作为用户认可的凭证。</li>
+<li>第三方网站(掘金)将 Authorization code 发送给自己的服务器</li>
+<li>服务器将 Authorization code 和自己的 client secret 一并发送给授权方(GitHub)的服务器，授权方服务器在验证通过后，返回 access token。OAuth 流程结束。</li>
+<li>结束之后，第三方网站的服务器(或者有时客服端也会)就可以使用 access token 作为用户授权的令牌，向授权方网站发送请求来获取用户信息或操作用户账户。这已经是 OAuth 流程之外的事了。</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>在自家 APP 中使用 Bearer token</li>
+</ul>
+<p>有的 App 会在 Api 的设计中，将登陆和授权设计成类似 OAuth2 的过程，但简化掉 Authorization code 的概念。即登陆接口请求成功时，会返回 access token，然后客服端在之后的请求中，就可以使用这个 access token 来当作 bearer token 进行用户操作了。</p>
+<ul>
+<li>Refresh token</li>
+</ul>
+<p>access token 有失效时间，在它失效后，调用 refresh token 接口，传入 refresh_token 来获取新的 access token</p>
+<blockquote>
+<p>TCP / IP 协议镞</p>
+</blockquote>
+<p><strong>为什么要分层？</strong></p>
+<p>网络太复杂，不稳定</p>
+<ul>
+<li>Application Layer 应用层：HTTP、FTP、DNS</li>
+<li>Transport Layer 传输层：TCP、UDP</li>
+<li>Internet Layer 网络层：IP</li>
+<li>Link Layer 数据链路层：以太网、Wi-Fi</li>
+</ul>
+<p><strong>TCP 连接</strong></p>
+<ol>
+<li>客户端：「我要向你发送消息」</li>
+<li>服务器：「好的。我要向你发送消息」</li>
+<li>客户端：「好的」</li>
+</ol>
+<p><strong>TCP 连接关闭</strong></p>
+<ol>
+<li>客户端：「我不再给你发送消息」</li>
+<li>服务端：「好的」</li>
+<li>服务端：「我不再给你发送消息」</li>
+<li>客户端：「好的」</li>
+</ol>
+<blockquote>
+<p>HTTPS </p>
+</blockquote>
+<p>HTTPS：HTTP over SSL ，既工作在 SSL(或 TLS)上的 HTTP。加密通信的 HTTP</p>
+<p><strong>工作原理</strong></p>
+<p>在客服端和服务器之间协商出一套对称密钥，每次发送信息之前将内容加密，收到之后解密，达到内容的加密传输</p>
+<p><strong>为什么不直接用非对称加密</strong></p>
+<p>非对称加密由于使用了复杂的数学原理，计算相当复杂，如果完全使用非对称加密来加密通信内容，会严重影响网络通信的性能</p>
+<p><strong>HTTPS 连接建立的过程</strong></p>
+<ol>
+<li>Client Hello</li>
+<li>Server Hello</li>
+<li>服务器证书 建立信任</li>
+<li>Pre-master Secret</li>
+<li>客户端通知：将使用加密通信</li>
+<li>客户端发送：Finished</li>
+<li>服务器通知：将使用加密通信</li>
+<li>服务器发送：Finished</li>
+</ol>
+<blockquote>
+<p>在 Android 中使用</p>
+</blockquote>
+<p><strong>正常情况</strong></p>
+<p>直接使用</p>
+<p><strong>需要自己写证书验证过程的场景</strong></p>
+<ul>
+<li>用的是自签名证书(例如只用于内网的 https)</li>
+<li>证书信息不全，缺乏中间证书机构(可能性不大)</li>
+<li>手机操作系统较旧，没有安装最新加入的根证书</li>
+</ul>
+<blockquote>
+<p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+<p><img src="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android 高级笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/16/登陆与授权、TCP-IP 和 HTTPS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-编码、加密和 Hash" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/14/编码、加密和 Hash/">编码、加密和 Hash</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/14/编码、加密和 Hash/" class="archive-article-date">
+  	<time datetime="2018-10-14T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	
+		</div>
+		
+		
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-10-14</code></p>
+</blockquote>
+<p>开发中经常遇见到容易混淆的概念，根本原因是没有理解其中的本质。今天把下面这些理解明白。</p>
+<blockquote>
+<p>编码解码 Encoding &amp; Decoding</p>
+</blockquote>
+<p>把数据从一种形式转换为另一种形式，解码可以还原数据</p>
+<blockquote>
+<p>加密解密 Encryption &amp; Decryption</p>
+</blockquote>
+<ul>
+<li>对称加密<ul>
+<li>原理：使用密钥和加密算法对数据进行转换，得到的无意义数据即为密文；使用密钥和解密算法对密文进行逆向转换得到原数据。</li>
+<li>经典算法：DES(56 位密钥，密钥太短⽽而逐渐被弃⽤用)，AES(128 位、192 位、256 位密钥，现在最流⾏行行) </li>
+</ul>
+</li>
+<li>非对称加密<ul>
+<li>原理：使用公钥对数据进行加密得到密文，使用私钥对数据进行解密得到原数据</li>
+<li>延伸：数字签名</li>
+<li>经典算法：RSA(可⽤用于加密和签名)，DSA(仅⽤用于签名，但速度更快)</li>
+</ul>
+</li>
+<li>密钥和密码登录<ul>
+<li>密钥(key)<ul>
+<li>场景：用于加密和解密</li>
+<li>目的：保证数据被盗时不会被人读懂内容</li>
+<li>焦点：数据</li>
+</ul>
+</li>
+<li>登陆密码(password)<ul>
+<li>场景：用户进入网站或游戏前的身份验证</li>
+<li>目的：数据提供方或应用服务方对拥有者数据的保护</li>
+<li>焦点：身份</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Base64</li>
+</ul>
+<p>Base64 就是将二进制数据转换成有 64 个字符组成的字符串的编码算法，由 A～Z、a~z、0~9、+/ 组成的 64 个字符。</p>
+<p>用途：将⼆二进制数据扩充了了储存和传输途径(例如可以把数据保存到文件、可以通过聊天对话框或 短信形式发送⼆进制数据、可以在 URL 中加⼊入简单的二进制数据)</p>
+<p>Base64 缺点：因为⾃自身的原理理(6 位变 8 位)，因此每次 Base64 编码之后，数据都会增⼤大约 1/3，所以会影响存储和传输性能。</p>
+<blockquote>
+<p>数字签名 Digital Signature</p>
+</blockquote>
+<p>数字签名是非对称密钥加密技术与数字摘要技术的应用</p>
+<blockquote>
+<p>压缩解压缩 Compression &amp; Decompression</p>
+</blockquote>
+<ul>
+<li>压缩：将数据使用更具有存储优势的编码算法进行编码</li>
+<li>解压缩：将压缩数据解码还原成原来的形式</li>
+<li>常见的压缩算法：JPEG、MP3</li>
+<li>压缩属于编码吗？<ul>
+<li>编码是什么意思：把数据从一种形式转换为另一种形式，可以还原数据</li>
+<li>压缩属于编码：解压缩过程属于解码过程</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>序列化 Serialization</p>
+</blockquote>
+<ul>
+<li>序列化：把数据对象(一般是内存中，JVM 中的对象)转换成字节序列的过程。</li>
+<li>反序列化：把子节码重新转换成内存中的对象</li>
+<li>目的：让内存中的对象可以被存储和传输</li>
+<li>序列化不是编码</li>
+</ul>
+<blockquote>
+<p>哈希 Hash</p>
+</blockquote>
+<ul>
+<li>定义：把任意数据转换成指定大小范围(通常很小)的数据</li>
+<li>作用：摘要，数字指纹。</li>
+<li>经典算法：MD5,SHA1,SHA256 等</li>
+<li>实际用途：<ul>
+<li>唯一性验证。例如：Java 中 hashCode 的方法</li>
+<li>快速查找：hashCode 和 HashMap</li>
+<li>隐私保护：例如：把密码 MD5 处理过后再存储到数据库（升级处理：加盐）</li>
+</ul>
+</li>
+<li>hash 不是编码也不是加密：Hash 是单向过程，不可逆，无法进行逆向恢复操作，因此不属于编码和加密 (MD5 不是加密)</li>
+</ul>
+<blockquote>
+<p>字符集 Charset</p>
+</blockquote>
+<ul>
+<li>含义：一个由整数向现实世界中的文字符号的 Map</li>
+<li>ASCII：128 个字符，1 字节</li>
+<li>ISO-8859-1:对 ASCII 进行扩充，1 字节</li>
+<li>Unicode：13 万个字符，多字节<ul>
+<li>UTF-8：Unicode 的编码分支</li>
+<li>UTF-16：Unicode 的编码分支</li>
+</ul>
+</li>
+<li>GBK / GB2313 / GB18030：中国自研标准，多字节，字符集 + 编码</li>
+</ul>
+<blockquote>
+<p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+<p><img src="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android 高级笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/14/编码、加密和 Hash/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-HTTP原理和机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/13/HTTP原理和机制/">HTTP 的原理和工作机制</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/13/HTTP原理和机制/" class="archive-article-date">
+  	<time datetime="2018-10-13T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+       
+			<div id="toc" class="toc-article">
+	  		<strong class="toc-title">文章目录</strong>
+	 	 	
+		</div>
+		
+		
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-10-13</code></p>
+</blockquote>
+<p>随着工作年限的增加，自己的技术技能并没有得到相应的成长，30 岁的危机也就提前降临了，今天开始给自己立个 flag，把握现在，不让 30 岁的时候后悔现在的自己。</p>
+<blockquote>
+<p>HTTP 到底是什么</p>
+</blockquote>
+<ul>
+<li>浏览器地址栏输入网址，打开网页</li>
+<li>Android 中发送网络请求，返回对应内容</li>
+</ul>
+<p>HTTP是什么：用于传输超文本的协议。以前是 HTML，现在也包括 Web API 的数据</p>
+<p>HTTP 工作模型：客户端按需求组装 HTTP 报文，发送给服务器，服务器处理后得到响应报文，发回给客户端，客户端处理响应报文</p>
+<p>URL -&gt; HTTP 报文</p>
+<blockquote>
+<p>请求报文：Request</p>
+</blockquote>
+<p>请求行：</p>
+<ul>
+<li>method：GET/POST。。。  </li>
+<li>path：/users  </li>
+<li>HTTP version：/1.1</li>
+</ul>
+<p>Headers：</p>
+<ul>
+<li>Host ：api.github.com</li>
+<li>Content-Type：text/plain</li>
+<li>Content-Length：243</li>
+<li>。。。</li>
+</ul>
+<p>Body：</p>
+<blockquote>
+<p>响应报文：</p>
+</blockquote>
+<p>状态行：</p>
+<ul>
+<li>HTTP Version：1.1</li>
+<li>status code：200</li>
+<li>status message：OK</li>
+</ul>
+<p>Headers：</p>
+<ul>
+<li>content-type：application/json;charset=utf-8</li>
+<li>cache-control：public</li>
+<li>etag：W/“07eecbgasdfasgu0uasdfyoaid28”</li>
+<li>content-encoding：gzip</li>
+</ul>
+<p>Body：{…}</p>
+<blockquote>
+<p>请求方法：</p>
+</blockquote>
+<ul>
+<li>GET：用于获取资源，不修改服务器数据，不发送 Body</li>
+<li>POST：用于增加和修改资源，发送内容放在 Body 里面</li>
+<li>PUT：用于修改资源，发送内容放在 Body 里面</li>
+<li>DELETE：用于删除资源，不发送 Body</li>
+<li>HEAD：和 GET 方法完全相同，返回的响应中没有 Body</li>
+</ul>
+<blockquote>
+<p>Status Code 状态码</p>
+</blockquote>
+<ul>
+<li>1xx：临时性消息。100(继续发送)、101(正在切换协议)</li>
+<li>2xx：成功。200(OK)、201(创建成功)</li>
+<li>3xx：重定向。301(永久移动)、302(临时移动)</li>
+<li>4xx：客户端错误。400(请求错误)、401(认证失败)</li>
+<li>5xx：服务器错误。500(服务器内部错误)</li>
+</ul>
+<p>Host：目标主机。不是在网络上用于寻址的，而是在目标服务器上用于定位子服务器的</p>
+<blockquote>
+<p>Content-Type：指定 Body 类型，主要四类：</p>
+</blockquote>
+<ul>
+<li>text/html：请求 web 页面时返回响应的类型，Body 返回 html 文本。</li>
+<li>x-www-form-urllencoded：Web 页面纯文本表单的提交方式。</li>
+<li>multitype/form-data：Web 页面含有二进制文件时的提交方式</li>
+<li>application/json,image/jpeg…：单项内容（文本和非文本都可以）</li>
+</ul>
+<blockquote>
+<p>Range/Accept-Range</p>
+</blockquote>
+<p>按范围取数据</p>
+<ul>
+<li><code>Accept-Range：bytes</code>响应报文中出现，表示服务器支持按字节来获取范围数据</li>
+<li><code>Range：bytes=&lt;start&gt;-&lt;end&gt;</code>请求报文中出现，表示要取哪段数据</li>
+<li><code>Content-Range：&lt;start&gt;-&lt;end&gt;/total</code>响应报文中出现，表示发送的是哪段数据</li>
+</ul>
+<p>作用：断点续传，多线程下载</p>
+<blockquote>
+<p>TCP 连接建立时的「三次（三向）握手」</p>
+</blockquote>
+<ol>
+<li>客户端：「我要向你发送消息」</li>
+<li>服务器：「好的。我要向你发送消息」</li>
+<li>客户端：「好的」</li>
+</ol>
+<blockquote>
+<p>TCP 连接关闭时的「四次挥手」</p>
+</blockquote>
+<ol>
+<li>客户端：「我不再给你发送消息」</li>
+<li>服务端：「好的」</li>
+<li>服务端：「我不再给你发送消息」</li>
+<li>客户端：「好的」</li>
+</ol>
+<blockquote>
+<p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+<p><img src="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android 高级笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/13/HTTP原理和机制/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-栈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1072,641 +1644,6 @@
 
 
   
-    <article id="post-RxJava 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/08/RxJava 总结/">RxJava 总结</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/08/RxJava 总结/" class="archive-article-date">
-  	<time datetime="2018-03-08T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RxJava"><span class="toc-number">1.</span> <span class="toc-text">RxJava</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#调度器的种类"><span class="toc-number">1.1.</span> <span class="toc-text">调度器的种类</span></a></li></ol></li></ol>
-		</div>
-		
-		
-        <h2 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h2><p><strong>什么是 RxJava</strong></p>
-<ul>
-<li>Observable：被观察者</li>
-<li>Observer：观察者</li>
-<li>subscribe：订阅者</li>
-</ul>
-<blockquote>
-<ul>
-<li>Observable 就是事件的发出者、可以理解成管道的<code>上游</code>、事件源</li>
-<li>Observer 就是事件的接受者、可以理解成管道的<code>下游</code>、接受者</li>
-<li>subscribe 就是 Observable 与 Observer 之间的连接者</li>
-</ul>
-</blockquote>
-<p>这三者之间的对应关系就是 RxJava</p>
-<blockquote>
-<p>RxJava 也是观察者模式的扩展、普通的观察者模式只负责事件的分发与接受、而 RxJava 在观察者模式上增强了 onComplete、onError。</p>
-</blockquote>
-<p><strong>Rxjava 中的 Flowable 和 Backpressure</strong> </p>
-<blockquote>
-<ul>
-<li>Flowable：事件源 <code>上游</code></li>
-<li>Subscriber：接收者 <code>下游</code></li>
-<li>subscribe：就是 Flowable 与 Subscriber 之间的连接者</li>
-</ul>
-<p>Subscription：Backpressure 中控制数据处理能力的开关和 Disposable(开关) 类似、s.request(Long.MAX_VALUE)。</p>
-</blockquote>
-<p>Flowable 和 Backpressure 组合使用就是对数据发送的各种策略</p>
-<blockquote>
-<p>如果 Flowable <code>上游</code> 产生大量数据、导致 Subscriber <code>下游</code> 接收数据跟不上时内存就会 OOM 、不采用 <code>Flowable</code> 的解决思路就是： </p>
-</blockquote>
-<ul>
-<li>一是从<code>数量</code>上进行治理、减少发送进水缸里的事件<ul>
-<li>filter // 数据过滤</li>
-</ul>
-</li>
-<li>二是从<code>速度</code>上进行治理、减缓事件发送进水缸的速度<ul>
-<li>延时发送数据 </li>
-<li>sample(2, TimeUnit.SECONDS)  //sample 取样</li>
-</ul>
-</li>
-</ul>
-<p><strong>创建操作符</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">Observable.create(<span class="keyword">new</span> ObservableOnSubscribe&lt;Integer&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(ObservableEmitter&lt;Integer&gt; e)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">                e.onNext(<span class="number">6</span>);</div><div class="line">                e.onNext(<span class="number">7</span>);</div><div class="line">                e.onNext(<span class="number">8</span>);</div><div class="line">                e.onNext(<span class="number">88</span>);</div><div class="line">				<span class="comment">// subscribe 中不调用 e.onComplete 方法、事件会一直发送</span></div><div class="line">                e.onComplete();</div><div class="line"></div><div class="line">                e.onNext(<span class="number">19</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;).subscribe(<span class="keyword">new</span> Observer&lt;Integer&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSubscribe</span><span class="params">(Disposable d)</span> </span>&#123;</div><div class="line"></div><div class="line">				<span class="comment">// 调用 d.dispose 后下游 Observer 将不再接受到事件</span></div><div class="line">                d.dispose();</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(Integer integer)</span> </span>&#123;</div><div class="line">                System.out.println(integer);</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onComplete</span><span class="params">()</span> </span>&#123;</div><div class="line">                System.out.println(<span class="string">"接收事件结束"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>ObservableEmitter： Emitter 是发射器的意思、这个就是用来发出事件的、它可以发出三种类型的事件、通过调用 emitter 的 onNext(T value)、onComplete() 和 onError(Throwable error) 就可以分别发出 next 事件、complete 事件和 error 事件。</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>Disposable: 这个单词的字面意思是一次性用品,用完即可丢弃的. 那么在RxJava 中怎么去理解它呢、 对应于上面的水管的例子、 我们可以把它理解成两根管道之间的一个机关、 当调用它的 dispose() 方法时、 它就会将两根管道切断、 从而导致下游收不到事件.</p>
-</blockquote>
-<ul>
-<li>create：创建一个常规的 Observable</li>
-<li>just：将一个/一组对象转换为一个可发射的 Observable</li>
-<li>defer：在订阅之前不创建 Observable</li>
-<li>from：将其他对象转换为 Observable</li>
-<li>start：创建一个可以发出函数返回值的 Observable</li>
-<li>timer：创建一个延迟发出的 Observable</li>
-<li>range：创建一个发射一系列连续整数的 Observable</li>
-<li>repeat：创建一个可重复发射特定序列的 Observable</li>
-<li>interval：创建一个特定时间隔的一系列整数 Observable</li>
-<li>empty/never/throw：创建非常精确和有限行为的 Observable</li>
-</ul>
-<p><strong>转换操作符</strong></p>
-<ul>
-<li>Map：一对一 对象转换</li>
-<li>FlatMap：一对多 对象转换</li>
-<li>GroupBy：分组转换</li>
-<li>Buffer：定期将 Observable 中的数据打包、然后发出整个数据</li>
-<li>Window：分段发送 Observable 中的数据包（类似 Buffer ）</li>
-<li>Scan：按顺序对 Observable 中的数据统计发送（斐波那契数列）</li>
-</ul>
-<p><strong>过滤操作符</strong></p>
-<ul>
-<li>Debounce：过滤发射速率过快的数据项</li>
-<li>Distinct：控制 Observable 发出重复的数据</li>
-<li>ElementAt：发射指定位置的数据</li>
-<li>Filter：仅发射通过条件的数据</li>
-<li>First：发射第一个数据</li>
-<li>IgnoreElements：不发射任何数据、但会走 onComplete 和 onError</li>
-<li>Last：发射最后一个数据</li>
-<li>Sample：采集时间间隔中最近的数据</li>
-<li>Skip：发射跳过指定 N 项后的数据</li>
-<li>SkipLast：发射去掉最后指定 N 项的数据</li>
-<li>Take：只发射指定的前 N 项数据</li>
-<li>TakeLast：只发射指定的最后 N 项数据</li>
-</ul>
-<p><strong>组合操作符</strong></p>
-<ul>
-<li>And/Then/When：将两个或多个 Observable 发射的数据集合并到一起</li>
-<li>CombineLatest：结合它们最近发射的数据、然后发射这个函数的返回值</li>
-<li>Join：有一个 Observable 发射了数据、另一个 Observable 就结合发射的数据</li>
-<li>Merge：合并组合</li>
-<li>StarWith：发射数据之前发送指定的序列</li>
-<li>Switch：转换为单个 Observable 、发射最近的数据</li>
-<li>Zip：通过指定函数将多个 Observable 组合在一起、结果未每个组合发射单个项目</li>
-</ul>
-<p><strong>异常操作符</strong></p>
-<ul>
-<li>Catch<ul>
-<li>onError 通过继续顺序无措的恢复通知</li>
-</ul>
-</li>
-<li>Retry：如果 Observable 发送了一个 onError 的通知、重新订阅它</li>
-</ul>
-<blockquote>
-<p>还有更多的操作符。。。</p>
-</blockquote>
-<p><strong>辅助操作符</strong></p>
-<p><strong>条件和布尔操作符</strong></p>
-<p><strong>算术和聚合操作符</strong></p>
-<p><strong>异步操作符</strong></p>
-<p><strong>连接操作符</strong></p>
-<p><strong>转换操作符</strong></p>
-<p><strong>阻塞操作符</strong></p>
-<p><strong>字符串操作符</strong></p>
-<p><strong>线程控制 调度器 Scheduler</strong></p>
-<blockquote>
-<p>调度器 Scheduler： 可以实现多线程功能、指定操作符（或者特定的 Observable）在特定的调度器上执行</p>
-</blockquote>
-<h3 id="调度器的种类"><a href="#调度器的种类" class="headerlink" title="调度器的种类"></a>调度器的种类</h3><table>
-<thead>
-<tr>
-<th>调度器类型</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Schedulers.computation()</td>
-<td>用于普通计算任务、如果事件循环和回调处理不要用 IO 操作</td>
-</tr>
-<tr>
-<td>Schedulers.from(executor)</td>
-<td>使用指定的 Executor 作为调度器</td>
-</tr>
-<tr>
-<td>Schedulers.immediate()</td>
-<td>在当前线程立即开始执行任务</td>
-</tr>
-<tr>
-<td>Schedulers.newThread()</td>
-<td>为每个任务创建一个新的线程</td>
-</tr>
-<tr>
-<td>Schedulers.trampoline()</td>
-<td>当其它排队的任务完成后、在当前线程排队开始执行</td>
-</tr>
-<tr>
-<td>Schedulers.io()</td>
-<td>用于 IO 耗时任务、如异步阻塞 IO 操作、它默认是一个 CachedThreadScheduler 很像一个缓存线程池</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>SubscribeOn：subscribeOn(Schedulers.newThread()) 指定的是上游发送事件的线程、多次指定上游线程只有第一次指定的有效、其余忽略</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>ObserveOn：observeOn(AndroidSchedulers.mainThread()) 指定的是下游接收事件的线程、多次指定下游线程是可以的、也就是说没调用一次 observeOn() 、下游线程就会切换一次</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RxJava 和 RxAndroid</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/08/RxJava 总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-保险" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/08/保险/">保险</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/08/保险/" class="archive-article-date">
-  	<time datetime="2018-03-08T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#保险是啥"><span class="toc-number">1.</span> <span class="toc-text">保险是啥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么买保险"><span class="toc-number">2.</span> <span class="toc-text">怎么买保险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要买这么多种保险"><span class="toc-number">3.</span> <span class="toc-text">为什么要买这么多种保险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保险配置原则："><span class="toc-number">4.</span> <span class="toc-text">保险配置原则：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我买了那些保险"><span class="toc-number">5.</span> <span class="toc-text">我买了那些保险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后："><span class="toc-number">6.</span> <span class="toc-text">最后：</span></a></li></ol>
-		</div>
-		
-		
-        <h2 id="保险是啥"><a href="#保险是啥" class="headerlink" title="保险是啥"></a>保险是啥</h2><blockquote>
-<p>保险的本质：用少量的可承受的钱（保费）转移极端条件下自己无法承受的重大风险（保额）。同时也解释了对于购买保险的 99% 的人，花了钱什么都看不到，因为什么都不会发生。但是对于 0.5% 发生保险风险事故的人，便会有事先准备的保险金额抵御难关。</p>
-</blockquote>
-<h2 id="怎么买保险"><a href="#怎么买保险" class="headerlink" title="怎么买保险"></a>怎么买保险</h2><p><strong>保险到底有多少种类</strong></p>
-<ul>
-<li>社保</li>
-<li>医保</li>
-<li>重疾险</li>
-<li>医疗险</li>
-<li>意外险</li>
-<li>老年人险种</li>
-<li>儿童险</li>
-<li>终身寿和定期寿</li>
-<li>年金险</li>
-<li>万能险</li>
-<li>团险</li>
-<li>家庭财产险</li>
-<li>交通意外险</li>
-<li>。。。</li>
-</ul>
-<p>可以看出上面列出的险种就不少、里面还有各种小险种、而且市面上最少也有 100 多家保险公司、也就导致保险多、选择难</p>
-<p><strong>什么病报什么险</strong></p>
-<table>
-<thead>
-<tr>
-<th>病种</th>
-<th>险种</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>感冒发烧看门诊</td>
-<td>自己掏钱 + 团险保销</td>
-</tr>
-<tr>
-<td>意外受伤看门诊</td>
-<td>意外医疗险 + 团险报销</td>
-</tr>
-<tr>
-<td>小病/小意外</td>
-<td>社保 + 普通医疗险 + 团险</td>
-</tr>
-<tr>
-<td>严重疾病/意外住院</td>
-<td>社保 + 普通医疗险 + 百万医疗险 + 团险</td>
-</tr>
-<tr>
-<td>重大疾病/轻症</td>
-<td>重疾险 + 百万医疗险 + 社保</td>
-</tr>
-<tr>
-<td>多次重疾/轻症</td>
-<td>多次重疾险 + 社保</td>
-</tr>
-</tbody>
-</table>
-<h2 id="为什么要买这么多种保险"><a href="#为什么要买这么多种保险" class="headerlink" title="为什么要买这么多种保险"></a>为什么要买这么多种保险</h2><p>任何一种保险都有自己限定的保障范围，没有办法面面俱到。<code>没有完美的产品，只有完美的产品组合</code>。人生那么长，那么多意料不到的状况，所以买保险是一个不断的打补丁的过程，并不是买了一个就万事大吉了。所以，以上列出的各种保险，保障的范围都是互相补充，也有部分重叠的。</p>
-<p>买保险，心态也要摆正。千人千面，认知都不同，自己才最了解自己，适合自己满足需求就好。不相信就不要买，要买就好好做功课。</p>
-<h2 id="保险配置原则："><a href="#保险配置原则：" class="headerlink" title="保险配置原则："></a>保险配置原则：</h2><p>买保险的顺序，可以按照『重疾 - 住院 - 意外 - 门诊』这个顺序来配置。对家庭经济影响越大的风险，越要先考虑。重疾虽然概率相对低，但一旦发生，动辄就是几十万的治疗费用，这个坑大，先填上。而感冒发烧这类情况，虽然出现次数可能会比较多，但是从金额上来讲，普通的门诊费用，一般家庭都能承担得起，而且报销的金额有时候都不值得去走一遍报销流程。</p>
-<p><strong>重大疾病保险</strong></p>
-<ul>
-<li>保障责任：只保障病种包括协会规定的《重大疾病保险的疾病定义使用规范》的 25 种重疾加部分保险公司规定的重疾、达到上述规定的重疾标准，直接给付重疾保额，其保额覆盖疾病的诊治和康复费用外，还包括生病期间的经济生活和工作收入损失补偿。</li>
-<li>风险角度：用少量的可承受的钱（保费）转移极端条件下自己无法承受的重大风险（保额）。</li>
-</ul>
-<p><strong>医疗保险</strong></p>
-<ul>
-<li>保障责任：保障大大小小疾病、保障责任全、但是只能经济补偿上述各种产生的医疗费用，不会因此得到其他多余一分钱的补偿</li>
-<li>风险角度：可以自行承担，也可以通过保险转移风险。</li>
-</ul>
-<p><strong>意外险</strong></p>
-<ul>
-<li>保障责任：保障意外身故/伤残 </li>
-<li>风险角度：保额很高、以保万一</li>
-</ul>
-<h2 id="我买了那些保险"><a href="#我买了那些保险" class="headerlink" title="我买了那些保险"></a>我买了那些保险</h2><ul>
-<li>意外险</li>
-<li>医疗险</li>
-<li>重疾险</li>
-</ul>
-<p>意外险：先说说我自己的经历、去年年末买了款泰康 50 元的意外险、买完后没过一个礼拜就打脸了、做饭过程中被刀划伤缝了四针、整个过程中用医保卡➕自己的现金共花了一千多吧、自费大概 100 多 、其余走的医保。之后我联系保险工作人员、确认可以理赔后、把医药收据单寄送过去、正常一个礼拜就会理赔保险。整个过程全部是网络操作、所以赶快适应互联网的时代吧。这之后我果断给自己的父母也配置了这款意外险。</p>
-<p>医疗险：当了解的越多、抉择就越难、我看过微信推出的<code>微医保·医疗险</code>后、果断给自己配上了、<strong><em>保险是随着年龄的大小保费越来越贵的</em></strong>、这款保险有两个福利：</p>
-<ul>
-<li>微保运动鼓励金：意思就是说每天步行 8000 步就可以领取 1 元、累计 100 元</li>
-<li>微保专享洗牙套餐劵：这个洗牙如果你在意的话、感觉很值、因为我每年去医院洗一次牙最少也得 200 元（主要是去年去医院治疗蛀牙花了不少钱）</li>
-</ul>
-<p>重疾险：这款是属于一辈子的长期险、我目前还没有决定买那款、</p>
-<h2 id="最后："><a href="#最后：" class="headerlink" title="最后："></a>最后：</h2><p>意外险、医疗险保期都是一年的、一年过后再续。而重疾险是一辈子的、有 20  年、30 年交保终身。</p>
-<p>买再多的保险也不如坚持锻炼、按时体检、小病不拖沓、大病及时就诊、愿我们买过的所有保险都用不上、踏踏实实过好每一天。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">保险</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/08/保险/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Multidex和反编译 Apk " class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/07/Multidex和反编译 Apk /">MultiDex 使用 与 反编译</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/07/Multidex和反编译 Apk /" class="archive-article-date">
-  	<time datetime="2018-03-07T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-       
-			<div id="toc" class="toc-article">
-	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-反编译-Apk"><span class="toc-number">1.</span> <span class="toc-text">Android 反编译 Apk</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境安装"><span class="toc-number">1.1.</span> <span class="toc-text">环境安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-apktool"><span class="toc-number">1.2.</span> <span class="toc-text">安装 apktool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载-dex2jar"><span class="toc-number">1.3.</span> <span class="toc-text">下载 dex2jar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dex2jar-使用说明"><span class="toc-number">1.4.</span> <span class="toc-text">dex2jar 使用说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载JD-GUI"><span class="toc-number">1.5.</span> <span class="toc-text">下载JD-GUI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工具使用"><span class="toc-number">1.6.</span> <span class="toc-text">工具使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MultiDex-使用"><span class="toc-number">2.</span> <span class="toc-text">MultiDex 使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MultiDex-是什么"><span class="toc-number">2.1.</span> <span class="toc-text">MultiDex 是什么</span></a></li></ol></li></ol>
-		</div>
-		
-		
-        <h2 id="Android-反编译-Apk"><a href="#Android-反编译-Apk" class="headerlink" title="Android 反编译 Apk"></a>Android 反编译 Apk</h2><h3 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h3><ul>
-<li>apktool：解析 apk 包、获取资源文件和 smail 代码</li>
-<li>dex2jar：逆向 class.dex 文件、得到 jar 包</li>
-<li>jd-gui：查看 jar 包文件里的 java 代码</li>
-</ul>
-<h3 id="安装-apktool"><a href="#安装-apktool" class="headerlink" title="安装 apktool"></a>安装 apktool</h3><ul>
-<li><code>Homebrew</code> 安装 <code>apktool</code></li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install apktool</div></pre></td></tr></table></figure>
-<h3 id="下载-dex2jar"><a href="#下载-dex2jar" class="headerlink" title="下载 dex2jar"></a>下载 dex2jar</h3><blockquote>
-<p>dex2jar 主要用于将解压后的 Apk 包中 classes.dex 转换为 classesdex.jar 包便于 jd_gui 查看</p>
-</blockquote>
-<ul>
-<li>dex2jar <a href="http://sourceforge.net/projects/dex2jar/files/" target="_blank" rel="external">下载地址</a></li>
-</ul>
-<h3 id="dex2jar-使用说明"><a href="#dex2jar-使用说明" class="headerlink" title="dex2jar 使用说明"></a>dex2jar 使用说明</h3><blockquote>
-<p>mac上使用 dex2jar 遇到的权限问题的解决</p>
-</blockquote>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chmod +x d2j_invoke.sh</div></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod +x ./*</div></pre></td></tr></table></figure>
-<blockquote>
-<p>权限提升</p>
-</blockquote>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">~/Game/安全与逆向/dex2jar-2.0 » sudo sh d2j-dex2jar.sh /Users/boomhe/Game/Apk/build/apk/classes.dex  </div><div class="line">d2j-dex2jar.sh: line 36: ./d2j_invoke.sh: Permission denied</div></pre></td></tr></table></figure>
-<p>提示 <code>./d2j_invoke.sh</code> 该文件没有权限</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">~/Game/安全与逆向/dex2jar-2.0 » ll | grep d2j_in               </div><div class="line">-rw-rw-r--@  1 boomhe  staff   326B 10 27  2014 d2j_invoke.bat</div><div class="line">-rwxrwxr-x@  1 boomhe  staff   1.3K 10 27  2014 d2j_invoke.sh</div></pre></td></tr></table></figure>
-<p>可以看到 <code>d2j_invoke.sh</code> 这个文件的权限变成了 <code>rwx</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">~/Game/安全与逆向/dex2jar-2.0 » sudo sh d2j-dex2jar.sh /Users/boomhe/Game/Apk/build/apk/classes.dex </div><div class="line">Password:</div><div class="line">dex2jar /Users/boomhe/Game/Apk/build/apk/classes.dex -&gt; ./classes-dex2jar.jar</div></pre></td></tr></table></figure>
-<p>可以看到 原 <code>.dex</code> 文件转换成了 <code>.jar</code> 文件、生成的 <code>classes-dex2jar.jar</code> 在当前目录下</p>
-<blockquote>
-<p>采用 <code>./d2j-dex2jar.sh</code> 直接把 apk 文件输出成 <code>.jar</code> 文件</p>
-</blockquote>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~/Game/安全与逆向/dex2jar-2.0 » ./d2j-dex2jar.sh -f /Users/boomhe/Downloads/1.apk</div></pre></td></tr></table></figure>
-<ul>
-<li><a href="http://sourceforge.net/p/dex2jar/wiki/UserGuide/" target="_blank" rel="external">使用说明地址</a></li>
-</ul>
-<h3 id="下载JD-GUI"><a href="#下载JD-GUI" class="headerlink" title="下载JD-GUI"></a>下载JD-GUI</h3><blockquote>
-<p><code>jd-gui</code> 主要是为了方便查看 <code>dex2jar</code> 转换的 <code>jar</code> 文件结构和部分代码</p>
-</blockquote>
-<ul>
-<li>解决 macOS JD-GUI 意外退出</li>
-</ul>
-<p><code>Homebrew</code> 安装 <code>jd-gui</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">~ » brew cask install jd-gui            </div><div class="line">Updating Homebrew...</div><div class="line">==&gt; Satisfying dependencies</div><div class="line">==&gt; Downloading https://github.com/java-decompiler/jd-gui/releases/download/v1.4</div><div class="line"><span class="comment">######################################################################## 100.0%</span></div><div class="line">==&gt; Verifying checksum <span class="keyword">for</span> Cask jd-gui</div><div class="line">==&gt; Installing Cask jd-gui</div><div class="line">==&gt; Moving App <span class="string">'JD-GUI.app'</span> to <span class="string">'/Applications/JD-GUI.app'</span>.</div><div class="line">🍺  jd-gui was successfully installed!</div></pre></td></tr></table></figure>
-<p>中途需要输入密码、多尝试几次就好了</p>
-<ul>
-<li>解决 <code>jd-gui</code> 不能直接打开 <code>.jar</code> 文件</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">~/Game/Apk/build/apk » sudo unzip -x -q classes-dex2jar.jar -d dex2jar</div><div class="line">Password:</div></pre></td></tr></table></figure>
-<p>采用 <code>unzip</code> 命令来解压文件、解压出来的就是 <code>.class</code> 文件了、就可以用 <code>jd-gui</code> 来查看了 </p>
-<ul>
-<li>jd-gui <a href="https://github.com/java-decompiler/jd-gui/releases/" target="_blank" rel="external">github地址</a> <a href="http://jd.benow.ca/" target="_blank" rel="external">官网地址</a></li>
-</ul>
-<h3 id="工具使用"><a href="#工具使用" class="headerlink" title="工具使用"></a>工具使用</h3><blockquote>
-<p>Apktool 反编译和二次打包</p>
-</blockquote>
-<ul>
-<li>apktool d -f demo.apk -o 存放反编译文件路径</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apktool d -f /Users/boomhe/debug.apk -o Game/Apk</div></pre></td></tr></table></figure>
-<ul>
-<li>apktool b -f 二次打包文件路径 -o demo.apk</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apktool b -f /Users/boomhe/Game/Apk -o /Users/boomhe/Game/debug.apk</div></pre></td></tr></table></figure>
-<h2 id="MultiDex-使用"><a href="#MultiDex-使用" class="headerlink" title="MultiDex 使用"></a>MultiDex 使用</h2><h3 id="MultiDex-是什么"><a href="#MultiDex-是什么" class="headerlink" title="MultiDex 是什么"></a>MultiDex 是什么</h3><blockquote>
-<p>MultiDex 就是分包、解决项目中 65535 问题</p>
-</blockquote>
-<p><strong>什么是 .dex 文件</strong></p>
-<blockquote>
-<p>Dalvik VM executes : Android Dalvik 虚拟机执行文件</p>
-</blockquote>
-<p><strong>什么是 art</strong></p>
-<blockquote>
-<p>Android Runtime :Android 运行时、Android 4.4 引入</p>
-</blockquote>
-<p>直接对 .apk 文件解压会保留 META-INF 签名信息文件</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip /Users/boomhe/Game/GWT.apk -d /Users/boomhe/Game/unzipGWT</div></pre></td></tr></table></figure>
-<p>采用 ApkTool 工具反编译的文件没有 META-INF 签名信息文件</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apktool d -f /Users/boomhe/Game/GWT.apk  -o Game/apktoolApk</div></pre></td></tr></table></figure>
-<p><strong>apk 解压后的项目结构</strong> </p>
-<ul>
-<li>AndroidManifest.xml 配置信息</li>
-<li>META-INF 签名信息</li>
-<li>classes.dex Java 字节码文件</li>
-<li>res 资源文件</li>
-<li>resources.arsc 二进制资源文件</li>
-</ul>
-<p><strong>Java 中常见的类加载器</strong></p>
-<ul>
-<li>BootstrapClassLoader：纯 C++ 实现的、没有对应的 Java 类、主要加载 jre/lib/目录下的核心库</li>
-<li>ExtClassLoader：主要加载 jre/lib/ext/ 目录下的扩展包</li>
-<li>AppClassLoader：主要加载 ClassPath 路径下的包</li>
-</ul>
-<p><strong>Android 中常见的类加载器</strong></p>
-<ul>
-<li>ClassLoader：加载器 是父委托加载机制</li>
-<li>PathClassLoader：加载 /data/app 目录下的 apk 文件、从这个目录可以看出、PathClassLoader 主要用来加载已经安装过的 apk </li>
-<li>DexClassLoader：加载路径需要在创建 DexClassLoader 时传入、也就是说可以加载任何路径下的 apk/dex/jar</li>
-</ul>
-<p><strong>两种分包方案</strong></p>
-<ul>
-<li>Ant：Eclipse 工具</li>
-<li>Gradle：Android Studio 工具</li>
-</ul>
-<p>Android Studio 集成 MultiDex</p>
-<blockquote>
-<p>引入依赖和开启multiDex</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    defaultConfig &#123;</div><div class="line">        ...</div><div class="line">        minSdkVersion <span class="number">15</span> </div><div class="line">        targetSdkVersion <span class="number">26</span></div><div class="line">        <span class="comment">// 第一步 开启 multiDex</span></div><div class="line">        multiDexEnabled <span class="keyword">true</span></div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">	<span class="comment">// 第二步：引入依赖</span></div><div class="line">  compile <span class="string">'com.android.support:multidex:1.0.1'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>重写 attachBaseContext() 方法并调用 MultiDex.install(this) 来启用 Dalvik 可执行文件分包</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第三步：重写 attachBaseContext()</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">attachBaseContext</span><span class="params">(Context base)</span> </span>&#123;</div><div class="line">     <span class="keyword">super</span>.attachBaseContext(context);</div><div class="line">     Multidex.install(<span class="keyword">this</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>配置 manifest 文件</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第四步：配置</span></div><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</div><div class="line"></div><div class="line">&lt;manifest </div><div class="line">xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="keyword">package</span>=<span class="string">"com.example.myapp"</span>&gt;</div><div class="line">    &lt;application</div><div class="line">            android:name=<span class="string">"com.czcg.qlsct.MyApplication"</span> &gt;</div><div class="line">        ...</div><div class="line">    &lt;/application&gt;</div><div class="line">&lt;/manifest&gt;</div></pre></td></tr></table></figure>
-<p><strong>动态加载分 Dex 思路</strong></p>
-<ul>
-<li>将 DexClassLoader 插入到 PathClassLoader 和 BootClassLoader 中间</li>
-<li>DexClassLoader 中的 dex 追加到 PathClassLoader 中</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>old</th>
-<th>2.0</th>
-<th>字段说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>accessToken |token|登录token<br>organizationCode|orgId|公司ID<br>organizationName|orgName|公司名称<br>mobile|userMobile|用户手机</p>
-<hr>
-<p><strong>参考文献</strong></p>
-<p><a href="http://mrljdx.com/2015/12/30/Mac%E4%B8%8B%E9%85%8D%E7%BD%AEApktool%E5%8F%8D%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/" target="_blank" rel="external">Mac下配置Apktool反编译环境</a></p>
-<p><a href="https://blog.csdn.net/guolin_blog/article/details/49738023" target="_blank" rel="external">郭霖</a></p>
-<p><a href="https://blog.csdn.net/lmj623565791/article/details/23564065" target="_blank" rel="external">鸿洋</a></p>
-<p><a href="https://blog.csdn.net/singwhatiwanna/article/details/18797493" target="_blank" rel="external">任玉刚</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/07/Multidex和反编译 Apk /">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1812,7 +1749,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
+                <a href="javascript:void(0)" class="js-tag color3">Android 高级笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1832,15 +1769,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">保险</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1848,11 +1781,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">关于我</a>
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+                <a href="javascript:void(0)" class="js-tag color4">关于我</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1860,15 +1793,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数组使用</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">生活书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">插件开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">库依赖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">查漏补缺</a>
               </li>
             
             <div class="clearfix"></div>

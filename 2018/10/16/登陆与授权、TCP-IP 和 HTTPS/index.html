@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>so 文件解析 | BoomHe</title>
+  <title>登陆与授权、TCP/IP 和 HTTPS | BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="so 文件 Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。   readelf -h xxx.so:查看 s">
-<meta name="keywords" content="Android 应用安全维护和逆向分析">
+  <meta name="description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-16  终于理解了登录、授权是怎么一回事  登录和授权的区别   登录：身份认证，确认 你是你。登录包含授权 授权：由身份或持有的令牌享有的某些权限(例如用户信息)  在实际应用中，多数场景下的「登录」和「授权」界限是模糊的 HTTP 中确认授权(登录)的两种方式  通过Cookie  工作机制  服务器需要客户端保存的内容">
+<meta name="keywords" content="Android 高级笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="so 文件解析">
-<meta property="og:url" content="http://yoursite.com/2018/03/28/so 文件解析/index.html">
+<meta property="og:title" content="登陆与授权、TCP&#x2F;IP 和 HTTPS">
+<meta property="og:url" content="http://yoursite.com/2018/10/16/登陆与授权、TCP-IP 和 HTTPS/index.html">
 <meta property="og:site_name" content="BoomHe">
-<meta property="og:description" content="so 文件 Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。   readelf -h xxx.so:查看 s">
+<meta property="og:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-16  终于理解了登录、授权是怎么一回事  登录和授权的区别   登录：身份认证，确认 你是你。登录包含授权 授权：由身份或持有的令牌享有的某些权限(例如用户信息)  在实际应用中，多数场景下的「登录」和「授权」界限是模糊的 HTTP 中确认授权(登录)的两种方式  通过Cookie  工作机制  服务器需要客户端保存的内容">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-27T09:39:06.477Z">
+<meta property="og:image" content="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg">
+<meta property="og:updated_time" content="2018-10-19T12:40:08.073Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="so 文件解析">
-<meta name="twitter:description" content="so 文件 Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。   readelf -h xxx.so:查看 s">
+<meta name="twitter:title" content="登陆与授权、TCP&#x2F;IP 和 HTTPS">
+<meta name="twitter:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-16  终于理解了登录、授权是怎么一回事  登录和授权的区别   登录：身份认证，确认 你是你。登录包含授权 授权：由身份或持有的令牌享有的某些权限(例如用户信息)  在实际应用中，多数场景下的「登录」和「授权」界限是模糊的 HTTP 中确认授权(登录)的两种方式  通过Cookie  工作机制  服务器需要客户端保存的内容">
+<meta name="twitter:image" content="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg">
   
     <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
   
@@ -163,20 +165,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-so 文件解析" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-登陆与授权、TCP-IP 和 HTTPS" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      so 文件解析
+      登陆与授权、TCP/IP 和 HTTPS
     </h1>
   
 
         
-        <a href="/2018/03/28/so 文件解析/" class="archive-article-date">
-  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
+        <a href="/2018/10/16/登陆与授权、TCP-IP 和 HTTPS/" class="archive-article-date">
+  	<time datetime="2018-10-16T09:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-16</time>
 </a>
         
       </header>
@@ -187,20 +189,128 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#so-文件"><span class="toc-number">1.</span> <span class="toc-text">so 文件</span></a></li></ol>
+	 	 	
 		</div>
 		
 		
-        <h2 id="so-文件"><a href="#so-文件" class="headerlink" title="so 文件"></a>so 文件</h2><blockquote>
-<p>Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。</p>
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-10-16</code></p>
+</blockquote>
+<p>终于理解了登录、授权是怎么一回事</p>
+<blockquote>
+<p>登录和授权的区别</p>
 </blockquote>
 <ul>
-<li>readelf -h xxx.so:查看 so 文件的头部信息<ul>
-<li>readelf -h </li>
-<li>35032967</li>
+<li>登录：身份认证，确认 你是你。登录包含授权</li>
+<li>授权：由身份或持有的令牌享有的某些权限(例如用户信息)</li>
 </ul>
+<p>在实际应用中，多数场景下的「登录」和「授权」界限是模糊的</p>
+<p>HTTP 中确认授权(登录)的两种方式</p>
+<blockquote>
+<p>通过Cookie</p>
+</blockquote>
+<p><strong>工作机制</strong></p>
+<ol>
+<li>服务器需要客户端保存的内容，放在<code>Set-Cookie</code>header 里返回，客服端会自动保存</li>
+<li>客服端保存的 Cookies,会在之后的所有请求中都携带进 <code>Cookie</code>header 里返回给服务器</li>
+<li>客户端保存的 Cookie 是按服务器域名来分类的，例如 shop.com 返回的 Cookie 保存下来以后，在之后向 games.com 的请求中并不会携带。</li>
+<li>客户端保存的 Cookie 在超时后会删除、没有设置超时时间的 Cookie (Session Cookie)在浏览器关闭后就会自动删除；另外，服务器也可以主动删除还未过期的客服端 Cookies  </li>
+</ol>
+<p><strong>Cookie 的作用</strong></p>
+<ol>
+<li>会话管理：登录状态、购物车</li>
+<li>个性化：用户偏好、主题</li>
+<li>Tracking：分析用户行为</li>
+</ol>
+<blockquote>
+<p>通过 Authorization Header</p>
+</blockquote>
+<p>两种主流方式：Basic 和 Bearer</p>
+<p><strong>Basic ：</strong></p>
+<ul>
+<li>格式：Authorization:Basic<username:password(base64ed)></username:password(base64ed)></li>
+</ul>
+<p><strong>Bearer ：</strong></p>
+<ul>
+<li>格式：Authorization:Bearer<bearer token=""></bearer></li>
+<li>brarer token 的获取方式：通过 OAuth2 的授权流程</li>
+<li>OAuth2 的流程：『掘金网站用 GitHub 登录』<ol>
+<li>第三方网站(掘金)向授权方网站(GitHub)申请第三方授权合作，拿到 client id 和 client secret</li>
+<li>用户在使用第三方网站(掘金)时，点击「通过 XX(如 GitHub)授权」按钮，第三方网站(掘金)将页面跳转到授权方网站(GitHub)，并传入 client id 作为自己的身份标识</li>
+<li>授权方网站(GitHub)根据 client id ,将第三方网站的信息和第三方网站需要的用户权限展示给用户，并询问用户是否同意授权</li>
+<li>用户点击「同意授权」按钮后，授权方网站(GitHub)将页面跳转回第三方网站(掘金)，并传入 Authorization code 作为用户认可的凭证。</li>
+<li>第三方网站(掘金)将 Authorization code 发送给自己的服务器</li>
+<li>服务器将 Authorization code 和自己的 client secret 一并发送给授权方(GitHub)的服务器，授权方服务器在验证通过后，返回 access token。OAuth 流程结束。</li>
+<li>结束之后，第三方网站的服务器(或者有时客服端也会)就可以使用 access token 作为用户授权的令牌，向授权方网站发送请求来获取用户信息或操作用户账户。这已经是 OAuth 流程之外的事了。</li>
+</ol>
 </li>
 </ul>
+<ul>
+<li>在自家 APP 中使用 Bearer token</li>
+</ul>
+<p>有的 App 会在 Api 的设计中，将登陆和授权设计成类似 OAuth2 的过程，但简化掉 Authorization code 的概念。即登陆接口请求成功时，会返回 access token，然后客服端在之后的请求中，就可以使用这个 access token 来当作 bearer token 进行用户操作了。</p>
+<ul>
+<li>Refresh token</li>
+</ul>
+<p>access token 有失效时间，在它失效后，调用 refresh token 接口，传入 refresh_token 来获取新的 access token</p>
+<blockquote>
+<p>TCP / IP 协议镞</p>
+</blockquote>
+<p><strong>为什么要分层？</strong></p>
+<p>网络太复杂，不稳定</p>
+<ul>
+<li>Application Layer 应用层：HTTP、FTP、DNS</li>
+<li>Transport Layer 传输层：TCP、UDP</li>
+<li>Internet Layer 网络层：IP</li>
+<li>Link Layer 数据链路层：以太网、Wi-Fi</li>
+</ul>
+<p><strong>TCP 连接</strong></p>
+<ol>
+<li>客户端：「我要向你发送消息」</li>
+<li>服务器：「好的。我要向你发送消息」</li>
+<li>客户端：「好的」</li>
+</ol>
+<p><strong>TCP 连接关闭</strong></p>
+<ol>
+<li>客户端：「我不再给你发送消息」</li>
+<li>服务端：「好的」</li>
+<li>服务端：「我不再给你发送消息」</li>
+<li>客户端：「好的」</li>
+</ol>
+<blockquote>
+<p>HTTPS </p>
+</blockquote>
+<p>HTTPS：HTTP over SSL ，既工作在 SSL(或 TLS)上的 HTTP。加密通信的 HTTP</p>
+<p><strong>工作原理</strong></p>
+<p>在客服端和服务器之间协商出一套对称密钥，每次发送信息之前将内容加密，收到之后解密，达到内容的加密传输</p>
+<p><strong>为什么不直接用非对称加密</strong></p>
+<p>非对称加密由于使用了复杂的数学原理，计算相当复杂，如果完全使用非对称加密来加密通信内容，会严重影响网络通信的性能</p>
+<p><strong>HTTPS 连接建立的过程</strong></p>
+<ol>
+<li>Client Hello</li>
+<li>Server Hello</li>
+<li>服务器证书 建立信任</li>
+<li>Pre-master Secret</li>
+<li>客户端通知：将使用加密通信</li>
+<li>客户端发送：Finished</li>
+<li>服务器通知：将使用加密通信</li>
+<li>服务器发送：Finished</li>
+</ol>
+<blockquote>
+<p>在 Android 中使用</p>
+</blockquote>
+<p><strong>正常情况</strong></p>
+<p>直接使用</p>
+<p><strong>需要自己写证书验证过程的场景</strong></p>
+<ul>
+<li>用的是自签名证书(例如只用于内网的 https)</li>
+<li>证书信息不全，缺乏中间证书机构(可能性不大)</li>
+<li>手机操作系统较旧，没有安装最新加入的根证书</li>
+</ul>
+<blockquote>
+<p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+<p><img src="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg" alt=""></p>
 
       
 
@@ -214,7 +324,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android 高级笔记</a>
         		</li>
       		
 		</ul>
@@ -270,7 +380,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/28/so 文件解析/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/10/16/登陆与授权、TCP-IP 和 HTTPS/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -284,18 +394,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/05/24/我的简历/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          个人简历
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/03/28/代码混淆/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">java 代码 与 资源文件混淆</div>
+    <a href="/2018/10/14/编码、加密和 Hash/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">编码、加密和 Hash</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>so 文件解析 | BoomHe</title>
+  <title>编码、加密和 Hash | BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="so 文件 Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。   readelf -h xxx.so:查看 s">
-<meta name="keywords" content="Android 应用安全维护和逆向分析">
+  <meta name="description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-14  开发中经常遇见到容易混淆的概念，根本原因是没有理解其中的本质。今天把下面这些理解明白。  编码解码 Encoding &amp;amp; Decoding  把数据从一种形式转换为另一种形式，解码可以还原数据  加密解密 Encryption &amp;amp; Decryption   对称加密 原理：使用密钥和加密算法对数据进行">
+<meta name="keywords" content="Android 高级笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="so 文件解析">
-<meta property="og:url" content="http://yoursite.com/2018/03/28/so 文件解析/index.html">
+<meta property="og:title" content="编码、加密和 Hash">
+<meta property="og:url" content="http://yoursite.com/2018/10/14/编码、加密和 Hash/index.html">
 <meta property="og:site_name" content="BoomHe">
-<meta property="og:description" content="so 文件 Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。   readelf -h xxx.so:查看 s">
+<meta property="og:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-14  开发中经常遇见到容易混淆的概念，根本原因是没有理解其中的本质。今天把下面这些理解明白。  编码解码 Encoding &amp;amp; Decoding  把数据从一种形式转换为另一种形式，解码可以还原数据  加密解密 Encryption &amp;amp; Decryption   对称加密 原理：使用密钥和加密算法对数据进行">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-27T09:39:06.477Z">
+<meta property="og:image" content="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg">
+<meta property="og:updated_time" content="2018-10-15T10:52:21.292Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="so 文件解析">
-<meta name="twitter:description" content="so 文件 Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。   readelf -h xxx.so:查看 s">
+<meta name="twitter:title" content="编码、加密和 Hash">
+<meta name="twitter:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-14  开发中经常遇见到容易混淆的概念，根本原因是没有理解其中的本质。今天把下面这些理解明白。  编码解码 Encoding &amp;amp; Decoding  把数据从一种形式转换为另一种形式，解码可以还原数据  加密解密 Encryption &amp;amp; Decryption   对称加密 原理：使用密钥和加密算法对数据进行">
+<meta name="twitter:image" content="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg">
   
     <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
   
@@ -163,20 +165,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-so 文件解析" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-编码、加密和 Hash" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      so 文件解析
+      编码、加密和 Hash
     </h1>
   
 
         
-        <a href="/2018/03/28/so 文件解析/" class="archive-article-date">
-  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
+        <a href="/2018/10/14/编码、加密和 Hash/" class="archive-article-date">
+  	<time datetime="2018-10-14T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-14</time>
 </a>
         
       </header>
@@ -187,20 +189,112 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#so-文件"><span class="toc-number">1.</span> <span class="toc-text">so 文件</span></a></li></ol>
+	 	 	
 		</div>
 		
 		
-        <h2 id="so-文件"><a href="#so-文件" class="headerlink" title="so 文件"></a>so 文件</h2><blockquote>
-<p>Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。</p>
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-10-14</code></p>
+</blockquote>
+<p>开发中经常遇见到容易混淆的概念，根本原因是没有理解其中的本质。今天把下面这些理解明白。</p>
+<blockquote>
+<p>编码解码 Encoding &amp; Decoding</p>
+</blockquote>
+<p>把数据从一种形式转换为另一种形式，解码可以还原数据</p>
+<blockquote>
+<p>加密解密 Encryption &amp; Decryption</p>
 </blockquote>
 <ul>
-<li>readelf -h xxx.so:查看 so 文件的头部信息<ul>
-<li>readelf -h </li>
-<li>35032967</li>
+<li>对称加密<ul>
+<li>原理：使用密钥和加密算法对数据进行转换，得到的无意义数据即为密文；使用密钥和解密算法对密文进行逆向转换得到原数据。</li>
+<li>经典算法：DES(56 位密钥，密钥太短⽽而逐渐被弃⽤用)，AES(128 位、192 位、256 位密钥，现在最流⾏行行) </li>
+</ul>
+</li>
+<li>非对称加密<ul>
+<li>原理：使用公钥对数据进行加密得到密文，使用私钥对数据进行解密得到原数据</li>
+<li>延伸：数字签名</li>
+<li>经典算法：RSA(可⽤用于加密和签名)，DSA(仅⽤用于签名，但速度更快)</li>
+</ul>
+</li>
+<li>密钥和密码登录<ul>
+<li>密钥(key)<ul>
+<li>场景：用于加密和解密</li>
+<li>目的：保证数据被盗时不会被人读懂内容</li>
+<li>焦点：数据</li>
+</ul>
+</li>
+<li>登陆密码(password)<ul>
+<li>场景：用户进入网站或游戏前的身份验证</li>
+<li>目的：数据提供方或应用服务方对拥有者数据的保护</li>
+<li>焦点：身份</li>
 </ul>
 </li>
 </ul>
+</li>
+<li>Base64</li>
+</ul>
+<p>Base64 就是将二进制数据转换成有 64 个字符组成的字符串的编码算法，由 A～Z、a~z、0~9、+/ 组成的 64 个字符。</p>
+<p>用途：将⼆二进制数据扩充了了储存和传输途径(例如可以把数据保存到文件、可以通过聊天对话框或 短信形式发送⼆进制数据、可以在 URL 中加⼊入简单的二进制数据)</p>
+<p>Base64 缺点：因为⾃自身的原理理(6 位变 8 位)，因此每次 Base64 编码之后，数据都会增⼤大约 1/3，所以会影响存储和传输性能。</p>
+<blockquote>
+<p>数字签名 Digital Signature</p>
+</blockquote>
+<p>数字签名是非对称密钥加密技术与数字摘要技术的应用</p>
+<blockquote>
+<p>压缩解压缩 Compression &amp; Decompression</p>
+</blockquote>
+<ul>
+<li>压缩：将数据使用更具有存储优势的编码算法进行编码</li>
+<li>解压缩：将压缩数据解码还原成原来的形式</li>
+<li>常见的压缩算法：JPEG、MP3</li>
+<li>压缩属于编码吗？<ul>
+<li>编码是什么意思：把数据从一种形式转换为另一种形式，可以还原数据</li>
+<li>压缩属于编码：解压缩过程属于解码过程</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>序列化 Serialization</p>
+</blockquote>
+<ul>
+<li>序列化：把数据对象(一般是内存中，JVM 中的对象)转换成字节序列的过程。</li>
+<li>反序列化：把子节码重新转换成内存中的对象</li>
+<li>目的：让内存中的对象可以被存储和传输</li>
+<li>序列化不是编码</li>
+</ul>
+<blockquote>
+<p>哈希 Hash</p>
+</blockquote>
+<ul>
+<li>定义：把任意数据转换成指定大小范围(通常很小)的数据</li>
+<li>作用：摘要，数字指纹。</li>
+<li>经典算法：MD5,SHA1,SHA256 等</li>
+<li>实际用途：<ul>
+<li>唯一性验证。例如：Java 中 hashCode 的方法</li>
+<li>快速查找：hashCode 和 HashMap</li>
+<li>隐私保护：例如：把密码 MD5 处理过后再存储到数据库（升级处理：加盐）</li>
+</ul>
+</li>
+<li>hash 不是编码也不是加密：Hash 是单向过程，不可逆，无法进行逆向恢复操作，因此不属于编码和加密 (MD5 不是加密)</li>
+</ul>
+<blockquote>
+<p>字符集 Charset</p>
+</blockquote>
+<ul>
+<li>含义：一个由整数向现实世界中的文字符号的 Map</li>
+<li>ASCII：128 个字符，1 字节</li>
+<li>ISO-8859-1:对 ASCII 进行扩充，1 字节</li>
+<li>Unicode：13 万个字符，多字节<ul>
+<li>UTF-8：Unicode 的编码分支</li>
+<li>UTF-16：Unicode 的编码分支</li>
+</ul>
+</li>
+<li>GBK / GB2313 / GB18030：中国自研标准，多字节，字符集 + 编码</li>
+</ul>
+<blockquote>
+<p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+<p><img src="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg" alt=""></p>
 
       
 
@@ -214,7 +308,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android 高级笔记</a>
         		</li>
       		
 		</ul>
@@ -270,7 +364,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/28/so 文件解析/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/10/14/编码、加密和 Hash/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -284,18 +378,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/05/24/我的简历/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/10/16/登陆与授权、TCP-IP 和 HTTPS/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          个人简历
+          登陆与授权、TCP/IP 和 HTTPS
         
       </div>
     </a>
   
   
-    <a href="/2018/03/28/代码混淆/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">java 代码 与 资源文件混淆</div>
+    <a href="/2018/10/13/HTTP原理和机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTTP 的原理和工作机制</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>so 文件解析 | BoomHe</title>
+  <title>HTTP 的原理和工作机制 | BoomHe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="so 文件 Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。   readelf -h xxx.so:查看 s">
-<meta name="keywords" content="Android 应用安全维护和逆向分析">
+  <meta name="description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-13  随着工作年限的增加，自己的技术技能并没有得到相应的成长，30 岁的危机也就提前降临了，今天开始给自己立个 flag，把握现在，不让 30 岁的时候后悔现在的自己。  HTTP 到底是什么   浏览器地址栏输入网址，打开网页 Android 中发送网络请求，返回对应内容  HTTP是什么：用于传输超文本的协议。以前是">
+<meta name="keywords" content="Android 高级笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="so 文件解析">
-<meta property="og:url" content="http://yoursite.com/2018/03/28/so 文件解析/index.html">
+<meta property="og:title" content="HTTP 的原理和工作机制">
+<meta property="og:url" content="http://yoursite.com/2018/10/13/HTTP原理和机制/index.html">
 <meta property="og:site_name" content="BoomHe">
-<meta property="og:description" content="so 文件 Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。   readelf -h xxx.so:查看 s">
+<meta property="og:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-13  随着工作年限的增加，自己的技术技能并没有得到相应的成长，30 岁的危机也就提前降临了，今天开始给自己立个 flag，把握现在，不让 30 岁的时候后悔现在的自己。  HTTP 到底是什么   浏览器地址栏输入网址，打开网页 Android 中发送网络请求，返回对应内容  HTTP是什么：用于传输超文本的协议。以前是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-27T09:39:06.477Z">
+<meta property="og:image" content="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg">
+<meta property="og:updated_time" content="2018-10-18T04:13:44.711Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="so 文件解析">
-<meta name="twitter:description" content="so 文件 Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。   readelf -h xxx.so:查看 s">
+<meta name="twitter:title" content="HTTP 的原理和工作机制">
+<meta name="twitter:description" content="微信公众号：BoomDev如有问题或建议请留言最近更新：2018-10-13  随着工作年限的增加，自己的技术技能并没有得到相应的成长，30 岁的危机也就提前降临了，今天开始给自己立个 flag，把握现在，不让 30 岁的时候后悔现在的自己。  HTTP 到底是什么   浏览器地址栏输入网址，打开网页 Android 中发送网络请求，返回对应内容  HTTP是什么：用于传输超文本的协议。以前是">
+<meta name="twitter:image" content="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg">
   
     <link rel="alternative" href="/atom.xml" title="BoomHe" type="application/atom+xml">
   
@@ -163,20 +165,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-so 文件解析" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-HTTP原理和机制" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      so 文件解析
+      HTTP 的原理和工作机制
     </h1>
   
 
         
-        <a href="/2018/03/28/so 文件解析/" class="archive-article-date">
-  	<time datetime="2018-03-28T02:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
+        <a href="/2018/10/13/HTTP原理和机制/" class="archive-article-date">
+  	<time datetime="2018-10-13T06:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-13</time>
 </a>
         
       </header>
@@ -187,20 +189,119 @@
        
 			<div id="toc" class="toc-article">
 	  		<strong class="toc-title">文章目录</strong>
-	 	 	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#so-文件"><span class="toc-number">1.</span> <span class="toc-text">so 文件</span></a></li></ol>
+	 	 	
 		</div>
 		
 		
-        <h2 id="so-文件"><a href="#so-文件" class="headerlink" title="so 文件"></a>so 文件</h2><blockquote>
-<p>Android 中的 so 文件就是 ELF 文件、readelf 文件位置在 Android 下  android-ndk-r12/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin 中、文件名称为 arm-linux-androideabi-readelf。</p>
+        <blockquote>
+<p>微信公众号：BoomDev<br>如有问题或建议请留言<br>最近更新：<code>2018-10-13</code></p>
+</blockquote>
+<p>随着工作年限的增加，自己的技术技能并没有得到相应的成长，30 岁的危机也就提前降临了，今天开始给自己立个 flag，把握现在，不让 30 岁的时候后悔现在的自己。</p>
+<blockquote>
+<p>HTTP 到底是什么</p>
 </blockquote>
 <ul>
-<li>readelf -h xxx.so:查看 so 文件的头部信息<ul>
-<li>readelf -h </li>
-<li>35032967</li>
+<li>浏览器地址栏输入网址，打开网页</li>
+<li>Android 中发送网络请求，返回对应内容</li>
 </ul>
-</li>
+<p>HTTP是什么：用于传输超文本的协议。以前是 HTML，现在也包括 Web API 的数据</p>
+<p>HTTP 工作模型：客户端按需求组装 HTTP 报文，发送给服务器，服务器处理后得到响应报文，发回给客户端，客户端处理响应报文</p>
+<p>URL -&gt; HTTP 报文</p>
+<blockquote>
+<p>请求报文：Request</p>
+</blockquote>
+<p>请求行：</p>
+<ul>
+<li>method：GET/POST。。。  </li>
+<li>path：/users  </li>
+<li>HTTP version：/1.1</li>
 </ul>
+<p>Headers：</p>
+<ul>
+<li>Host ：api.github.com</li>
+<li>Content-Type：text/plain</li>
+<li>Content-Length：243</li>
+<li>。。。</li>
+</ul>
+<p>Body：</p>
+<blockquote>
+<p>响应报文：</p>
+</blockquote>
+<p>状态行：</p>
+<ul>
+<li>HTTP Version：1.1</li>
+<li>status code：200</li>
+<li>status message：OK</li>
+</ul>
+<p>Headers：</p>
+<ul>
+<li>content-type：application/json;charset=utf-8</li>
+<li>cache-control：public</li>
+<li>etag：W/“07eecbgasdfasgu0uasdfyoaid28”</li>
+<li>content-encoding：gzip</li>
+</ul>
+<p>Body：{…}</p>
+<blockquote>
+<p>请求方法：</p>
+</blockquote>
+<ul>
+<li>GET：用于获取资源，不修改服务器数据，不发送 Body</li>
+<li>POST：用于增加和修改资源，发送内容放在 Body 里面</li>
+<li>PUT：用于修改资源，发送内容放在 Body 里面</li>
+<li>DELETE：用于删除资源，不发送 Body</li>
+<li>HEAD：和 GET 方法完全相同，返回的响应中没有 Body</li>
+</ul>
+<blockquote>
+<p>Status Code 状态码</p>
+</blockquote>
+<ul>
+<li>1xx：临时性消息。100(继续发送)、101(正在切换协议)</li>
+<li>2xx：成功。200(OK)、201(创建成功)</li>
+<li>3xx：重定向。301(永久移动)、302(临时移动)</li>
+<li>4xx：客户端错误。400(请求错误)、401(认证失败)</li>
+<li>5xx：服务器错误。500(服务器内部错误)</li>
+</ul>
+<p>Host：目标主机。不是在网络上用于寻址的，而是在目标服务器上用于定位子服务器的</p>
+<blockquote>
+<p>Content-Type：指定 Body 类型，主要四类：</p>
+</blockquote>
+<ul>
+<li>text/html：请求 web 页面时返回响应的类型，Body 返回 html 文本。</li>
+<li>x-www-form-urllencoded：Web 页面纯文本表单的提交方式。</li>
+<li>multitype/form-data：Web 页面含有二进制文件时的提交方式</li>
+<li>application/json,image/jpeg…：单项内容（文本和非文本都可以）</li>
+</ul>
+<blockquote>
+<p>Range/Accept-Range</p>
+</blockquote>
+<p>按范围取数据</p>
+<ul>
+<li><code>Accept-Range：bytes</code>响应报文中出现，表示服务器支持按字节来获取范围数据</li>
+<li><code>Range：bytes=&lt;start&gt;-&lt;end&gt;</code>请求报文中出现，表示要取哪段数据</li>
+<li><code>Content-Range：&lt;start&gt;-&lt;end&gt;/total</code>响应报文中出现，表示发送的是哪段数据</li>
+</ul>
+<p>作用：断点续传，多线程下载</p>
+<blockquote>
+<p>TCP 连接建立时的「三次（三向）握手」</p>
+</blockquote>
+<ol>
+<li>客户端：「我要向你发送消息」</li>
+<li>服务器：「好的。我要向你发送消息」</li>
+<li>客户端：「好的」</li>
+</ol>
+<blockquote>
+<p>TCP 连接关闭时的「四次挥手」</p>
+</blockquote>
+<ol>
+<li>客户端：「我不再给你发送消息」</li>
+<li>服务端：「好的」</li>
+<li>服务端：「我不再给你发送消息」</li>
+<li>客户端：「好的」</li>
+</ol>
+<blockquote>
+<p>我是一名有备而来的 Android 工程师<br>微信公众号：BoomDev<br>欢迎关注我、一起学习、一起进步!</p>
+</blockquote>
+<p><img src="http://pbl7l4exy.bkt.clouddn.com/%E5%85%AC%E4%BC%97%E5%8F%B78.jpg" alt=""></p>
 
       
 
@@ -214,7 +315,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Android 应用安全维护和逆向分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android 高级笔记</a>
         		</li>
       		
 		</ul>
@@ -270,7 +371,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/28/so 文件解析/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/10/13/HTTP原理和机制/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -284,18 +385,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/05/24/我的简历/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/10/14/编码、加密和 Hash/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          个人简历
+          编码、加密和 Hash
         
       </div>
     </a>
   
   
-    <a href="/2018/03/28/代码混淆/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">java 代码 与 资源文件混淆</div>
+    <a href="/2018/10/08/栈/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">栈</div>
       <i class="icon-circle-right"></i>
     </a>
   
